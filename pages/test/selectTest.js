@@ -18,6 +18,7 @@ const selectTest = (props) => {
   useEffect(async () => {
     const response = await axios.post("http://localhost:8080/getauthors");
     const authors = await response.data;
+    console.log("authors", authors);
     setAuthorHint(authors);
   }, []);
   function validateForm() {
