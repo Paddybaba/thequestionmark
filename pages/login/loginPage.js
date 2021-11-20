@@ -18,10 +18,13 @@ const loginPage = (props) => {
 
   async function handleSubmit() {
     try {
-      const resposne = await axios.post("http://localhost:8080/login", {
-        username: email,
-        password: password,
-      });
+      const resposne = await axios.post(
+        "https://quiz-server-paddy.herokuapp.com/login",
+        {
+          username: email,
+          password: password,
+        }
+      );
       const data = await resposne.data;
       const student = await data.student;
       if (resposne.status === 400 || !data) {

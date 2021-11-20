@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Countdown from "./Countdown";
 const TopBar = (props) => {
   // console.log("props from topbar", props);
   return (
@@ -12,7 +13,9 @@ const TopBar = (props) => {
                 <div></div>
                 <div>{props.student.student}</div>
               </div>
-              <div>Timer</div>
+              <div>
+                <Countdown />
+              </div>
               <div>Date and time</div>
             </div>
           </div>
