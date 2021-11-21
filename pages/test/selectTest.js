@@ -69,7 +69,9 @@ const selectTest = (props) => {
                       defaultValue="Science"
                     >
                       <option value="Mathematics">Mathematics</option>
-                      <option value="gk">General Knowledge</option>
+                      <option value="General Knowledge">
+                        General Knowledge
+                      </option>
                       <option value="Science">Science</option>
                       <option value="English">English</option>
                     </select>

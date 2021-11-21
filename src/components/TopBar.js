@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Countdown from "./Countdown";
+import Watch from "./Watch";
 const TopBar = (props) => {
-  // console.log("props from topbar", props);
+  console.log("props from topbar", props.student.options.subject);
   return (
     <>
       <div className="">
@@ -10,13 +11,16 @@ const TopBar = (props) => {
           <div className="mx-auto">
             <div className="topbar">
               <div className="d-flex">
-                <div></div>
-                <div>{props.student.student}</div>
+                <div className="flex-fill text-center">
+                  {props.student.student}
+                </div>
               </div>
-              <div>
+              <div className="flex-fill text-center  text-uppercase">
+                {props.student.options.subject}
+              </div>
+              <div className="text-right">
                 <Countdown />
               </div>
-              <div>Date and time</div>
             </div>
           </div>
         </div>
