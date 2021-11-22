@@ -7,17 +7,15 @@ import { useRouter } from "next/router";
 import { Hint } from "react-autocomplete-hint";
 import axios from "axios";
 const selectTest = (props) => {
-  // console.log("select page props", props);
+  console.log("select page props", props);
   const [authorHint, setAuthorHint] = useState([]);
-  const [mystudent, setStudent] = useState(props.student.user.student);
+  const [mystudent, setStudent] = useState(props.student.user.student_name);
   const [subject, setSubject] = useState("Science");
   const [author, setAuthor] = useState("");
   const [year, setYear] = useState("");
 
   useEffect(async () => {
-    const response = await axios.post(
-      "https://quiz-server-paddy.herokuapp.com/getauthors"
-    );
+    const response = await axios.post("http://localhost:8080/getauthors");
     const authors = await response.data;
     console.log("authors", authors);
     setAuthorHint(authors);
@@ -128,10 +126,7 @@ const selectTest = (props) => {
   );
 };
 const requestQuestions = async (options) => {
-  const response = await axios.post(
-    "https://quiz-server-paddy.herokuapp.com/getquest",
-    options
-  );
+  const response = await axios.post("http://localhost:8080/getquest", options);
   const data = await response.data;
   return data;
 };

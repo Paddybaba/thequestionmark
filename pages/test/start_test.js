@@ -26,7 +26,7 @@ const StartTest = (props) => {
             <div className="row">
               <div className="col-10 mx-auto">
                 <div className="welcome text-center">
-                  All the best, <strong>{props.student.student}</strong>
+                  All the best, <strong>{props.student.student_name}</strong>
                 </div>
               </div>
             </div>

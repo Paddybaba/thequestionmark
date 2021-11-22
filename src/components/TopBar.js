@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Countdown from "./Countdown";
 import Watch from "./Watch";
 const TopBar = (props) => {
-  console.log("props from topbar", props.student.options.subject);
+  console.log("props from topbar", props);
   return (
     <>
       <div className="">
@@ -12,7 +12,7 @@ const TopBar = (props) => {
             <div className="topbar">
               <div className="d-flex">
                 <div className="flex-fill text-center">
-                  {props.student.student}
+                  {props.student.student_name}
                 </div>
               </div>
               <div className="flex-fill text-center  text-uppercase">
