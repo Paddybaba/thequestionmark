@@ -23,16 +23,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
-    ],
-    "/test/selectTest": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/test/selectTest.js"
-    ],
-    "/test/test_page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/test/test_page.js"
     ]
   },
   "ampFirstPages": []

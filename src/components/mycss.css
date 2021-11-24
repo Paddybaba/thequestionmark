@@ -44,6 +44,13 @@ body {
   height: 100vh;
   color: black;
 }
+/* /////// LOGINPage ////////// */
+
+.simple-link:hover {
+  font-weight: bolder;
+  cursor: pointer;
+}
+
 /* ///////TOP BAR ////////// */
 .topbar {
   position: absolute;
