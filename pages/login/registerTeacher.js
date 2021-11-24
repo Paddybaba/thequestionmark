@@ -37,6 +37,7 @@ const registerTeacher = (props) => {
           teacher_id: email,
           teacher_name: teacherName,
         };
+        console.log("Teacher Registered", teacher);
         // props.userLoginHandler(student);       ********************
         // router.push("/test/selectTest");        *****************
       }
@@ -75,10 +76,9 @@ const registerTeacher = (props) => {
               onChange={(e) => setTeacherName(e.target.value)}
             />
           </Form.Group>
-          <Form.Group size="lg" controlId="email">
+          <Form.Group className="mt-4" size="lg" controlId="email">
             <Form.Label>Email</Form.Label>
             <Form.Control
-              autoFocus
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -97,14 +97,14 @@ const registerTeacher = (props) => {
             className="mt-4"
             // type="submit" (This is not allowing action to work properly)
             disabled={!validateForm()}
-            onClick={() => console.log(teacherName)}
+            onClick={() => handleSubmit()}
           >
             Register
           </Button>
         </Form>
         <p
           className="mt-4 simple-link "
-          //   onClick={() => router.push("/login/loginPage")}  ********************
+          onClick={() => router.push("/login/loginTeacher")}
         >
           Already registered, go to Login
         </p>

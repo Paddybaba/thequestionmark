@@ -75,10 +75,9 @@ const registerStudent = (props) => {
               onChange={(e) => setStudentName(e.target.value)}
             />
           </Form.Group>
-          <Form.Group size="lg" controlId="email">
+          <Form.Group className="mt-4" size="lg" controlId="email">
             <Form.Label>Email</Form.Label>
             <Form.Control
-              autoFocus
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}

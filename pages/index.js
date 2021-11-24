@@ -21,7 +21,7 @@ export default function Home() {
         <Link href="/login/loginStudent">
           <div className="box-login text-center text-uppercase">Student</div>
         </Link>
-        <Link href="/login/registerTeacher">
+        <Link href="/login/loginTeacher">
           <div className="box-login text-center text-uppercase">TEACHER</div>
         </Link>
       </main>
