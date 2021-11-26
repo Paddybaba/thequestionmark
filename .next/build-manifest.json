@@ -24,15 +24,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/login/loginTeacher": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/login/loginTeacher.js"
+    ],
     "/question/addQuestion": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/question/addQuestion.js"
-    ],
-    "/test/test_page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/test/test_page.js"
     ]
   },
   "ampFirstPages": []

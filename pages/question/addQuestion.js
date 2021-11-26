@@ -6,70 +6,73 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const addQuestion = (props) => {
-
-   const initialValues = {
-    subject: "", 
+  const initialValues = {
+    subject: "Science",
     author: "",
     model: "text", //Other images
     question: {
-        quest: "",
-        options: ["", "", "", ""],
-        correct_ans: "",
-        marks: 0
+      quest: "",
+      options: ["", "", "", ""],
+      correct_ans: "",
+      marks: 0,
     },
-    year:2021,
-    difficulty: "" //easy, medium ,hard
-   }  
-   const [newQuestion, setQuestion] = useState(initialValues);
-   const [teacher, setTeacher] = useState("Anup")
+    year: 2021,
+    difficulty: "Easy", //easy, medium ,hard
+  };
+
+  const [newQuestion, setQuestion] = useState(initialValues);
+  useEffect(() => {
+    const stored_teacher = JSON.parse(
+      localStorage.getItem("teacher")
+    ).teacher_name;
+    setQuestion({ ...newQuestion, author: stored_teacher });
+  }, []);
+
   const router = useRouter();
-  
-  useEffect(()=>{
-    setTeacher(JSON.parse(localStorage.getItem("teacher")).teacher_name)
-},[])
-//   function validateForm() {
-//     return email.length > 0 && password.length > 0 && teacherName.length > 0;
-//   }
-  const handleInputChange=(event)=>{
-    const {name,value} = event.target;
+
+  //   function validateForm() {
+  //     return email.length > 0 && password.length > 0 && teacherName.length > 0;
+  //   }
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
     setQuestion({
-        ...newQuestion,
-        [name]:value,
+      ...newQuestion,
+      [name]: value,
     });
- }
-//   async function handleSubmit() {
-//     try {
-//       const resposne = await axios.post(
-//         "http://localhost:8080/registerTeacher",
-//         {
-//           teacher_id: email,
-//           teacher_name: teacherName,
-//           password: password,
-//         }
-//       );
-//       const data = await resposne.data; // receive : Registered Succesfully
+  };
+  //   async function handleSubmit() {
+  //     try {
+  //       const resposne = await axios.post(
+  //         "http://localhost:8080/registerTeacher",
+  //         {
+  //           teacher_id: email,
+  //           teacher_name: teacherName,
+  //           password: password,
+  //         }
+  //       );
+  //       const data = await resposne.data; // receive : Registered Succesfully
 
-//       if (resposne.status === 400 || !data) {
-//         window.alert("Something went wrong during registration !!!");
-//       } else {
-//         const teacher = {
-//           teacher_id: email,
-//           teacher_name: teacherName,
-//         };
-//         console.log("Teacher Registered", teacher);
-//         // props.userLoginHandler(student);       ********************
-//         // router.push("/test/selectTest");        *****************
-//       }
-//     } catch (err) {
-//       alert("fetch error");
-//       console.log(err.message);
-//     }
-//   }
-
+  //       if (resposne.status === 400 || !data) {
+  //         window.alert("Something went wrong during registration !!!");
+  //       } else {
+  //         const teacher = {
+  //           teacher_id: email,
+  //           teacher_name: teacherName,
+  //         };
+  //         console.log("Teacher Registered", teacher);
+  //         // props.userLoginHandler(student);       ********************
+  //         // router.push("/test/selectTest");        *****************
+  //       }
+  //     } catch (err) {
+  //       alert("fetch error");
+  //       console.log(err.message);
+  //     }
+  //   }
+  console.log(newQuestion);
   return (
     <div
       className="row gx-0"
-      style={{ height: "100vh", backgroundColor: "honeydew" }}
+      // style={{ height: "100vh", backgroundColor: "honeydew" }}
     >
       <Head>
         <title>New Question</title>
@@ -83,49 +86,72 @@ const addQuestion = (props) => {
           Home
         </div>
         <div className="text-center text-uppercase fs-3 fw-bold my-5">
-         Add New Question
+          Add New Question
         </div>
         <Form>
           <Form.Group size="lg" controlId="teacherName">
             <Form.Label>Subject</Form.Label>
             <select
-            name="subject"
-                      className="form-select"
-                      aria-label="Default select example"
-                      onChange={handleInputChange}
-                      defaultValue="Science"
-                    >
-                      <option value="Mathematics">Mathematics</option>
-                      <option value="General Knowledge">
-                        General Knowledge
-                      </option>
-                      <option value="Science">Science</option>
-                      <option value="English">English</option>
-                    </select>
+              name="subject"
+              className="form-select"
+              aria-label="Default select example"
+              onChange={handleInputChange}
+              defaultValue="Science"
+            >
+              <option value="Mathematics">Mathematics</option>
+              <option value="General Knowledge">General Knowledge</option>
+              <option value="Science">Science</option>
+              <option value="English">English</option>
+            </select>
           </Form.Group>
           <Form.Group className="mt-4" size="lg" controlId="author">
             <Form.Label>Author</Form.Label>
             <Form.Control
               type="text"
-              defaultValue ={teacher}
+              defaultValue={newQuestion.author}
               readOnly
             />
           </Form.Group>
           <Form.Group className="mt-4" size="lg" controlId="model">
             <Form.Label>Model</Form.Label>
             <Form.Control
+              name="model"
               type="text"
               value={newQuestion.model}
               onChange={handleInputChange}
-              readOnly
+              // readOnly
             />
+          </Form.Group>
+          <Form.Group className="mt-4" size="lg" controlId="year">
+            <Form.Label>Year</Form.Label>
+            <Form.Control
+              type="number"
+              name="year"
+              value={newQuestion.year}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group className="mt-4" size="lg" controlId="difficulty">
+            <Form.Label>Difficulty</Form.Label>
+            <select
+              name="difficulty"
+              className="form-select"
+              aria-label="Default select example"
+              onChange={handleInputChange}
+              defaultValue="Easy"
+            >
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+              <option value="Scholar">Scholar</option>
+            </select>
           </Form.Group>
           <Button
             block="true"
             className="mt-4"
             // type="submit" (This is not allowing action to work properly)
             // disabled={!validateForm()}
-            onClick={()=>{}}
+            onClick={() => {}}
           >
             Register
           </Button>
