@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/login/registerTeacher": "pages/login/registerTeacher.js",
-  "/login/loginTeacher": "pages/login/loginTeacher.js"
+  "/test/test_page": "pages/test/test_page.js",
+  "/question/addQuestion": "pages/question/addQuestion.js"
 }

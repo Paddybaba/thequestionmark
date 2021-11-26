@@ -113,7 +113,7 @@ const selectTest = (props) => {
                   block="true"
                   className="mt-4"
                   // type="submit" (This is not allowing action to work properly)
-                  onClick={() => router.push("/login/loginPage")}
+                  onClick={() => router.push("/login/loginStudent")}
                 >
                   Log Out
                 </Button>

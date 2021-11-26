@@ -24,13 +24,14 @@ const loginTeacher = (props) => {
       });
       const data = await resposne.data;
       const teacher = await data.teacher;
-
+      localStorage.setItem("teacher", JSON.stringify(teacher));
+      // console.log("data", teacher.teacher_name)
       if (resposne.status === 400 || !data) {
         window.alert("Invalid Credentials 1 !!!");
       } else {
         //LOGIN TEAHCER TO SELECT SUBJECT PAGE
         // props.userLoginHandler(student);
-        // router.push("/test/selectTest");
+        router.push("/question/addQuestion");
       }
     } catch (err) {
       alert("Something went wrong !!!");
@@ -87,7 +88,7 @@ const loginTeacher = (props) => {
         </Form>
         <p
           className="mt-4 simple-link "
-          onClick={() => router.push("/login/registerTeacher")}
+          onClick={() => router.push("/login/registerTeacher", teacher = teacher)}
         >
           New Teacher, Register
         </p>
