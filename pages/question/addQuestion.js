@@ -35,6 +35,7 @@ const addQuestion = (props) => {
   //   }
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    console.log("name of field :", name);
     setQuestion({
       ...newQuestion,
       [name]: value,
@@ -145,6 +146,29 @@ const addQuestion = (props) => {
               <option value="Hard">Hard</option>
               <option value="Scholar">Scholar</option>
             </select>
+          </Form.Group>
+          <Form.Group className="mt-4" size="lg" controlId="quest">
+            <Form.Label>Question</Form.Label>
+            <Form.Control
+              type="text"
+              value={newQuestion.question.quest}
+              onChange={(e) => {
+                setQuestion({
+                  ...newQuestion,
+                  question: { ...newQuestion.question, quest: e.target.value },
+                });
+              }}
+            />
+          </Form.Group>
+          <Form.Group className="mt-4" size="lg" controlId="option">
+            <Form.Label>Option A</Form.Label>
+            <Form.Control
+              type="text"
+              value={newQuestion.question.options[0]}
+              onChange={(e) =>
+                newQuestion.question.options.push(e.target.value)
+              }
+            />
           </Form.Group>
           <Button
             block="true"
