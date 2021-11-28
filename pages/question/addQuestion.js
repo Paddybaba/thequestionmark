@@ -4,9 +4,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { useRouter } from "next/router";
-// import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
+import path from "../api/mypaths";
 
 const addQuestion = (props) => {
+  console.log("path", path);
   var stored_teacher;
   const initialValues = {
     subject: "Science",
@@ -56,10 +57,7 @@ const addQuestion = (props) => {
 
   async function onSubmitQuestion() {
     try {
-      const resposne = await axios.post(
-        "http://localhost:8080/addQuestion",
-        newQuestion
-      );
+      const resposne = await axios.post(`${path}/addQuestion`, newQuestion);
       const message = await resposne.data;
       console.log("message", message);
       setQuestion({

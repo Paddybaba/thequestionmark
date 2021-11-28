@@ -6,7 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { userLogin } from "../../redux/actions";
 import { connect } from "react-redux";
-
+import path from "../api/mypaths";
 const loginTeacher = (props) => {
   // console.log("props from login page :", props);
   const [email, setEmail] = useState("");
@@ -18,7 +18,7 @@ const loginTeacher = (props) => {
 
   async function handleSubmit() {
     try {
-      const resposne = await axios.post("http://localhost:8080/loginTeacher", {
+      const resposne = await axios.post(`${path}/loginTeacher`, {
         teacher_id: email,
         password: password,
       });
@@ -88,7 +88,9 @@ const loginTeacher = (props) => {
         </Form>
         <p
           className="mt-4 simple-link "
-          onClick={() => router.push("/login/registerTeacher", teacher = teacher)}
+          onClick={() =>
+            router.push("/login/registerTeacher", (teacher = teacher))
+          }
         >
           New Teacher, Register
         </p>

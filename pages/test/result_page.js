@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import TopBar from "../../src/components/TopBar";
 import router from "next/router";
-
+import path from "../api/mypaths";
 //////
 //  make an array of correct answers *
 //  pointer events remove from options *

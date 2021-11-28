@@ -6,7 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { userLogin } from "../../redux/actions";
 import { connect } from "react-redux";
-
+import path from "../api/mypaths";
 const registerStudent = (props) => {
   // console.log("props from register page :", props);
   const [email, setEmail] = useState("");
@@ -20,14 +20,11 @@ const registerStudent = (props) => {
 
   async function handleSubmit() {
     try {
-      const resposne = await axios.post(
-        "http://localhost:8080/registerStudent",
-        {
-          student_id: email,
-          student_name: studentName,
-          password: password,
-        }
-      );
+      const resposne = await axios.post(`${path}/registerStudent`, {
+        student_id: email,
+        student_name: studentName,
+        password: password,
+      });
       const data = await resposne.data; // receive : Registered Succesfully
 
       if (resposne.status === 400 || !data) {

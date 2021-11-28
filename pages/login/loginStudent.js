@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { userLogin } from "../../redux/actions";
 import { connect } from "react-redux";
+import path from "../api/mypaths";
 
 const loginPage = (props) => {
   // console.log("props from login page :", props);
@@ -18,7 +19,7 @@ const loginPage = (props) => {
 
   async function handleSubmit() {
     try {
-      const resposne = await axios.post("http://localhost:8080/login", {
+      const resposne = await axios.post(`${path}/login`, {
         student_id: email,
         password: password,
       });
