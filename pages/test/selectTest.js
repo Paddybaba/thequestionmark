@@ -75,6 +75,40 @@ const selectTest = (props) => {
                       <option value="English">English</option>
                     </select>
                   </Form.Group>
+                  <Form.Group className="mt-3">
+                    <label>Select Author</label>
+                    <input
+                      className="form-select"
+                      aria-label="Default select example"
+                      list="author-options"
+                      onChange={(e) => setAuthor(e.target.value)}
+                    />
+                    <datalist id="author-options">
+                      {authorHint.map((author, index) => {
+                        return (
+                          <option value={author} key={index}>
+                            {author}
+                          </option>
+                        );
+                      })}
+                    </datalist>
+                  </Form.Group>
+                  {/* <Form.Group size="lg" controlId="author">
+                    <Form.Label>Select Author</Form.Label>
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
+                      onChange={(e) => setAuthor(e.target.value)}
+                    >
+                      {authorHint.map((author, index) => {
+                        return (
+                          <option value={author} key={index}>
+                            {author}
+                          </option>
+                        );
+                      })}
+                      </select>
+                  </Form.Group> */}
                   {/* <Form.Group className="mt-4" size="lg" controlId="author">
                     <Form.Label>Author</Form.Label>
                     <Form.Control
@@ -83,7 +117,8 @@ const selectTest = (props) => {
                       onChange={(e) => setAuthor(e.target.value)}
                     />
                   </Form.Group> */}
-                  <Form.Group className="mt-4" size="lg" controlId="author">
+
+                  {/* <Form.Group className="mt-4" size="lg" controlId="author">
                     <Form.Label>Author</Form.Label>
                     <Hint options={authorHint} allowTabFill>
                       <input
@@ -92,8 +127,8 @@ const selectTest = (props) => {
                         onChange={(e) => setAuthor(e.target.value)}
                       />
                     </Hint>
-                  </Form.Group>
-                  <Form.Group className="mt-4" size="lg" controlId="year">
+                  </Form.Group> */}
+                  <Form.Group className="mt-3" size="lg" controlId="year">
                     <Form.Label>Year</Form.Label>
                     <Form.Control
                       type="text"

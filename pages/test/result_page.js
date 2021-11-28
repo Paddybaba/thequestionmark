@@ -157,7 +157,18 @@ const result_page = (props) => {
   } catch (err) {
     console.log(err);
 
-    return <div>Error occured</div>;
+    return (
+      <div className="row">
+        <h3 className="text-center mt-5">Mark All the questions First!!!</h3>
+        <h5
+          className="text-center"
+          onClick={() => router.push("/test/test_page")}
+          style={{ cursor: "pointer" }}
+        >
+          Go back
+        </h5>
+      </div>
+    );
   }
 };
 

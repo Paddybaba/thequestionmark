@@ -20,7 +20,10 @@ function PopModal(props) {
         <h4>Incorrect Answers : {props.progress.incorrect.length}</h4>
         <h4 style={{ fontWeight: "bolder" }}>
           Marks Obtained :{" "}
-          {(props.progress.correct.length / props.progress.total) * 100}%
+          {Math.round(
+            (props.progress.correct.length / props.progress.total) * 100
+          )}
+          %
         </h4>
       </Modal.Body>
       <Modal.Footer>
