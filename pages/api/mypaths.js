@@ -1,1 +1,2 @@
-export default path = "https://quiz-server-paddy.herokuapp.com";
+const path = "https://quiz-server-paddy.herokuapp.com";
+export default path;

@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useRouter } from "next/router";
 import { Hint } from "react-autocomplete-hint";
 import axios from "axios";
+import path from "../api/mypaths";
 const selectTest = (props) => {
   console.log("select page props", props);
   const [authorHint, setAuthorHint] = useState([]);
@@ -15,7 +16,7 @@ const selectTest = (props) => {
   const [year, setYear] = useState("");
 
   useEffect(async () => {
-    const response = await axios.post("http://localhost:8080/getauthors");
+    const response = await axios.post(`${path}/getauthors`);
     const authors = await response.data;
     console.log("authors", authors);
     setAuthorHint(authors);
@@ -126,7 +127,7 @@ const selectTest = (props) => {
   );
 };
 const requestQuestions = async (options) => {
-  const response = await axios.post("http://localhost:8080/getquest", options);
+  const response = await axios.post(`${path}/getquest`, options);
   const data = await response.data;
   return data;
 };
