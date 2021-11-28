@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 // import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
 const addQuestion = (props) => {
+  var stored_teacher;
   const initialValues = {
     subject: "Science",
     author: "",
@@ -23,9 +24,7 @@ const addQuestion = (props) => {
 
   const [newQuestion, setQuestion] = useState(initialValues);
   useEffect(() => {
-    const stored_teacher = JSON.parse(
-      localStorage.getItem("teacher")
-    ).teacher_name;
+    stored_teacher = JSON.parse(localStorage.getItem("teacher")).teacher_name;
     setQuestion({ ...newQuestion, author: stored_teacher });
   }, []);
 
@@ -63,6 +62,11 @@ const addQuestion = (props) => {
       );
       const message = await resposne.data;
       console.log("message", message);
+      setQuestion({
+        ...initialValues,
+        subject: newQuestion.subject,
+        author: newQuestion.author,
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -97,14 +101,11 @@ const addQuestion = (props) => {
   //   }
   // console.log(newQuestion);
   return (
-    <div
-      className="row gx-0"
-      // style={{ height: "100vh", backgroundColor: "honeydew" }}
-    >
+    <div className="row gx-0" style={{ backgroundColor: "#d1d1d1" }}>
       <Head>
         <title>New Question</title>
       </Head>
-      <div className="col-7 mt-5 mx-auto">
+      <div className="col-10 mt-5 mx-auto">
         <div
           className="simple-link"
           style={{ position: "absolute", top: 5, right: 10, cursor: "pointer" }}
@@ -112,7 +113,7 @@ const addQuestion = (props) => {
         >
           Home
         </div>
-        <div className="text-center text-uppercase fs-3 fw-bold my-5">
+        <div className="text-center text-uppercase fs-3 fw-bold mb-3">
           Add New Question
         </div>
         <Form>
@@ -146,7 +147,7 @@ const addQuestion = (props) => {
               type="text"
               value={newQuestion.model}
               onChange={handleInputChange}
-              // readOnly
+              readOnly
             />
           </Form.Group>
           <Form.Group className="mt-4" size="lg" controlId="year">
@@ -176,6 +177,8 @@ const addQuestion = (props) => {
           <Form.Group className="mt-4" size="lg" controlId="quest">
             <Form.Label>Question</Form.Label>
             <Form.Control
+              style={{ maxHeight: 300 }}
+              contentEditable
               type="text"
               value={newQuestion.question.quest}
               onChange={(e) => {
@@ -218,10 +221,16 @@ const addQuestion = (props) => {
               onChange={(e) => addOptions(e, 3)}
             />
           </Form.Group>
-          <Form.Group className="mt-4" size="lg" controlId="correct_ans">
+          <Form.Group
+            className="mt-4"
+            size="lg"
+            controlId="correct_ans"
+            style={{ color: "#32a852" }}
+          >
             <Form.Label>Correct Answer</Form.Label>
             <select
               className="form-select"
+              style={{ backgroundColor: "honeydew" }}
               aria-label="Default select example"
               onChange={(e) => {
                 setQuestion({
@@ -250,7 +259,7 @@ const addQuestion = (props) => {
           </Form.Group>
           <Button
             block="true"
-            className="mt-4"
+            className="mt-4 mb-5"
             // type="submit" (This is not allowing action to work properly)
             disabled={!validateForm()}
             onClick={onSubmitQuestion}
@@ -258,12 +267,12 @@ const addQuestion = (props) => {
             Submit Question
           </Button>
         </Form>
-        <p
+        {/* <p
           className="mt-4 simple-link "
           onClick={() => router.push("/login/loginTeacher")}
         >
           Already registered, go to Login
-        </p>
+        </p> */}
       </div>
     </div>
   );
