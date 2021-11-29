@@ -4,68 +4,108 @@ import TopBar from "../../src/components/TopBar";
 import PopModal from "../../src/components/PopModal";
 
 const myQuestions = [
-    // {
-    // subject: "General Knowledge",
-    // author: "Anup Kumar",
-    // model: "question-with-image",
-    // question: {
-    //     quest: {qimg :"https://images.unsplash.com/photo-1610361418971-50cb8d1f8339?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80",
-    //     q:"Where is this famous monument located?"},
-    //     options: ["Delhi", "Mumbai", "Agra", "Jaipur"],
-    //     correct_ans: "Agra",
-    //     marks: 5
-    // },
-    // difficulty: "medium"
-    // },
-    // {
-    //     subject: "General Knowledge",
-    //     author: "Anup Kumar",
-    //     model: "question-with-image",
-    //     question: {
-    //         quest: {qimg :"https://images.unsplash.com/photo-1585828068970-7b75082485cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=513&q=80",
-    //         q:"Where is this famous monument located?"},
-    //         options: ["Delhi", "Mumbai", "Agra", "Jaipur"],
-    //         correct_ans: "Delhi",
-    //         marks: 5
-    //     },
-    //     difficulty: "medium"
-    //     },
-    //     {
-    //         subject: "General Knowledge",
-    //         author: "Anup Kumar",
-    //         model: "all-text",
-    //         question: {
-    //             quest: {qimg :"",
-    //             q:"Where is this famous monument located?"},
-    //             options: ["Delhi", "Mumbai", "Agra", "Jaipur"],
-    //             correct_ans: "Delhi",
-    //             marks: 5
-    //         },
-    //         difficulty: "medium"
-    //         },
-            {
-                subject: "General Knowledge",
-                author: "Anup Kumar",
-                model: "options-with-image",
-                question: {
-                    quest: {qimg :"",
-                    q:"Which of this is located in Hyderabad?"},
-                    options: [{image : "https://images.unsplash.com/photo-1585828068970-7b75082485cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=513&q=80", option : "a"}, {image : "https://media.istockphoto.com/photos/high-wide-angle-view-of-charminar-in-the-night-picture-id1215274990", option : "b"}, {image : "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80", option :"c"}, {image : "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80", option:"d"}],
-                   
-                    correct_ans: "b",
-                    marks: 5
-                },
-                difficulty: "medium"
-                },
-]
+  {
+    subject: "General Knowledge",
+    author: "Anup Kumar",
+    model: "question-with-image",
+    question: {
+      quest: {
+        image:
+          "https://images.unsplash.com/photo-1610361418971-50cb8d1f8339?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80",
+        que: "Where is this famous monument located?",
+      },
+      options: [
+        { image: "", option: "Delhi" },
+        { image: "", option: "Mumbai" },
+        { image: "", option: "Agra" },
+        { image: "", option: "Jaipur" },
+      ],
+      correct_ans: "Agra",
+      marks: 5,
+    },
+    difficulty: "medium",
+  },
+  {
+    subject: "General Knowledge",
+    author: "Anup Kumar",
+    model: "question-with-image",
+    question: {
+      quest: {
+        image:
+          "https://images.unsplash.com/photo-1585828068970-7b75082485cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=513&q=80",
+        que: "Where is this famous monument located?",
+      },
+      options: [
+        { image: "", option: "Delhi" },
+        { image: "", option: "Mumbai" },
+        { image: "", option: "Agra" },
+        { image: "", option: "Jaipur" },
+      ],
+      correct_ans: "Delhi",
+      marks: 5,
+    },
+    difficulty: "medium",
+  },
+  {
+    subject: "General Knowledge",
+    author: "Anup Kumar",
+    model: "all-text",
+    question: {
+      quest: { image: "", que: "Where is this famous monument located?" },
+      options: [
+        { image: "", option: "Delhi" },
+        { image: "", option: "Mumbai" },
+        { image: "", option: "Agra" },
+        { image: "", option: "Jaipur" },
+      ],
+      correct_ans: "Delhi",
+      marks: 5,
+    },
+    difficulty: "medium",
+  },
+  {
+    subject: "General Knowledge",
+    author: "Anup Kumar",
+    model: "options-with-image",
+    question: {
+      quest: { image: "", que: "Which of this is located in Hyderabad?" },
+      options: [
+        {
+          image:
+            "https://images.unsplash.com/photo-1585828068970-7b75082485cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=513&q=80",
+          option: "a",
+        },
+        {
+          image:
+            "https://media.istockphoto.com/photos/high-wide-angle-view-of-charminar-in-the-night-picture-id1215274990",
+          option: "b",
+        },
+        {
+          image:
+            "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80",
+          option: "c",
+        },
+        {
+          image:
+            "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80",
+          option: "d",
+        },
+      ],
+
+      correct_ans: "b",
+      marks: 5,
+    },
+    difficulty: "medium",
+  },
+];
 function saveProgress(score) {
   localStorage.setItem("score", JSON.stringify(score));
 }
 
 const test_page2 = (props) => {
   // console.log(props.student_record);
-//   const data = props.questBank;
-const data = myQuestions ;
+  //   const data = props.questBank;
+  const data = myQuestions;
   const arrayofNulls = new Array(data.length).fill("x");
   const score = {
     total: data.length,
@@ -102,6 +142,7 @@ const data = myQuestions ;
     clickedList[activeQ] = value;
     // console.log("new Array", clickedList);
     setProgress({ ...progress, clickedAnsList: clickedList });
+    console.log(progress.clickedAnsList);
   }
   function addToResult(clicked, correct) {
     var correctArray = progress.correct;
@@ -128,8 +169,8 @@ const data = myQuestions ;
   const onOptionClick = (e) => {
     addToClicked(e.target.getAttribute("position"));
     addToAnswered();
-    const clickedAnswer = e.target.innerHTML.toLowerCase();
-    console.log(clickedAnswer)
+    const clickedAnswer = e.target.getAttribute("content");
+    console.log(clickedAnswer);
     const correctAns = data[activeQ].question.correct_ans.toLowerCase();
     addToResult(clickedAnswer, correctAns);
     saveProgress(progress);
@@ -166,8 +207,15 @@ const data = myQuestions ;
 
                   <div className="row ">
                     <div className="col-12 quest-question mt-2 mr-3 mb-2">
-                       {currentQuestion.quest.qimg != ""? <img className="question-image" src={currentQuestion.quest.qimg}></img> : null}
-                      <p className="text-bottom fw-bold">{currentQuestion.quest.q}</p>
+                      {currentQuestion.quest.image != "" ? (
+                        <img
+                          className="question-image"
+                          src={currentQuestion.quest.image}
+                        ></img>
+                      ) : null}
+                      <p className="text-bottom fw-bold">
+                        {currentQuestion.quest.que}
+                      </p>
                     </div>
 
                     <ol>
@@ -175,18 +223,45 @@ const data = myQuestions ;
                         return (
                           <li
                             key={index}
-                            position={index}
-                            className="options"
                             onClick={(e) => onOptionClick(e)}
-                            style={{
-                              border:
-                                index == progress.clickedAnsList[activeQ]
-                                  ? "1px solid green"
-                                  : "none",
-                            }}
+                            // style={{
+                            //   border:
+                            //     index == progress.clickedAnsList[activeQ]
+                            //       ? "1px solid green"
+                            //       : "none",
+                            // }}
                           >
-                            {element.image != "" ? <img className="option-image" src={element.image}></img> : null}
-                            <p style={{float:"left"}}>{element.option}</p>
+                            <div
+                              className="options"
+                              position={index}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                alignContent: "center",
+                                border:
+                                  index == progress.clickedAnsList[activeQ]
+                                    ? "1px solid green"
+                                    : "none",
+                              }}
+                              content={element.option}
+                            >
+                              {element.image != "" ? (
+                                <img
+                                  className="option-image"
+                                  src={element.image}
+                                ></img>
+                              ) : null}
+                              {element.option.length > 2 ? (
+                                <p
+                                  style={{
+                                    verticalAlign: "center",
+                                    margin: 3,
+                                  }}
+                                >
+                                  {element.option}
+                                </p>
+                              ) : null}
+                            </div>
                           </li>
                         );
                       })}
@@ -278,6 +353,5 @@ const mstp = (state) => {
     student_record: state.studentReducer.user.progress,
   };
 };
-
 
 export default connect(mstp)(test_page2);
