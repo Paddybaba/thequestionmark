@@ -35,7 +35,7 @@ const StartTest = (props) => {
                 <div
                   className="start-button mx-auto mt-3"
                   onClick={() => {
-                    router.push("/test/test_page");
+                    router.push("/test/test_page2");
                     localStorage.setItem("score", JSON.stringify(score));
                   }}
                 >

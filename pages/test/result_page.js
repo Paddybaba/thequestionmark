@@ -12,7 +12,7 @@ import path from "../api/mypaths";
 
 const result_page = (props) => {
   const data = props.questBank;
-
+  // console.log("props from result_page", data)
   //   console.log(correctAnswerArray);
   const [progress, setProgress] = useState(
     typeof window !== "undefined"
@@ -21,6 +21,7 @@ const result_page = (props) => {
         : {}
       : {}
   );
+  // console.log("progress from result page :", progress)
   const [activeQ, setActiveQ] = useState(0);
   // const [clickedOption, setClickedOption] = useState(progress.clickedAnsList);
   try {
@@ -41,13 +42,15 @@ const result_page = (props) => {
   try {
     let currentQuestion = data[activeQ].question;
     const clickedAnswerArray = data.map((quest, index) => {
-      return quest.question.options[progress.clickedAnsList[index]];
+      return quest.question.options[progress.clickedAnsList[index]].option;
     });
 
     const correctAnswerArray = data.map((quest, index) => {
       return quest.question.correct_ans;
     });
     const correctAnswer = correctAnswerArray[activeQ].toLowerCase();
+
+    
     return (
       <>
         <TopBar />
@@ -64,8 +67,16 @@ const result_page = (props) => {
                     <div className="col-6 text-center">Marks : 5</div>
                   </div>
                   <div className="row ">
-                    <div className="col-12 quest-question mt-2 mr-3">
-                      {currentQuestion.quest}
+                  <div className="col-12 quest-question mt-2 mr-3 mb-2">
+                      {currentQuestion.quest.image != "" ? (
+                        <img
+                          className="question-image"
+                          src={currentQuestion.quest.image}
+                        ></img>
+                      ) : null}
+                      <p className="text-bottom fw-bold">
+                        {currentQuestion.quest.que}
+                      </p>
                     </div>
 
                     <ol>
@@ -77,17 +88,45 @@ const result_page = (props) => {
                             className="options"
                             onClick={(e) => onOptionClick(e)}
                             style={{
-                              border:
-                                index == progress.clickedAnsList[activeQ]
-                                  ? "1px solid green"
-                                  : "none",
-                              backgroundColor:
-                                element.toLowerCase() == correctAnswer
-                                  ? "greenyellow"
-                                  : "transparent",
+                             
+                              
                             }}
                           >
-                            {element}
+                            <div
+                              className="options"
+                              position={index}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                alignContent: "center",
+                                border:
+                                  index == progress.clickedAnsList[activeQ]
+                                    ? "1px solid green"
+                                    : "none",
+                                    backgroundColor:
+                                element.option.toLowerCase() == correctAnswer
+                                  ? "greenyellow"
+                                  : "transparent",
+                              }}
+                              content={element.option}
+                            >
+                              {element.image != "" ? (
+                                <img
+                                  className="option-image"
+                                  src={element.image}
+                                ></img>
+                              ) : null}
+                              {element.option.length > 2 ? (
+                                <p
+                                  style={{
+                                    verticalAlign: "center",
+                                    margin: 3,
+                                  }}
+                                >
+                                  {element.option}
+                                </p>
+                              ) : null}
+                            </div>
                           </li>
                         );
                       })}

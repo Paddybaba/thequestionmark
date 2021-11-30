@@ -3,109 +3,109 @@ import { connect } from "react-redux";
 import TopBar from "../../src/components/TopBar";
 import PopModal from "../../src/components/PopModal";
 
-const myQuestions = [
-  {
-    subject: "General Knowledge",
-    author: "Anup Kumar",
-    model: "question-with-image",
-    question: {
-      quest: {
-        image:
-          "https://images.unsplash.com/photo-1610361418971-50cb8d1f8339?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80",
-        que: "Where is this famous monument located?",
-      },
-      options: [
-        { image: "", option: "Delhi" },
-        { image: "", option: "Mumbai" },
-        { image: "", option: "Agra" },
-        { image: "", option: "Jaipur" },
-      ],
-      correct_ans: "Agra",
-      marks: 5,
-    },
-    difficulty: "medium",
-  },
-  {
-    subject: "General Knowledge",
-    author: "Anup Kumar",
-    model: "question-with-image",
-    question: {
-      quest: {
-        image:
-          "https://images.unsplash.com/photo-1585828068970-7b75082485cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=513&q=80",
-        que: "Where is this famous monument located?",
-      },
-      options: [
-        { image: "", option: "Delhi" },
-        { image: "", option: "Mumbai" },
-        { image: "", option: "Agra" },
-        { image: "", option: "Jaipur" },
-      ],
-      correct_ans: "Delhi",
-      marks: 5,
-    },
-    difficulty: "medium",
-  },
-  {
-    subject: "General Knowledge",
-    author: "Anup Kumar",
-    model: "all-text",
-    question: {
-      quest: { image: "", que: "Where is this famous monument located?" },
-      options: [
-        { image: "", option: "Delhi" },
-        { image: "", option: "Mumbai" },
-        { image: "", option: "Agra" },
-        { image: "", option: "Jaipur" },
-      ],
-      correct_ans: "Delhi",
-      marks: 5,
-    },
-    difficulty: "medium",
-  },
-  {
-    subject: "General Knowledge",
-    author: "Anup Kumar",
-    model: "options-with-image",
-    question: {
-      quest: { image: "", que: "Which of this is located in Hyderabad?" },
-      options: [
-        {
-          image:
-            "https://images.unsplash.com/photo-1585828068970-7b75082485cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=513&q=80",
-          option: "a",
-        },
-        {
-          image:
-            "https://media.istockphoto.com/photos/high-wide-angle-view-of-charminar-in-the-night-picture-id1215274990",
-          option: "b",
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80",
-          option: "c",
-        },
-        {
-          image:
-            "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80",
-          option: "d",
-        },
-      ],
+// const myQuestions = [
+//   {
+//       subject: "General Knowledge",
+//       author: "Anup Kumar",
+//       model: "question-with-image",
+//       question: {
+//         quest: {
+//           image:
+//             "https://images.unsplash.com/photo-1610361418971-50cb8d1f8339?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80",
+//           que: "Where is this famous monument located?",
+//         },
+//         options: [
+//           { image: "", option: "Delhi" },
+//           { image: "", option: "Mumbai" },
+//           { image: "", option: "Agra" },
+//           { image: "", option: "Jaipur" },
+//         ],
+//         correct_ans: "Agra",
+//         marks: 5,
+//     },
+//     difficulty: "medium",
+//   },
+//   {
+//     subject: "General Knowledge",
+//     author: "Anup Kumar",
+//     model: "question-with-image",
+//     question: {
+//       quest: {
+//         image:
+//           "https://images.unsplash.com/photo-1585828068970-7b75082485cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=513&q=80",
+//         que: "Where is this famous monument located?",
+//       },
+//       options: [
+//         { image: "", option: "Delhi" },
+//         { image: "", option: "Mumbai" },
+//         { image: "", option: "Agra" },
+//         { image: "", option: "Jaipur" },
+//       ],
+//       correct_ans: "Delhi",
+//       marks: 5,
+//     },
+//     difficulty: "medium",
+//   },
+//   {
+//     subject: "General Knowledge",
+//     author: "Anup Kumar",
+//     model: "all-text",
+//     question: {
+//       quest: { image: "", que: "Where is Red Fort  located?" },
+//       options: [
+//         { image: "", option: "Delhi" },
+//         { image: "", option: "Mumbai" },
+//         { image: "", option: "Agra" },
+//         { image: "", option: "Jaipur" },
+//       ],
+//       correct_ans: "Delhi",
+//       marks: 5,
+//     },
+//     difficulty: "medium",
+//   },
+//   {
+//     subject: "General Knowledge",
+//     author: "Anup Kumar",
+//     model: "options-with-image",
+//     question: {
+//       quest: { image: "", que: "Which of this is located in Hyderabad?" },
+//       options: [
+//         {
+//           image:
+//             "https://images.unsplash.com/photo-1585828068970-7b75082485cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=513&q=80",
+//           option: "a",
+//         },
+//         {
+//           image:
+//             "https://media.istockphoto.com/photos/high-wide-angle-view-of-charminar-in-the-night-picture-id1215274990",
+//           option: "b",
+//         },
+//         {
+//           image:
+//             "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80",
+//           option: "c",
+//         },
+//         {
+//           image:
+//             "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80",
+//           option: "d",
+//         },
+//       ],
 
-      correct_ans: "b",
-      marks: 5,
-    },
-    difficulty: "medium",
-  },
-];
+//       correct_ans: "b",
+//       marks: 5,
+//     },
+//     difficulty: "medium",
+//   },
+// ];
 function saveProgress(score) {
   localStorage.setItem("score", JSON.stringify(score));
 }
 
 const test_page2 = (props) => {
-  // console.log(props.student_record);
-  //   const data = props.questBank;
-  const data = myQuestions;
+  console.log("props from test page-2:",props.questBank);
+    const data = props.questBank;
+  // const data = myQuestions;
   const arrayofNulls = new Array(data.length).fill("x");
   const score = {
     total: data.length,
@@ -135,14 +135,13 @@ const test_page2 = (props) => {
       : console.log("already answered");
     // console.log(activeQ, " is present in ", answeredQuest);
     setProgress({ ...progress, answered: answeredQuest });
-    // console.log(progress);
+    console.log("progress",progress);
   }
   function addToClicked(value) {
     var clickedList = progress.clickedAnsList;
     clickedList[activeQ] = value;
-    // console.log("new Array", clickedList);
     setProgress({ ...progress, clickedAnsList: clickedList });
-    console.log(progress.clickedAnsList);
+    console.log(progress.correctAnsList);
   }
   function addToResult(clicked, correct) {
     var correctArray = progress.correct;
@@ -169,9 +168,10 @@ const test_page2 = (props) => {
   const onOptionClick = (e) => {
     addToClicked(e.target.getAttribute("position"));
     addToAnswered();
-    const clickedAnswer = e.target.getAttribute("content");
+    const clickedAnswer = e.target.getAttribute("content").toLowerCase();
     console.log(clickedAnswer);
     const correctAns = data[activeQ].question.correct_ans.toLowerCase();
+    console.log("corrrect answer ", correctAns)
     addToResult(clickedAnswer, correctAns);
     saveProgress(progress);
   };
@@ -355,3 +355,5 @@ const mstp = (state) => {
 };
 
 export default connect(mstp)(test_page2);
+
+

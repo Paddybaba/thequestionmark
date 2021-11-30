@@ -24,10 +24,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/test/test_page": [
+    "/test/selectTest": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/test/test_page.js"
+      "static/chunks/pages/test/selectTest.js"
     ],
     "/test/test_page2": [
       "static/chunks/webpack.js",
