@@ -5,18 +5,42 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { useRouter } from "next/router";
 import path from "../api/mypaths";
+import Resizer from "react-image-file-resizer";
+
+//// Resize image before uploading
+const resizeFile = (file) =>
+  new Promise((resolve, reject) => {
+    Resizer.imageFileResizer(
+      file,
+      600,
+      400,
+      "JPEG",
+      100,
+      0,
+      (uri) => {
+        resolve(uri);
+      },
+      "file"
+    );
+  });
 
 const addQuestion2 = (props) => {
   console.log("path", path);
   var stored_teacher;
+
   const initialValues = {
     subject: "Science",
     author: "",
     class: [],
     model: "All-Text", //Other images
     question: {
-      quest: {image : "", que : ""},
-      options: [{image:"", option:"A"}, {image:"", option:"B"}, {image:"", option:"C"}, {image:"", option:"D"}],
+      quest: { image: "", que: "" },
+      options: [
+        { image: "", option: "A" },
+        { image: "", option: "B" },
+        { image: "", option: "C" },
+        { image: "", option: "D" },
+      ],
       correct_ans: "A",
       marks: 0,
     },
@@ -24,7 +48,15 @@ const addQuestion2 = (props) => {
     difficulty: "Easy", //easy, medium ,hard
   };
 
+  const empty_image_array = {
+    quest_image: null,
+    optionA: null,
+    optionB: null,
+    optionC: null,
+    optionD: null,
+  };
   const [newQuestion, setQuestion] = useState(initialValues);
+  const [questImage, setQuestImage] = useState();
   useEffect(() => {
     stored_teacher = JSON.parse(localStorage.getItem("teacher")).teacher_name;
     setQuestion({ ...newQuestion, author: stored_teacher });
@@ -32,12 +64,24 @@ const addQuestion2 = (props) => {
 
   const router = useRouter();
 
-//   function validateForm() {
-//     return (
-//       newQuestion.question.quest.length > 0 &&
-//       newQuestion.question.correct_ans.length > 0
-//     );
-//   }
+  ///// Get Image file from input, resize it and add to images State
+  const getQuestImage = async (event) => {
+    try {
+      const image = event.target.files[0];
+      const resizedImage = await resizeFile(image);
+      console.log("original", image);
+      console.log("resized", resizedImage);
+      setQuestImage(resizedImage);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  //   function validateForm() {
+  //     return (
+  //       newQuestion.question.quest.length > 0 &&
+  //       newQuestion.question.correct_ans.length > 0
+  //     );
+  //   }
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     // console.log("name of field :", name);
@@ -70,35 +114,7 @@ const addQuestion2 = (props) => {
       console.log(err.message);
     }
   }
-  //   async function handleSubmit() {
-  //     try {
-  //       const resposne = await axios.post(
-  //         "http://localhost:8080/registerTeacher",
-  //         {
-  //           teacher_id: email,
-  //           teacher_name: teacherName,
-  //           password: password,
-  //         }
-  //       );
-  //       const data = await resposne.data; // receive : Registered Succesfully
 
-  //       if (resposne.status === 400 || !data) {
-  //         window.alert("Something went wrong during registration !!!");
-  //       } else {
-  //         const teacher = {
-  //           teacher_id: email,
-  //           teacher_name: teacherName,
-  //         };
-  //         console.log("Teacher Registered", teacher);
-  //         // props.userLoginHandler(student);       ********************
-  //         // router.push("/test/selectTest");        *****************
-  //       }
-  //     } catch (err) {
-  //       alert("fetch error");
-  //       console.log(err.message);
-  //     }
-  //   }
-  // console.log(newQuestion);
   return (
     <div className="row gx-0" style={{ backgroundColor: "#d1d1d1" }}>
       <Head>
@@ -146,11 +162,14 @@ const addQuestion2 = (props) => {
               className="form-select"
               aria-label="Default select example"
               onChange={handleInputChange}
-            
             >
               <option value="All-Text">All-Text</option>
-              <option value="Image-Question-Text-Options">Image-Question-Text-Options</option>
-              <option value="Text-Question-Image-Options">Text-Question-Image-Options</option>
+              <option value="Image-Question-Text-Options">
+                Image-Question-Text-Options
+              </option>
+              <option value="Text-Question-Image-Options">
+                Text-Question-Image-Options
+              </option>
               <option value="Combined">Combined</option>
             </select>
           </Form.Group>
@@ -178,9 +197,41 @@ const addQuestion2 = (props) => {
               <option value="Scholar">Scholar</option>
             </select>
           </Form.Group>
-          <Form.Group className="mt-4" style={{backgroundColor:"honeydew", padding:"5px", borderRadius:4}} size="lg" controlId="quest">
-             {newQuestion.model == "Image-Question-Text-Options" || newQuestion.model == "Combined" ? <div><Form.Label>Question Image</Form.Label>
-              <input className="image-input" type="file" /></div> : null}
+          <Form.Group
+            className="mt-4"
+            style={{
+              backgroundColor: "honeydew",
+              padding: "5px",
+              borderRadius: 4,
+            }}
+            size="lg"
+            controlId="quest"
+          >
+            {newQuestion.model == "Image-Question-Text-Options" ||
+            newQuestion.model == "Combined" ? (
+              <div>
+                {!questImage ? <Form.Label>Question Image</Form.Label> : null}
+                {!questImage ? null : (
+                  <img
+                    style={{
+                      height: 100,
+                      width: 120,
+                      padding: 2,
+                      borderRadius: 5,
+                    }}
+                    src={URL.createObjectURL(questImage)}
+                  />
+                )}
+                <input
+                  id="quest-image"
+                  accept="image/*"
+                  onChange={(e) => getQuestImage(e)}
+                  className="image-input"
+                  name="quest-image"
+                  type="file"
+                />
+              </div>
+            ) : null}
             <Form.Label>Question Text</Form.Label>
             <Form.Control
               style={{ maxHeight: 300 }}
@@ -195,16 +246,47 @@ const addQuestion2 = (props) => {
               }}
             />
           </Form.Group>
-          <Form.Group className="mt-4" size="lg" controlId="option">
+          <Form.Group
+            className="mt-4"
+            size="lg"
+            controlId="option"
+            style={{
+              backgroundColor: "#ffe3fb",
+              padding: "5px",
+              borderRadius: 4,
+            }}
+          >
+            {newQuestion.model == "Text-Question-Image-Options" ||
+            newQuestion.model == "Combined" ? (
+              <div>
+                <Form.Label>Option A Image</Form.Label>
+                <input className="image-input" type="file" />
+              </div>
+            ) : null}
             <Form.Label>Option A</Form.Label>
             <Form.Control
               type="text"
-              
               value={newQuestion.question.options[0].option}
               onChange={(e) => addOptions(e, 0)}
             />
           </Form.Group>
-          <Form.Group className="mt-4" size="lg" controlId="option">
+          <Form.Group
+            className="mt-4"
+            style={{
+              backgroundColor: "#ffe3fb",
+              padding: "5px",
+              borderRadius: 4,
+            }}
+            size="lg"
+            controlId="option"
+          >
+            {newQuestion.model == "Text-Question-Image-Options" ||
+            newQuestion.model == "Combined" ? (
+              <div>
+                <Form.Label>Option A Image</Form.Label>
+                <input className="image-input" type="file" />
+              </div>
+            ) : null}
             <Form.Label>Option B</Form.Label>
             <Form.Control
               type="text"
@@ -212,7 +294,23 @@ const addQuestion2 = (props) => {
               onChange={(e) => addOptions(e, 1)}
             />
           </Form.Group>
-          <Form.Group className="mt-4" size="lg" controlId="option">
+          <Form.Group
+            className="mt-4"
+            size="lg"
+            controlId="option"
+            style={{
+              backgroundColor: "#ffe3fb",
+              padding: "5px",
+              borderRadius: 4,
+            }}
+          >
+            {newQuestion.model == "Text-Question-Image-Options" ||
+            newQuestion.model == "Combined" ? (
+              <div>
+                <Form.Label>Option A Image</Form.Label>
+                <input className="image-input" type="file" />
+              </div>
+            ) : null}
             <Form.Label>Option C</Form.Label>
             <Form.Control
               type="text"
@@ -220,7 +318,23 @@ const addQuestion2 = (props) => {
               onChange={(e) => addOptions(e, 2)}
             />
           </Form.Group>
-          <Form.Group className="mt-4" size="lg" controlId="option">
+          <Form.Group
+            className="mt-4"
+            size="lg"
+            controlId="option"
+            style={{
+              backgroundColor: "#ffe3fb",
+              padding: "5px",
+              borderRadius: 4,
+            }}
+          >
+            {newQuestion.model == "Text-Question-Image-Options" ||
+            newQuestion.model == "Combined" ? (
+              <div>
+                <Form.Label>Option A Image</Form.Label>
+                <input className="image-input" type="file" />
+              </div>
+            ) : null}
             <Form.Label>Option D</Form.Label>
             <Form.Control
               type="text"
