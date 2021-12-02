@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_mypaths__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../api/mypaths */ "./pages/api/mypaths.js");
 /* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-dev-runtime */ "react/jsx-dev-runtime");
 /* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__);
-var _jsxFileName = "D:\\DEV\\GITHUB\\thequestionmark\\pages\\login\\loginTeacher.js";
+var _jsxFileName = "E:\\DEV\\MCQ\\thequestionmark\\pages\\login\\loginTeacher.js";
 
 
 
