@@ -14,7 +14,7 @@ const resizeFile = (file) =>
       file,
       600,
       400,
-      ".JPEG",
+      "JPEG",
       100,
       0,
       (uri) => {
@@ -51,7 +51,13 @@ const addQuestion2 = (props) => {
   const empty_image_array = [];
   const [newQuestion, setQuestion] = useState(initialValues);
   const [questImage, setQuestImage] = useState();
-  const [allImage, setAllImages] = useState({quest_image : null , optionA : null, optionB: null, optionC: null, optionD: null})
+  const [allImage, setAllImages] = useState({
+    quest_image: null,
+    optionA: null,
+    optionB: null,
+    optionC: null,
+    optionD: null,
+  });
   useEffect(() => {
     stored_teacher = JSON.parse(localStorage.getItem("teacher")).teacher_name;
     setQuestion({ ...newQuestion, author: stored_teacher });
@@ -64,53 +70,53 @@ const addQuestion2 = (props) => {
     try {
       const image = event.target.files[0];
       const resizedImage = await resizeFile(image);
-      setAllImages({...allImage, quest_image : resizedImage})
-      console.log("All images : ", allImage)
+      setAllImages({ ...allImage, quest_image: resizedImage });
+      console.log("All images : ", allImage);
     } catch (err) {
       console.log(err.message);
     }
   };
 
-  const getOptionImageA = async(event) =>{
-    try{
+  const getOptionImageA = async (event) => {
+    try {
       const image = event.target.files[0];
       const resizedImage = await resizeFile(image);
-     setAllImages({...allImage, optionA : resizedImage})
-      console.log(allImage)
-    }catch(err){
-      console.log(err.message)
+      setAllImages({ ...allImage, optionA: resizedImage });
+      console.log(allImage);
+    } catch (err) {
+      console.log(err.message);
     }
-  }
-  const getOptionImageB = async(event) =>{
-    try{
+  };
+  const getOptionImageB = async (event) => {
+    try {
       const image = event.target.files[0];
       const resizedImage = await resizeFile(image);
-     setAllImages({...allImage, optionB : resizedImage})
-      console.log(allImage)
-    }catch(err){
-      console.log(err.message)
+      setAllImages({ ...allImage, optionB: resizedImage });
+      console.log(allImage);
+    } catch (err) {
+      console.log(err.message);
     }
-  }
-  const getOptionImageC = async(event) =>{
-    try{
+  };
+  const getOptionImageC = async (event) => {
+    try {
       const image = event.target.files[0];
       const resizedImage = await resizeFile(image);
-     setAllImages({...allImage, optionC : resizedImage})
-      console.log(allImage)
-    }catch(err){
-      console.log(err.message)
+      setAllImages({ ...allImage, optionC: resizedImage });
+      console.log(allImage);
+    } catch (err) {
+      console.log(err.message);
     }
-  }
-  const getOptionImageD = async(event) =>{
-    try{
+  };
+  const getOptionImageD = async (event) => {
+    try {
       const image = event.target.files[0];
       const resizedImage = await resizeFile(image);
-     setAllImages({...allImage, optionD : resizedImage})
-      console.log(allImage)
-    }catch(err){
-      console.log(err.message)
+      setAllImages({ ...allImage, optionD: resizedImage });
+      console.log(allImage);
+    } catch (err) {
+      console.log(err.message);
     }
-  }
+  };
   //   function validateForm() {
   //     return (
   //       newQuestion.question.quest.length > 0 &&
@@ -137,9 +143,26 @@ const addQuestion2 = (props) => {
 
   async function onSubmitQuestion() {
     try {
-      // console.log("Images", allImage)
-      // console.log("question", newQuestion)
-      const resposne = await axios.post(`${path}/addQuestion`, {newQuestion, allImage});
+      console.log("Images", allImage);
+      console.log("question", newQuestion);
+      let fd = new FormData();
+      fd.append("question", JSON.stringify(newQuestion));
+      fd.append("quest_image", allImage.quest_image);
+      fd.append("optionA", allImage.optionA);
+      fd.append("optionB", allImage.optionB);
+      fd.append("optionC", allImage.optionC);
+      fd.append("optionD", allImage.optionD);
+
+      // console.log("formData", fd.get("quest_image"));
+      const resposne = await axios.post(
+        "http://localhost:8080/addQuestion",
+        fd,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       const message = await resposne.data;
       console.log("message", message);
       setQuestion({
@@ -247,7 +270,9 @@ const addQuestion2 = (props) => {
             {newQuestion.model == "Image-Question-Text-Options" ||
             newQuestion.model == "Combined" ? (
               <div>
-                {!allImage.quest_image ? <Form.Label>Question Image</Form.Label> : null}
+                {!allImage.quest_image ? (
+                  <Form.Label>Question Image</Form.Label>
+                ) : null}
                 {!allImage.quest_image ? null : (
                   <img
                     style={{
@@ -296,7 +321,9 @@ const addQuestion2 = (props) => {
             {newQuestion.model == "Text-Question-Image-Options" ||
             newQuestion.model == "Combined" ? (
               <div>
-                 {allImage.optionA == null ? <Form.Label>Option A Image</Form.Label> : null}
+                {allImage.optionA == null ? (
+                  <Form.Label>Option A Image</Form.Label>
+                ) : null}
                 {!allImage.optionA ? null : (
                   <img
                     style={{
@@ -308,13 +335,14 @@ const addQuestion2 = (props) => {
                     src={URL.createObjectURL(allImage.optionA)}
                   />
                 )}
-                <input  
-                id="optionA-image"
-                accept="image/*"
-                onChange={(e) => getOptionImageA(e)}
-                className="image-input"
-                name="quest-image"
-                type="file"/>
+                <input
+                  id="optionA-image"
+                  accept="image/*"
+                  onChange={(e) => getOptionImageA(e)}
+                  className="image-input"
+                  name="quest-image"
+                  type="file"
+                />
               </div>
             ) : null}
             <Form.Label>Option A</Form.Label>
@@ -337,7 +365,9 @@ const addQuestion2 = (props) => {
             {newQuestion.model == "Text-Question-Image-Options" ||
             newQuestion.model == "Combined" ? (
               <div>
-                 {allImage.optionB == null ? <Form.Label>Option B Image</Form.Label> : null}
+                {allImage.optionB == null ? (
+                  <Form.Label>Option B Image</Form.Label>
+                ) : null}
                 {!allImage.optionB ? null : (
                   <img
                     style={{
@@ -349,16 +379,17 @@ const addQuestion2 = (props) => {
                     src={URL.createObjectURL(allImage.optionB)}
                   />
                 )}
-                <input  
-                id="optionB-image"
-                accept="image/*"
-                onChange={(e) => getOptionImageB(e)}
-                className="image-input"
-                name="quest-image"
-                type="file"/>
+                <input
+                  id="optionB-image"
+                  accept="image/*"
+                  onChange={(e) => getOptionImageB(e)}
+                  className="image-input"
+                  name="quest-image"
+                  type="file"
+                />
               </div>
             ) : null}
-          
+
             <Form.Label>Option B</Form.Label>
             <Form.Control
               type="text"
@@ -379,7 +410,9 @@ const addQuestion2 = (props) => {
             {newQuestion.model == "Text-Question-Image-Options" ||
             newQuestion.model == "Combined" ? (
               <div>
-                 {allImage.optionC == null ? <Form.Label>Option C Image</Form.Label> : null}
+                {allImage.optionC == null ? (
+                  <Form.Label>Option C Image</Form.Label>
+                ) : null}
                 {!allImage.optionC ? null : (
                   <img
                     style={{
@@ -391,13 +424,14 @@ const addQuestion2 = (props) => {
                     src={URL.createObjectURL(allImage.optionC)}
                   />
                 )}
-                <input  
-                id="optionC-image"
-                accept="image/*"
-                onChange={(e) => getOptionImageC(e)}
-                className="image-input"
-                name="quest-image"
-                type="file"/>
+                <input
+                  id="optionC-image"
+                  accept="image/*"
+                  onChange={(e) => getOptionImageC(e)}
+                  className="image-input"
+                  name="quest-image"
+                  type="file"
+                />
               </div>
             ) : null}
             <Form.Label>Option C</Form.Label>
@@ -420,7 +454,9 @@ const addQuestion2 = (props) => {
             {newQuestion.model == "Text-Question-Image-Options" ||
             newQuestion.model == "Combined" ? (
               <div>
-                 {allImage.optionD == null ? <Form.Label>Option D Image</Form.Label> : null}
+                {allImage.optionD == null ? (
+                  <Form.Label>Option D Image</Form.Label>
+                ) : null}
                 {!allImage.optionD ? null : (
                   <img
                     style={{
@@ -432,13 +468,14 @@ const addQuestion2 = (props) => {
                     src={URL.createObjectURL(allImage.optionD)}
                   />
                 )}
-                <input  
-                id="optionD-image"
-                accept="image/*"
-                onChange={(e) => getOptionImageD(e)}
-                className="image-input"
-                name="quest-image"
-                type="file"/>
+                <input
+                  id="optionD-image"
+                  accept="image/*"
+                  onChange={(e) => getOptionImageD(e)}
+                  className="image-input"
+                  name="quest-image"
+                  type="file"
+                />
               </div>
             ) : null}
             <Form.Label>Option D</Form.Label>
