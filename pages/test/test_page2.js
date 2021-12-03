@@ -103,8 +103,8 @@ function saveProgress(score) {
 }
 
 const test_page2 = (props) => {
-  console.log("props from test page-2:",props.questBank);
-    const data = props.questBank;
+  console.log("props from test page-2:", props.questBank);
+  const data = props.questBank;
   // const data = myQuestions;
   const arrayofNulls = new Array(data.length).fill("x");
   const score = {
@@ -135,7 +135,7 @@ const test_page2 = (props) => {
       : console.log("already answered");
     // console.log(activeQ, " is present in ", answeredQuest);
     setProgress({ ...progress, answered: answeredQuest });
-    console.log("progress",progress);
+    console.log("progress", progress);
   }
   function addToClicked(value) {
     var clickedList = progress.clickedAnsList;
@@ -171,7 +171,7 @@ const test_page2 = (props) => {
     const clickedAnswer = e.target.getAttribute("content").toLowerCase();
     console.log(clickedAnswer);
     const correctAns = data[activeQ].question.correct_ans.toLowerCase();
-    console.log("corrrect answer ", correctAns)
+    console.log("corrrect answer ", correctAns);
     addToResult(clickedAnswer, correctAns);
     saveProgress(progress);
   };
@@ -251,7 +251,11 @@ const test_page2 = (props) => {
                                   src={element.image}
                                 ></img>
                               ) : null}
-                              {element.option.length > 2 ? (
+                              {element.option.length > 0 &&
+                              element.option != "A" &&
+                              element.option != "B" &&
+                              element.option != "C" &&
+                              element.option != "D" ? (
                                 <p
                                   style={{
                                     verticalAlign: "center",
@@ -269,7 +273,9 @@ const test_page2 = (props) => {
                   </div>
                 </div>
                 <div className="col-sm-4 mx-auto navi-box">
-                  <p>Total Questions : {progress.total}</p>
+                  <p style={{ marginBottom: "-5px" }}>
+                    Total Questions : {progress.total}
+                  </p>
                   {data.map((element, index) => {
                     return (
                       <div
@@ -355,5 +361,3 @@ const mstp = (state) => {
 };
 
 export default connect(mstp)(test_page2);
-
-

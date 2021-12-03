@@ -132,6 +132,8 @@ body {
 }
 .navi-box {
   /* border-left: 1px solid gray; */
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 .quest-toprow {
@@ -180,6 +182,13 @@ li {
   cursor: pointer;
   box-shadow: 2px 2px 2px gray;
 }
+@media only screen and (max-width: 576px) {
+  .question-number-box {
+    width: 20px;
+    height: 20px;
+    font-size: 60%;
+  }
+}
 .question-number-box:hover {
   background-color: rgb(134, 233, 250);
   color: white;
@@ -217,10 +226,10 @@ li {
 
 @media only screen and (max-width: 576px) {
   .quest-box {
-    height: 50vh;
+    height: 70vh;
   }
   .navi-box {
-    height: 34vh;
+    height: 14vh;
   }
 }
 
@@ -231,11 +240,12 @@ li {
   margin-right: 5px;
 }
 .option-image {
-  height: 80px;
-  width: 120px;
+  height: 60px;
+  width: 100px;
   border-radius: 3px;
   margin: 2px 0;
 }
+
 .option-text {
   pointer-events: none;
   display: flex;

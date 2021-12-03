@@ -50,7 +50,6 @@ const result_page = (props) => {
     });
     const correctAnswer = correctAnswerArray[activeQ].toLowerCase();
 
-    
     return (
       <>
         <TopBar />
@@ -67,7 +66,7 @@ const result_page = (props) => {
                     <div className="col-6 text-center">Marks : 5</div>
                   </div>
                   <div className="row ">
-                  <div className="col-12 quest-question mt-2 mr-3 mb-2">
+                    <div className="col-12 quest-question mt-2 mr-3 mb-2">
                       {currentQuestion.quest.image != "" ? (
                         <img
                           className="question-image"
@@ -87,10 +86,7 @@ const result_page = (props) => {
                             position={index}
                             className="options"
                             onClick={(e) => onOptionClick(e)}
-                            style={{
-                             
-                              
-                            }}
+                            style={{}}
                           >
                             <div
                               className="options"
@@ -103,10 +99,10 @@ const result_page = (props) => {
                                   index == progress.clickedAnsList[activeQ]
                                     ? "1px solid green"
                                     : "none",
-                                    backgroundColor:
-                                element.option.toLowerCase() == correctAnswer
-                                  ? "greenyellow"
-                                  : "transparent",
+                                backgroundColor:
+                                  element.option.toLowerCase() == correctAnswer
+                                    ? "greenyellow"
+                                    : "transparent",
                               }}
                               content={element.option}
                             >
@@ -116,7 +112,11 @@ const result_page = (props) => {
                                   src={element.image}
                                 ></img>
                               ) : null}
-                              {element.option.length > 2 ? (
+                              {element.option.length > 0 &&
+                              element.option != "A" &&
+                              element.option != "B" &&
+                              element.option != "C" &&
+                              element.option != "D" ? (
                                 <p
                                   style={{
                                     verticalAlign: "center",

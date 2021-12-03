@@ -31,7 +31,7 @@ const loginTeacher = (props) => {
       } else {
         //LOGIN TEAHCER TO SELECT SUBJECT PAGE
         // props.userLoginHandler(student);
-        router.push("/question/addQuestion");
+        router.push("/question/addQuestion2");
       }
     } catch (err) {
       alert("Something went wrong !!!");

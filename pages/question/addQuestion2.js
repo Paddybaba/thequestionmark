@@ -32,7 +32,7 @@ const addQuestion2 = (props) => {
     subject: "Science",
     author: "",
     class: [],
-    model: "All-Text", //Other images
+    model: "Text-Question-Text-Options", //Other images
     question: {
       quest: { image: "", que: "" },
       options: [
@@ -148,12 +148,12 @@ const addQuestion2 = (props) => {
       let fd = new FormData();
       fd.append("question", JSON.stringify(newQuestion));
 
-      if(allImage.quest_image) fd.append("images", allImage.quest_image, "questionImage");
-      if(allImage.optionA) fd.append("images", allImage.optionA, "optionA");
-      if(allImage.optionB) fd.append("images", allImage.optionB, "optionB");
-      if(allImage.optionC) fd.append("images", allImage.optionC, "optionC");
-      if(allImage.optionD) fd.append("images", allImage.optionD, "optionD");
-      
+      if (allImage.quest_image)
+        fd.append("images", allImage.quest_image, "questionImage");
+      if (allImage.optionA) fd.append("images", allImage.optionA, "optionA");
+      if (allImage.optionB) fd.append("images", allImage.optionB, "optionB");
+      if (allImage.optionC) fd.append("images", allImage.optionC, "optionC");
+      if (allImage.optionD) fd.append("images", allImage.optionD, "optionD");
 
       // console.log("formData", fd.get("quest_image"));
       const resposne = await axios.post(
@@ -166,7 +166,14 @@ const addQuestion2 = (props) => {
         }
       );
       const message = await resposne.data;
-      console.log("message", message);
+      if (message) alert("Question Uploaded Successfully !!!");
+      setAllImages({
+        quest_image: null,
+        optionA: null,
+        optionB: null,
+        optionC: null,
+        optionD: null,
+      });
       setQuestion({
         ...initialValues,
         subject: newQuestion.subject,
@@ -217,24 +224,7 @@ const addQuestion2 = (props) => {
               readOnly
             />
           </Form.Group>
-          <Form.Group className="mt-4" size="lg" controlId="model">
-            <Form.Label>Model</Form.Label>
-            <select
-              name="model"
-              className="form-select"
-              aria-label="Default select example"
-              onChange={handleInputChange}
-            >
-              <option value="All-Text">All-Text</option>
-              <option value="Image-Question-Text-Options">
-                Image-Question-Text-Options
-              </option>
-              <option value="Text-Question-Image-Options">
-                Text-Question-Image-Options
-              </option>
-              <option value="Combined">Combined</option>
-            </select>
-          </Form.Group>
+
           <Form.Group className="mt-4" size="lg" controlId="year">
             <Form.Label>Year</Form.Label>
             <Form.Control
@@ -257,6 +247,27 @@ const addQuestion2 = (props) => {
               <option value="Medium">Medium</option>
               <option value="Hard">Hard</option>
               <option value="Scholar">Scholar</option>
+            </select>
+          </Form.Group>
+          <Form.Group className="mt-4" size="lg" controlId="model">
+            <Form.Label>Model</Form.Label>
+            <select
+              name="model"
+              className="form-select"
+              aria-label="Default select example"
+              onChange={handleInputChange}
+              value={newQuestion.model}
+            >
+              <option value="Text-Question-Text-Options">
+                Text-Question-Text-Options
+              </option>
+              <option value="Image-Question-Text-Options">
+                Image-Question-Text-Options
+              </option>
+              <option value="Text-Question-Image-Options">
+                Text-Question-Image-Options
+              </option>
+              <option value="Combined">Combined</option>
             </select>
           </Form.Group>
           <Form.Group
@@ -303,9 +314,14 @@ const addQuestion2 = (props) => {
               type="text"
               value={newQuestion.question.quest.que}
               onChange={(e) => {
+                const quest = { image: "", que: e.target.value };
+                // console.log("quest", quest);
                 setQuestion({
                   ...newQuestion,
-                  question: { ...newQuestion.question, quest: e.target.value },
+                  question: {
+                    ...newQuestion.question,
+                    quest: quest,
+                  },
                 });
               }}
             />
@@ -351,7 +367,16 @@ const addQuestion2 = (props) => {
             <Form.Control
               type="text"
               value={newQuestion.question.options[0].option}
-              onChange={(e) => addOptions(e, 0)}
+              onChange={(e) => {
+                addOptions(e, 0);
+                setQuestion({
+                  ...newQuestion,
+                  question: {
+                    ...newQuestion.question,
+                    correct_ans: e.target.value,
+                  },
+                });
+              }}
             />
           </Form.Group>
           <Form.Group
@@ -498,6 +523,7 @@ const addQuestion2 = (props) => {
               className="form-select"
               style={{ backgroundColor: "honeydew" }}
               aria-label="Default select example"
+              value={newQuestion.question.correct_ans}
               onChange={(e) => {
                 setQuestion({
                   ...newQuestion,
