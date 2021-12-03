@@ -147,11 +147,13 @@ const addQuestion2 = (props) => {
       console.log("question", newQuestion);
       let fd = new FormData();
       fd.append("question", JSON.stringify(newQuestion));
-      fd.append("quest_image", allImage.quest_image);
-      fd.append("optionA", allImage.optionA);
-      fd.append("optionB", allImage.optionB);
-      fd.append("optionC", allImage.optionC);
-      fd.append("optionD", allImage.optionD);
+
+      if(allImage.quest_image) fd.append("images", allImage.quest_image, "questionImage");
+      if(allImage.optionA) fd.append("images", allImage.optionA, "optionA");
+      if(allImage.optionB) fd.append("images", allImage.optionB, "optionB");
+      if(allImage.optionC) fd.append("images", allImage.optionC, "optionC");
+      if(allImage.optionD) fd.append("images", allImage.optionD, "optionD");
+      
 
       // console.log("formData", fd.get("quest_image"));
       const resposne = await axios.post(
