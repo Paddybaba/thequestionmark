@@ -35,7 +35,7 @@ const loginTeacher = (props) => {
       }
     } catch (err) {
       alert("Something went wrong !!!");
-      console.log(err.message);
+      // console.log(err.message);
     }
   }
 
@@ -88,9 +88,7 @@ const loginTeacher = (props) => {
         </Form>
         <p
           className="mt-4 simple-link "
-          onClick={() =>
-            router.push("/login/registerTeacher")
-          }
+          onClick={() => router.push("/login/registerTeacher")}
         >
           New Teacher, Register
         </p>

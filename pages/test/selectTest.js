@@ -8,17 +8,18 @@ import { Hint } from "react-autocomplete-hint";
 import axios from "axios";
 import path from "../api/mypaths";
 const selectTest = (props) => {
-  console.log("select page props", props);
+  // console.log("select page props", props);
   const [authorHint, setAuthorHint] = useState([]);
   const [mystudent, setStudent] = useState(props.student.user.student_name);
   const [subject, setSubject] = useState("Science");
   const [author, setAuthor] = useState("");
   const [year, setYear] = useState("");
+  const [standard, setStandard] = useState("Class-1");
 
   useEffect(async () => {
     const response = await axios.post(`${path}/getauthors`);
     const authors = await response.data;
-    console.log("authors", authors);
+    // console.log("authors", authors);
     setAuthorHint(authors);
   }, []);
   function validateForm() {
@@ -32,6 +33,7 @@ const selectTest = (props) => {
       subject,
       author,
       year,
+      standard,
     };
     props.selectOptionsHandler(options);
     const questions = await requestQuestions(options);
@@ -45,10 +47,7 @@ const selectTest = (props) => {
   // console.log(props);
   return (
     <>
-      <div
-        className="container-fluid"
-        // style={{ backgroundColor: "honeydew" }}
-      >
+      <div className="container-fluid">
         <div className="row">
           <div className="col-10 mx-auto">
             <h3 className="col-10 text-center mx-auto mt-5">
@@ -93,41 +92,27 @@ const selectTest = (props) => {
                       })}
                     </datalist>
                   </Form.Group>
-                  {/* <Form.Group size="lg" controlId="author">
-                    <Form.Label>Select Author</Form.Label>
+                  <Form.Group className="mt-3" size="lg" controlId="class">
+                    <Form.Label>Class</Form.Label>
                     <select
                       className="form-select"
                       aria-label="Default select example"
-                      onChange={(e) => setAuthor(e.target.value)}
+                      onChange={(e) => setStandard(e.target.value)}
                     >
-                      {authorHint.map((author, index) => {
-                        return (
-                          <option value={author} key={index}>
-                            {author}
-                          </option>
-                        );
-                      })}
-                      </select>
-                  </Form.Group> */}
-                  {/* <Form.Group className="mt-4" size="lg" controlId="author">
-                    <Form.Label>Author</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={author}
-                      onChange={(e) => setAuthor(e.target.value)}
-                    />
-                  </Form.Group> */}
-
-                  {/* <Form.Group className="mt-4" size="lg" controlId="author">
-                    <Form.Label>Author</Form.Label>
-                    <Hint options={authorHint} allowTabFill>
-                      <input
-                        className="form-control"
-                        value={author}
-                        onChange={(e) => setAuthor(e.target.value)}
-                      />
-                    </Hint>
-                  </Form.Group> */}
+                      <option value="Class-1">Class-1</option>
+                      <option value="Class-2">Class-2</option>
+                      <option value="Class-3">Class-3</option>
+                      <option value="Class-4">Class-4</option>
+                      <option value="Class-5">Class-5</option>
+                      <option value="Class-6">Class-6</option>
+                      <option value="Class-7">Class-7</option>
+                      <option value="Class-8">Class-8</option>
+                      <option value="Class-9">Class-9</option>
+                      <option value="Class-10">Class-10</option>
+                      <option value="Class-11">Class-11</option>
+                      <option value="Class-12">Class-12</option>
+                    </select>
+                  </Form.Group>
                   <Form.Group className="mt-3" size="lg" controlId="year">
                     <Form.Label>Year</Form.Label>
                     <Form.Control

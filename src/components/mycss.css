@@ -134,7 +134,6 @@ body {
 }
 .navi-box {
   /* border-left: 1px solid gray; */
-  
 }
 
 .quest-toprow {
@@ -207,9 +206,10 @@ li {
   background-color: rgb(128, 192, 33);
   border-radius: 3px;
   border: 1px solid rgb(128, 192, 33);
+  height: 40px;
   transition: all 400ms ease;
   /* center text vertically in button */
-  line-height: 0;       
+  line-height: 0;
 }
 .previous-next:hover {
   background-color: rgb(109, 151, 45);
@@ -221,7 +221,7 @@ li {
   margin-left: auto;
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 480px) {
   .quest-box {
     height: 70vh;
   }
@@ -233,9 +233,14 @@ li {
     height: 20px;
     font-size: 60%;
   }
-  /* .previous-next{
+  .previous-next {
     height: 30px;
-  } */
+  }
+}
+@media only screen and (min-device-width: 480px) and (max-device-width: 640px) and (orientation: landscape) {
+  .previous-next {
+    height: 30px;
+  }
 }
 /* @media only screen and (min-width: 640px) {
 .previous-next {height : 30px}

@@ -25,7 +25,7 @@ const resizeFile = (file) =>
   });
 
 const addQuestion2 = (props) => {
-  console.log("path", path);
+  // console.log("path", path);
   var stored_teacher;
 
   const initialValues = {
@@ -42,11 +42,11 @@ const addQuestion2 = (props) => {
         { image: "", option: "D" },
       ],
       correct_ans: "A",
+      explanation: "",
       marks: 0,
     },
     year: 2021,
     difficulty: "Easy", //easy, medium ,hard
-    explanation : ""
   };
 
   const empty_image_array = [];
@@ -72,9 +72,9 @@ const addQuestion2 = (props) => {
       const image = event.target.files[0];
       const resizedImage = await resizeFile(image);
       setAllImages({ ...allImage, quest_image: resizedImage });
-      console.log("All images : ", allImage);
+      // console.log("All images : ", allImage);
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
     }
   };
 
@@ -83,9 +83,9 @@ const addQuestion2 = (props) => {
       const image = event.target.files[0];
       const resizedImage = await resizeFile(image);
       setAllImages({ ...allImage, optionA: resizedImage });
-      console.log(allImage);
+      // console.log(allImage);
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
     }
   };
   const getOptionImageB = async (event) => {
@@ -93,9 +93,9 @@ const addQuestion2 = (props) => {
       const image = event.target.files[0];
       const resizedImage = await resizeFile(image);
       setAllImages({ ...allImage, optionB: resizedImage });
-      console.log(allImage);
+      // console.log(allImage);
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
     }
   };
   const getOptionImageC = async (event) => {
@@ -103,9 +103,9 @@ const addQuestion2 = (props) => {
       const image = event.target.files[0];
       const resizedImage = await resizeFile(image);
       setAllImages({ ...allImage, optionC: resizedImage });
-      console.log(allImage);
+      // console.log(allImage);
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
     }
   };
   const getOptionImageD = async (event) => {
@@ -113,9 +113,9 @@ const addQuestion2 = (props) => {
       const image = event.target.files[0];
       const resizedImage = await resizeFile(image);
       setAllImages({ ...allImage, optionD: resizedImage });
-      console.log(allImage);
+      // console.log(allImage);
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
     }
   };
   //   function validateForm() {
@@ -144,8 +144,8 @@ const addQuestion2 = (props) => {
 
   async function onSubmitQuestion() {
     try {
-      console.log("Images", allImage);
-      console.log("question", newQuestion);
+      // console.log("Images", allImage);
+      // console.log("question", newQuestion);
       let fd = new FormData();
       fd.append("question", JSON.stringify(newQuestion));
 
@@ -181,7 +181,8 @@ const addQuestion2 = (props) => {
         author: newQuestion.author,
       });
     } catch (err) {
-      console.log(err.message);
+      alert("Could not upload the question !!!");
+      // console.log(err.message);
     }
   }
 
@@ -555,7 +556,7 @@ const addQuestion2 = (props) => {
             <Form.Control
               type="text"
               name="explanation"
-              value={newQuestion.explanation}
+              value={newQuestion.question.explanation}
               onChange={handleInputChange}
             />
           </Form.Group>

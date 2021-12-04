@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import path from "../api/mypaths";
 
 const addQuestion = (props) => {
-  console.log("path", path);
+  // console.log("path", path);
   var stored_teacher;
   const initialValues = {
     subject: "Science",
@@ -59,14 +59,14 @@ const addQuestion = (props) => {
     try {
       const resposne = await axios.post(`${path}/addQuestion`, newQuestion);
       const message = await resposne.data;
-      console.log("message", message);
+      // console.log("message", message);
       setQuestion({
         ...initialValues,
         subject: newQuestion.subject,
         author: newQuestion.author,
       });
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
     }
   }
   //   async function handleSubmit() {

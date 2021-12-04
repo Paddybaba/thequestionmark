@@ -34,7 +34,7 @@ function studentReducer(state = initialState, action) {
     case "USER_LOGOUT": {
     }
     case "SELECT_OPTIONS": {
-      console.log("options added");
+      // console.log("options added");
       return {
         ...state,
         user: { ...state.user, options: action.payload },
@@ -42,7 +42,7 @@ function studentReducer(state = initialState, action) {
     }
 
     case "SET_QUESTIONS": {
-      console.log("questions added to state");
+      // console.log("questions added to state");
       return {
         ...state,
         questions: action.payload,

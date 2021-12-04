@@ -103,7 +103,7 @@ function saveProgress(score) {
 }
 
 const test_page2 = (props) => {
-  console.log("props from test page-2:", props.questBank);
+  // console.log("props from test page-2:", props.questBank);
   const data = props.questBank;
   // const data = myQuestions;
   const arrayofNulls = new Array(data.length).fill("x");
@@ -130,18 +130,16 @@ const test_page2 = (props) => {
   const [modalShow, setModalShow] = useState(false);
   function addToAnswered() {
     var answeredQuest = progress.answered;
-    answeredQuest.indexOf(activeQ) === -1
-      ? answeredQuest.push(activeQ)
-      : console.log("already answered");
+    answeredQuest.indexOf(activeQ) === -1 ? answeredQuest.push(activeQ) : {};
     // console.log(activeQ, " is present in ", answeredQuest);
     setProgress({ ...progress, answered: answeredQuest });
-    console.log("progress", progress);
+    // console.log("progress", progress);
   }
   function addToClicked(value) {
     var clickedList = progress.clickedAnsList;
     clickedList[activeQ] = value;
     setProgress({ ...progress, clickedAnsList: clickedList });
-    console.log(progress.correctAnsList);
+    // console.log(progress.correctAnsList);
   }
   function addToResult(clicked, correct) {
     var correctArray = progress.correct;
@@ -169,9 +167,9 @@ const test_page2 = (props) => {
     addToClicked(e.target.getAttribute("position"));
     addToAnswered();
     const clickedAnswer = e.target.getAttribute("content").toLowerCase();
-    console.log(clickedAnswer);
+    // console.log(clickedAnswer);
     const correctAns = data[activeQ].question.correct_ans.toLowerCase();
-    console.log("corrrect answer ", correctAns);
+    // console.log("corrrect answer ", correctAns);
     addToResult(clickedAnswer, correctAns);
     saveProgress(progress);
   };
@@ -194,8 +192,10 @@ const test_page2 = (props) => {
     let currentQuestion = data[activeQ].question;
     return (
       <>
-      <div style={{position:"fixed" , top: 0, width:"100%"}}><TopBar /></div>
-        
+        <div style={{ position: "fixed", top: 0, width: "100%" }}>
+          <TopBar />
+        </div>
+
         <div className="container-fluid test-page gx-0 ">
           <div className="row gx-0 main-container">
             <div className="col-10 mx-auto">
@@ -214,7 +214,10 @@ const test_page2 = (props) => {
                           src={currentQuestion.quest.image}
                         ></img>
                       ) : null}
-                      <p className="text-bottom fw-bold" style={{lineHeight : "15px"}}>
+                      <p
+                        className="text-bottom fw-bold"
+                        style={{ lineHeight: "15px" }}
+                      >
                         {currentQuestion.quest.que}
                       </p>
                     </div>
@@ -309,7 +312,6 @@ const test_page2 = (props) => {
                   <button
                     className="previous-next"
                     onClick={() => onPreviousClick()}
-            
                     disabled={activeQ === 0}
                   >
                     Previous

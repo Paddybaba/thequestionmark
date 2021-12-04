@@ -39,7 +39,7 @@ const registerStudent = (props) => {
       }
     } catch (err) {
       alert("fetch error");
-      console.log(err.message);
+      // console.log(err.message);
     }
   }
 

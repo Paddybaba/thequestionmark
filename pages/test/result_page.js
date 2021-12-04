@@ -26,7 +26,7 @@ const result_page = (props) => {
   // const [clickedOption, setClickedOption] = useState(progress.clickedAnsList);
   try {
   } catch (e) {
-    console.log("cannont read quest");
+    // console.log("cannont read quest");
   }
 
   const onNextClick = () => {
@@ -41,7 +41,7 @@ const result_page = (props) => {
 
   try {
     let currentQuestion = data[activeQ].question;
-    console.log(currentQuestion)
+    console.log(currentQuestion);
     const clickedAnswerArray = data.map((quest, index) => {
       return quest.question.options[progress.clickedAnsList[index]].option;
     });
@@ -53,15 +53,14 @@ const result_page = (props) => {
 
     return (
       <>
-        <div style={{position:"fixed" , top: 0, width:"100%"}}><TopBar /></div>
+        <div style={{ position: "fixed", top: 0, width: "100%" }}>
+          <TopBar />
+        </div>
         <div className="container-fluid test-page gx-0 ">
           <div className="row gx-0 main-container">
             <div className="col-11 mx-auto">
               <div className="row ">
-                <div
-                  className="col-sm-8 mx-auto quest-box"
-                  style={{ pointerEvents: "none" }}
-                >
+                <div className="col-sm-8 mx-auto quest-box">
                   <div className="row quest-toprow">
                     <div className="col-6"> Question No. {activeQ + 1}</div>
                     <div className="col-6 text-center">Marks : 5</div>
@@ -79,7 +78,7 @@ const result_page = (props) => {
                       </p>
                     </div>
 
-                    <ol>
+                    <ol style={{ pointerEvents: "none" }}>
                       {currentQuestion.options.map((element, index) => {
                         return (
                           <li
@@ -132,8 +131,12 @@ const result_page = (props) => {
                         );
                       })}
                     </ol>
-                    <div><div>Explanation</div>
-                    <div>{currentQuestion.explanation}</div></div>
+                    <div>
+                      <div>Explanation</div>
+                      <div style={{ fontStyle: "italic" }}>
+                        {currentQuestion.explanation}
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="col-sm-4 mx-auto navi-box">
@@ -197,14 +200,14 @@ const result_page = (props) => {
       </>
     );
   } catch (err) {
-    console.log(err);
+    // console.log(err);
 
     return (
       <div className="row">
         <h3 className="text-center mt-5">Mark All the questions First!!!</h3>
         <h5
           className="text-center"
-          onClick={() => router.push("/test/test_page")}
+          onClick={() => router.push("/test/test_page2")}
           style={{ cursor: "pointer" }}
         >
           Go back
