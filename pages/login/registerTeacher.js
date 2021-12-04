@@ -34,9 +34,10 @@ const registerTeacher = (props) => {
           teacher_id: email,
           teacher_name: teacherName,
         };
-        console.log("Teacher Registered", teacher);
+        alert(`${teacher.teacher_name} registered successfully !!! Proceeding to add questions ...`);
+        localStorage.setItem("teacher", JSON.stringify(teacher));
         // props.userLoginHandler(student);       ********************
-        // router.push("/test/selectTest");        *****************
+        router.push("/question/addQuestion2");  
       }
     } catch (err) {
       alert("fetch error");
@@ -47,7 +48,7 @@ const registerTeacher = (props) => {
   return (
     <div
       className="row gx-0"
-      style={{ height: "100vh", backgroundColor: "honeydew" }}
+      style={{  backgroundColor: "honeydew" }}
     >
       <Head>
         <title>Registration</title>

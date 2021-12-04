@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Countdown from "./Countdown";
 import Watch from "./Watch";
 const TopBar = (props) => {
-  console.log("props from topbar", props);
+  // console.log("props from topbar", props);
   return (
     <>
       <div className="">

@@ -19,10 +19,12 @@ const StartTest = (props) => {
   };
   return (
     <>
-      <div className="container-fluid test-page">
-        <div className="row">
-          <div className="col-12 mx-auto">
-            <TopBar />
+      <div className="test-page">
+        <div className="row gx-0">
+          <div className="col-12 mx-auto gx-0">
+            <div style={{ position: "fixed", top: 0, width: "100%" }}>
+              <TopBar />
+            </div>
             <div className="row">
               <div className="col-10 mx-auto">
                 <div className="welcome text-center">
@@ -35,7 +37,7 @@ const StartTest = (props) => {
                 <div
                   className="start-button mx-auto mt-3"
                   onClick={() => {
-                    router.push("/test/test_page");
+                    router.push("/test/test_page2");
                     localStorage.setItem("score", JSON.stringify(score));
                   }}
                 >

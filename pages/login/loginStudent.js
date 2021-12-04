@@ -25,7 +25,7 @@ const loginPage = (props) => {
       });
       const data = await resposne.data;
       const student = await data.student;
-      console.log("studnet", student);
+      // console.log("studnet", student);
       if (resposne.status === 400 || !data) {
         window.alert("Invalid Credentials 1 !!!");
       } else {
