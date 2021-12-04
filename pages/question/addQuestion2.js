@@ -157,15 +157,11 @@ const addQuestion2 = (props) => {
       if (allImage.optionD) fd.append("images", allImage.optionD, "optionD");
 
       // console.log("formData", fd.get("quest_image"));
-      const resposne = await axios.post(
-        "http://localhost:8080/addQuestion",
-        fd,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const resposne = await axios.post(`${path}/addQuestion`, fd, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       const message = await resposne.data;
       if (message) alert("Question Uploaded Successfully !!!");
       setAllImages({
@@ -557,7 +553,15 @@ const addQuestion2 = (props) => {
               type="text"
               name="explanation"
               value={newQuestion.question.explanation}
-              onChange={handleInputChange}
+              onChange={(e) =>
+                setQuestion({
+                  ...newQuestion,
+                  question: {
+                    ...newQuestion.question,
+                    explanation: e.target.value,
+                  },
+                })
+              }
             />
           </Form.Group>
           <Button
