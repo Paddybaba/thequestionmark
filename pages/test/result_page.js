@@ -41,6 +41,7 @@ const result_page = (props) => {
 
   try {
     let currentQuestion = data[activeQ].question;
+    console.log(currentQuestion)
     const clickedAnswerArray = data.map((quest, index) => {
       return quest.question.options[progress.clickedAnsList[index]].option;
     });
@@ -52,7 +53,7 @@ const result_page = (props) => {
 
     return (
       <>
-        <TopBar />
+        <div style={{position:"fixed" , top: 0, width:"100%"}}><TopBar /></div>
         <div className="container-fluid test-page gx-0 ">
           <div className="row gx-0 main-container">
             <div className="col-11 mx-auto">
@@ -131,7 +132,8 @@ const result_page = (props) => {
                         );
                       })}
                     </ol>
-                    <div>Explanation</div>
+                    <div><div>Explanation</div>
+                    <div>{currentQuestion.explanation}</div></div>
                   </div>
                 </div>
                 <div className="col-sm-4 mx-auto navi-box">

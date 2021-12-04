@@ -221,7 +221,7 @@ li {
   margin-left: auto;
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 576px) {
   .quest-box {
     height: 70vh;
   }
@@ -233,9 +233,9 @@ li {
     height: 20px;
     font-size: 60%;
   }
-  .previous-next{
+  /* .previous-next{
     height: 30px;
-  }
+  } */
 }
 /* @media only screen and (min-width: 640px) {
 .previous-next {height : 30px}
