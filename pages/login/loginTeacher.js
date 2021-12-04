@@ -89,7 +89,7 @@ const loginTeacher = (props) => {
         <p
           className="mt-4 simple-link "
           onClick={() =>
-            router.push("/login/registerTeacher", (teacher = teacher))
+            router.push("/login/registerTeacher")
           }
         >
           New Teacher, Register

@@ -46,6 +46,7 @@ const addQuestion2 = (props) => {
     },
     year: 2021,
     difficulty: "Easy", //easy, medium ,hard
+    explanation : ""
   };
 
   const empty_image_array = [];
@@ -548,6 +549,15 @@ const addQuestion2 = (props) => {
                 {newQuestion.question.options[3].option}
               </option>
             </select>
+          </Form.Group>
+          <Form.Group className="mt-4" size="lg" controlId="explanation">
+            <Form.Label>Explanation</Form.Label>
+            <Form.Control
+              type="text"
+              name="explanation"
+              value={newQuestion.explanation}
+              onChange={handleInputChange}
+            />
           </Form.Group>
           <Button
             block="true"

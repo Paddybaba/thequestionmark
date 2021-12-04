@@ -194,7 +194,8 @@ const test_page2 = (props) => {
     let currentQuestion = data[activeQ].question;
     return (
       <>
-        <TopBar />
+      <div style={{position:"fixed" , top: 0, width:"100%"}}><TopBar /></div>
+        
         <div className="container-fluid test-page gx-0 ">
           <div className="row gx-0 main-container">
             <div className="col-10 mx-auto">
@@ -213,7 +214,7 @@ const test_page2 = (props) => {
                           src={currentQuestion.quest.image}
                         ></img>
                       ) : null}
-                      <p className="text-bottom fw-bold">
+                      <p className="text-bottom fw-bold" style={{lineHeight : "15px"}}>
                         {currentQuestion.quest.que}
                       </p>
                     </div>
@@ -308,7 +309,7 @@ const test_page2 = (props) => {
                   <button
                     className="previous-next"
                     onClick={() => onPreviousClick()}
-                    // style={{ visibility: activeQ == 0 ? "hidden" : "visible" }}
+            
                     disabled={activeQ === 0}
                   >
                     Previous
@@ -316,10 +317,6 @@ const test_page2 = (props) => {
                   <button
                     className="previous-next"
                     onClick={() => onNextClick()}
-                    // style={{
-                    //   visibility:
-                    //     // activeQ == data.length - 1 ? "hidden" : "visible",
-                    // }}
                     disabled={activeQ == data.length - 1}
                   >
                     Next

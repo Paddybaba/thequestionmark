@@ -55,7 +55,7 @@ const result_page = (props) => {
         <TopBar />
         <div className="container-fluid test-page gx-0 ">
           <div className="row gx-0 main-container">
-            <div className="col-10 mx-auto">
+            <div className="col-11 mx-auto">
               <div className="row ">
                 <div
                   className="col-sm-8 mx-auto quest-box"
@@ -131,6 +131,7 @@ const result_page = (props) => {
                         );
                       })}
                     </ol>
+                    <div>Explanation</div>
                   </div>
                 </div>
                 <div className="col-sm-4 mx-auto navi-box">

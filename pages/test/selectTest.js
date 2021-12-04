@@ -47,7 +47,7 @@ const selectTest = (props) => {
     <>
       <div
         className="container-fluid"
-        style={{ backgroundColor: "honeydew", height: "100vh" }}
+        // style={{ backgroundColor: "honeydew" }}
       >
         <div className="row">
           <div className="col-10 mx-auto">
