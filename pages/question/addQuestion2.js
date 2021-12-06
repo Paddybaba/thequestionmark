@@ -175,7 +175,12 @@ const addQuestion2 = (props) => {
         ...initialValues,
         subject: newQuestion.subject,
         author: newQuestion.author,
+        year: newQuestion.year,
+        class: newQuestion.class,
       });
+      document.getElementById("question-text").focus();
+      // document.getElementById("question-text").scrollIntoView();
+      window.scrollTo(0, 500);
     } catch (err) {
       alert("Could not upload the question !!!");
       // console.log(err.message);
@@ -232,6 +237,29 @@ const addQuestion2 = (props) => {
               onChange={handleInputChange}
             />
           </Form.Group>
+          <Form.Group className="mt-4" size="lg" controlId="class">
+            <Form.Label>Class</Form.Label>
+            <select
+              name="class"
+              className="form-select"
+              aria-label="Default select example"
+              onChange={handleInputChange}
+              defaultValue="Class-1"
+            >
+              <option value="Class-1">Class-1</option>
+              <option value="Class-2">Class-2</option>
+              <option value="Class-3">Class-3</option>
+              <option value="Class-4">Class-4</option>
+              <option value="Class-5">Class-5</option>
+              <option value="Class-6">Class-6</option>
+              <option value="Class-7">Class-7</option>
+              <option value="Class-8">Class-8</option>
+              <option value="Class-9">Class-9</option>
+              <option value="Class-10">Class-10</option>
+              <option value="Class-11">Class-11</option>
+              <option value="Class-12">Class-12</option>
+            </select>
+          </Form.Group>
           <Form.Group className="mt-4" size="lg" controlId="difficulty">
             <Form.Label>Difficulty</Form.Label>
             <select
@@ -276,7 +304,7 @@ const addQuestion2 = (props) => {
               borderRadius: 4,
             }}
             size="lg"
-            controlId="quest"
+            // controlId="quest"
           >
             {newQuestion.model == "Image-Question-Text-Options" ||
             newQuestion.model == "Combined" ? (
@@ -307,6 +335,8 @@ const addQuestion2 = (props) => {
             ) : null}
             <Form.Label>Question Text</Form.Label>
             <Form.Control
+              id="question-text"
+              name="question_text"
               style={{ maxHeight: 300 }}
               contentEditable
               type="text"
