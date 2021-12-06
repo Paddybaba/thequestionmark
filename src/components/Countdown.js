@@ -20,7 +20,9 @@ const Countdown = () => {
 
     return () => clearInterval(timer);
   }, [counter]);
-  return (
+
+  
+    return (
     <>
       <div className="countdown">
         <h3>

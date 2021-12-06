@@ -250,14 +250,22 @@ li {
   width: 150px;
   border-radius: 5px;
   margin-right: 5px;
+  transition: all 400ms ease;
+}
+.question-image:hover{
+  transform: scale(2.5) translate(10%,10%);
+
 }
 .option-image {
   height: 60px;
   width: 100px;
   border-radius: 3px;
   margin: 2px 0;
+  /* transition: 300ms all ease; */
 }
-
+/* .option-image:hover{
+  transform: scale(2);
+} */
 .option-text {
   pointer-events: none;
   display: flex;

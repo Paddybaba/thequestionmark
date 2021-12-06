@@ -23,7 +23,7 @@ const selectTest = (props) => {
     setAuthorHint(authors);
   }, []);
   function validateForm() {
-    return subject.length > 0 && author.length > 0 && year > 0;
+    return subject.length > 0 && author.length > 0 && year > 0 && standard.length > 0;
   }
 
   const router = useRouter();
@@ -98,6 +98,7 @@ const selectTest = (props) => {
                       className="form-select"
                       aria-label="Default select example"
                       onChange={(e) => setStandard(e.target.value)}
+          
                     >
                       <option value="Class-1">Class-1</option>
                       <option value="Class-2">Class-2</option>
@@ -124,7 +125,7 @@ const selectTest = (props) => {
                   <Button
                     block="true"
                     className="mt-4"
-                    // disabled={!validateForm()}
+                    disabled={!validateForm()}
                     onClick={() => onSubmit()}
                   >
                     Submit

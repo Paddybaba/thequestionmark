@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { userLogin } from "../../redux/actions";
 import { connect } from "react-redux";
 import path from "../api/mypaths";
-
+import {FaHome} from "react-icons/fa"
 const loginPage = (props) => {
   // console.log("props from login page :", props);
   const [email, setEmail] = useState("");
@@ -30,7 +30,7 @@ const loginPage = (props) => {
         window.alert("Invalid Credentials 1 !!!");
       } else {
         props.userLoginHandler(student);
-        router.push("/test/selectTest");
+        router.replace("/test/selectTest");
       }
     } catch (err) {
       alert("Something went wrong !!!");
@@ -41,18 +41,18 @@ const loginPage = (props) => {
   return (
     <div
       className="row gx-0"
-      style={{ height: "100vh", backgroundColor: "honeydew" }}
+      // style={{ height: "100vh", backgroundColor: "honeydew" }}
     >
       <Head>
         <title>Student Login</title>
       </Head>
-      <div className="col-7 mt-5 mx-auto">
+      <div className="col-7 mx-auto" style={{marginTop : "20%"}}>
         <div
           className="simple-link"
-          style={{ position: "absolute", top: 5, right: 10, cursor: "pointer" }}
+          style={{fontSize:"1.3em", position: "absolute", top: 5, right: 10, cursor: "pointer" }}
           onClick={() => router.push("/")}
         >
-          Home
+         <FaHome/>
         </div>
         <div className="text-center text-uppercase fs-3 fw-bold my-5">
           Student Login

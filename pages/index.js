@@ -7,6 +7,7 @@ import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import { useEffect } from "react";
 export default function Home() {
+ 
   return (
     <div className={styles.container}>
       <Head>
@@ -21,10 +22,10 @@ export default function Home() {
       <main className={styles.main}>
         <h1>The Question Mark </h1>
         <Link href="/login/loginStudent">
-          <div className="box-login text-center text-uppercase">Student</div>
+          <div className="box-login text-center text-uppercase" onClick={()=>{document.body.requestFullscreen()}}>Student</div>
         </Link>
         <Link href="/login/loginTeacher">
-          <div className="box-login text-center text-uppercase">TEACHER</div>
+          <div className="box-login text-center text-uppercase" onClick={()=>{document.body.requestFullscreen()}}>TEACHER</div>
         </Link>
       </main>
     </div>

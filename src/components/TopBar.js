@@ -15,7 +15,7 @@ const TopBar = (props) => {
                   {props.student.student_name}
                 </div>
               </div>
-              <div className="flex-fill text-center  text-uppercase">
+              <div className="flex-fill text-center fw-bold text-uppercase">
                 {props.student.options.subject}
               </div>
               <div className="text-right">
