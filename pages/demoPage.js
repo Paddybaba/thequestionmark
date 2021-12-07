@@ -11,7 +11,7 @@ const demoPage = (props) => {
             <div>
               <h3>I am demo page</h3>
               <button onClick={() => props.loginHandler("Clciked")}>
-                Click me
+                Click me once
               </button>
             </div>
           </div>
