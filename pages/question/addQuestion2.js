@@ -31,7 +31,7 @@ const addQuestion2 = (props) => {
   const initialValues = {
     subject: "Science",
     author: "",
-    class: [],
+    class: "Class-1",
     model: "Text-Question-Text-Options", //Other images
     question: {
       quest: { image: "", que: "" },
@@ -243,8 +243,9 @@ const addQuestion2 = (props) => {
               name="class"
               className="form-select"
               aria-label="Default select example"
-              onChange={handleInputChange}
-              defaultValue="Class-1"
+              onChange={(e) => {
+                setQuestion({ ...newQuestion, class: e.target.value });
+              }}
             >
               <option value="Class-1">Class-1</option>
               <option value="Class-2">Class-2</option>

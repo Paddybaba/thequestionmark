@@ -188,8 +188,7 @@ const test_page2 = (props) => {
     var numberOfCorrects = progress.correct.length;
     alert("Finish", numberOfCorrects);
   };
-  
- 
+
   try {
     let currentQuestion = data[activeQ].question;
     return (

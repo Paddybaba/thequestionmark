@@ -7,7 +7,8 @@ import { useRouter } from "next/router";
 import { userLogin } from "../../redux/actions";
 import { connect } from "react-redux";
 import path from "../api/mypaths";
-import {FaHome} from "react-icons/fa"
+import { FaHome, FaUserAlt, FaKey } from "react-icons/fa";
+
 const loginPage = (props) => {
   // console.log("props from login page :", props);
   const [email, setEmail] = useState("");
@@ -46,20 +47,28 @@ const loginPage = (props) => {
       <Head>
         <title>Student Login</title>
       </Head>
-      <div className="col-7 mx-auto" style={{marginTop : "20%"}}>
+      <div className="col-7 mx-auto" style={{ marginTop: "3em" }}>
         <div
           className="simple-link"
-          style={{fontSize:"1.3em", position: "absolute", top: 5, right: 10, cursor: "pointer" }}
+          style={{
+            fontSize: "1.3em",
+            position: "absolute",
+            top: 5,
+            right: 10,
+            cursor: "pointer",
+          }}
           onClick={() => router.push("/")}
         >
-         <FaHome/>
+          <FaHome />
         </div>
         <div className="text-center text-uppercase fs-3 fw-bold my-5">
           Student Login
         </div>
         <Form>
           <Form.Group size="lg" controlId="email">
-            <Form.Label>Student ID</Form.Label>
+            <Form.Label>
+              <FaUserAlt /> Student ID
+            </Form.Label>
             <Form.Control
               autoFocus
               type="email"
@@ -68,7 +77,9 @@ const loginPage = (props) => {
             />
           </Form.Group>
           <Form.Group className="mt-4" size="lg" controlId="password">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>
+              <FaKey /> Password
+            </Form.Label>
             <Form.Control
               type="password"
               value={password}

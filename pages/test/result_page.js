@@ -188,7 +188,7 @@ const result_page = (props) => {
                   </button>
                   <button
                     className=" previous-next finish-button"
-                    onClick={() => router.push("/test/selectTest")}
+                    onClick={() => router.replace("/test/selectTest")}
                   >
                     END TEST
                   </button>

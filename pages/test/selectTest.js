@@ -13,7 +13,7 @@ const selectTest = (props) => {
   const [mystudent, setStudent] = useState(props.student.user.student_name);
   const [subject, setSubject] = useState("Science");
   const [author, setAuthor] = useState("");
-  const [year, setYear] = useState("");
+  const [year, setYear] = useState(2021);
   const [standard, setStandard] = useState("Class-1");
 
   useEffect(async () => {
@@ -23,7 +23,9 @@ const selectTest = (props) => {
     setAuthorHint(authors);
   }, []);
   function validateForm() {
-    return subject.length > 0 && author.length > 0 && year > 0 && standard.length > 0;
+    return (
+      subject.length > 0 && author.length > 0 && year > 0 && standard.length > 0
+    );
   }
 
   const router = useRouter();
@@ -98,7 +100,6 @@ const selectTest = (props) => {
                       className="form-select"
                       aria-label="Default select example"
                       onChange={(e) => setStandard(e.target.value)}
-          
                     >
                       <option value="Class-1">Class-1</option>
                       <option value="Class-2">Class-2</option>
@@ -117,7 +118,7 @@ const selectTest = (props) => {
                   <Form.Group className="mt-3" size="lg" controlId="year">
                     <Form.Label>Year</Form.Label>
                     <Form.Control
-                      type="text"
+                      type="number"
                       value={year}
                       onChange={(e) => setYear(e.target.value)}
                     />
