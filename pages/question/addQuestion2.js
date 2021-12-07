@@ -6,7 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import path from "../api/mypaths";
 import Resizer from "react-image-file-resizer";
-
+import { ProgressBar } from "react-bootstrap";
 //// Resize image before uploading
 const resizeFile = (file) =>
   new Promise((resolve, reject) => {
@@ -15,7 +15,7 @@ const resizeFile = (file) =>
       600,
       400,
       "JPEG",
-      100,
+      80,
       0,
       (uri) => {
         resolve(uri);
@@ -51,7 +51,9 @@ const addQuestion2 = (props) => {
 
   const empty_image_array = [];
   const [newQuestion, setQuestion] = useState(initialValues);
-  const [questImage, setQuestImage] = useState();
+  // const [questImage, setQuestImage] = useState();
+  const [uploadProgress, setUploadProgress] = useState(0);
+
   const [allImage, setAllImages] = useState({
     quest_image: null,
     optionA: null,
@@ -157,11 +159,22 @@ const addQuestion2 = (props) => {
       if (allImage.optionD) fd.append("images", allImage.optionD, "optionD");
 
       // console.log("formData", fd.get("quest_image"));
-      const resposne = await axios.post(`${path}/addQuestion`, fd, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      var config = {
+       
+        onUploadProgress: (progressEvent) => {
+          const {loaded, total} = progressEvent;
+          let percent = Math.floor( (loaded * 100) / total )
+          console.log( `${loaded}kb of ${total}kb | ${percent}%` );
+  
+          if( percent < 100 ){
+            setUploadProgress(percent)
+          }
+        }
+
+      };
+      const resposne = await axios.post(`${path}/addQuestion`, fd, config,  {headers: {
+        "Content-Type": "multipart/form-data",
+      }});
       const message = await resposne.data;
       if (message) alert("Question Uploaded Successfully !!!");
       setAllImages({
@@ -178,6 +191,10 @@ const addQuestion2 = (props) => {
         year: newQuestion.year,
         class: newQuestion.class,
       });
+      // Finish Progress bar after getting response
+      setUploadProgress(100, ()=>{ setTimeout(() => {
+        this.setState({ uploadPercentage: 0 })
+      }, 500);})
       document.getElementById("question-text").focus();
       // document.getElementById("question-text").scrollIntoView();
       window.scrollTo(0, 500);
@@ -578,7 +595,7 @@ const addQuestion2 = (props) => {
               </option>
             </select>
           </Form.Group>
-          <Form.Group className="mt-4" size="lg" controlId="explanation">
+          <Form.Group className="mt-4 mb-3" size="lg" controlId="explanation">
             <Form.Label>Explanation</Form.Label>
             <Form.Control
               type="text"
@@ -595,6 +612,7 @@ const addQuestion2 = (props) => {
               }
             />
           </Form.Group>
+          { uploadProgress > 0 && uploadProgress < 100 ? <ProgressBar now={uploadProgress} animated label={`${uploadProgress}%`} /> : null }
           <Button
             block="true"
             className="mt-4 mb-5"

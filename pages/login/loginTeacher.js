@@ -42,7 +42,7 @@ const loginTeacher = (props) => {
   return (
     <div
       className="row gx-0"
-      style={{ height: "100vh", backgroundColor: "honeydew" }}
+      style={{ color: "white"}}
     >
       <Head>
         <title>Teacher Login</title>

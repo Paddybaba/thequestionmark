@@ -48,7 +48,7 @@ const registerTeacher = (props) => {
   return (
     <div
       className="row gx-0"
-      style={{  backgroundColor: "honeydew" }}
+      style={{ color: "white"}}
     >
       <Head>
         <title>Registration</title>

@@ -26,7 +26,7 @@ export default function Home() {
           <div
             className="box-login text-center"
             onClick={() => {
-              document.body.requestFullscreen();
+              document.documentElement.requestFullscreen();
             }}
           >
             <FcReadingEbook />
@@ -37,7 +37,7 @@ export default function Home() {
           <div
             className="box-login text-center"
             onClick={() => {
-              document.body.requestFullscreen();
+              document.documentElement.requestFullscreen();
             }}
           >
             <GiTeacher />

@@ -253,7 +253,7 @@ li {
   transition: all 400ms ease;
 }
 .question-image:hover {
-  transform: scale(2.5) translate(10%, 10%);
+  transform: scale(2) translate(25%, 20%);
 }
 .option-image {
   height: 60px;
