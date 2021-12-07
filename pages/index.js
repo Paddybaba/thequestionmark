@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { GiTeacher } from "react-icons/gi";
-import { FcReadingEbook } from "react-icons/Fc";
+import { FcReadingEbook } from "react-icons/fc";
 // import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
