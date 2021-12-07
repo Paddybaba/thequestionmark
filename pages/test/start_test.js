@@ -1,5 +1,5 @@
 import React from "react";
-import TopBar from "../../src/components/TopBar";
+import TopBar1 from "../../src/components/TopBar1";
 import { connect } from "react-redux";
 import router, { useRouter } from "next/router";
 
@@ -23,7 +23,7 @@ const StartTest = (props) => {
         <div className="row gx-0">
           <div className="col-12 mx-auto gx-0">
             <div style={{ position: "fixed", top: 0, width: "100%" }}>
-              <TopBar />
+              <TopBar1 />
             </div>
             <div className="row">
               <div className="col-10 mx-auto">
@@ -37,7 +37,7 @@ const StartTest = (props) => {
                 <div
                   className="start-button mx-auto mt-3"
                   onClick={() => {
-                    router.push("/test/test_page2");
+                    router.replace("/test/test_page2");
                     localStorage.setItem("score", JSON.stringify(score));
                   }}
                 >

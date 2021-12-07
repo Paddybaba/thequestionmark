@@ -6,7 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import path from "../api/mypaths";
 import Resizer from "react-image-file-resizer";
-
+import { ProgressBar } from "react-bootstrap";
 //// Resize image before uploading
 const resizeFile = (file) =>
   new Promise((resolve, reject) => {
@@ -15,7 +15,7 @@ const resizeFile = (file) =>
       600,
       400,
       "JPEG",
-      100,
+      80,
       0,
       (uri) => {
         resolve(uri);
@@ -31,7 +31,7 @@ const addQuestion2 = (props) => {
   const initialValues = {
     subject: "Science",
     author: "",
-    class: [],
+    class: "Class-1",
     model: "Text-Question-Text-Options", //Other images
     question: {
       quest: { image: "", que: "" },
@@ -51,7 +51,9 @@ const addQuestion2 = (props) => {
 
   const empty_image_array = [];
   const [newQuestion, setQuestion] = useState(initialValues);
-  const [questImage, setQuestImage] = useState();
+  // const [questImage, setQuestImage] = useState();
+  const [uploadProgress, setUploadProgress] = useState(0);
+
   const [allImage, setAllImages] = useState({
     quest_image: null,
     optionA: null,
@@ -157,11 +159,22 @@ const addQuestion2 = (props) => {
       if (allImage.optionD) fd.append("images", allImage.optionD, "optionD");
 
       // console.log("formData", fd.get("quest_image"));
-      const resposne = await axios.post(`${path}/addQuestion`, fd, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      var config = {
+       
+        onUploadProgress: (progressEvent) => {
+          const {loaded, total} = progressEvent;
+          let percent = Math.floor( (loaded * 100) / total )
+          console.log( `${loaded}kb of ${total}kb | ${percent}%` );
+  
+          if( percent < 100 ){
+            setUploadProgress(percent)
+          }
+        }
+
+      };
+      const resposne = await axios.post(`${path}/addQuestion`, fd, config,  {headers: {
+        "Content-Type": "multipart/form-data",
+      }});
       const message = await resposne.data;
       if (message) alert("Question Uploaded Successfully !!!");
       setAllImages({
@@ -175,7 +188,16 @@ const addQuestion2 = (props) => {
         ...initialValues,
         subject: newQuestion.subject,
         author: newQuestion.author,
+        year: newQuestion.year,
+        class: newQuestion.class,
       });
+      // Finish Progress bar after getting response
+      setUploadProgress(100, ()=>{ setTimeout(() => {
+        this.setState({ uploadPercentage: 0 })
+      }, 500);})
+      document.getElementById("question-text").focus();
+      // document.getElementById("question-text").scrollIntoView();
+      window.scrollTo(0, 500);
     } catch (err) {
       alert("Could not upload the question !!!");
       // console.log(err.message);
@@ -232,6 +254,30 @@ const addQuestion2 = (props) => {
               onChange={handleInputChange}
             />
           </Form.Group>
+          <Form.Group className="mt-4" size="lg" controlId="class">
+            <Form.Label>Class</Form.Label>
+            <select
+              name="class"
+              className="form-select"
+              aria-label="Default select example"
+              onChange={(e) => {
+                setQuestion({ ...newQuestion, class: e.target.value });
+              }}
+            >
+              <option value="Class-1">Class-1</option>
+              <option value="Class-2">Class-2</option>
+              <option value="Class-3">Class-3</option>
+              <option value="Class-4">Class-4</option>
+              <option value="Class-5">Class-5</option>
+              <option value="Class-6">Class-6</option>
+              <option value="Class-7">Class-7</option>
+              <option value="Class-8">Class-8</option>
+              <option value="Class-9">Class-9</option>
+              <option value="Class-10">Class-10</option>
+              <option value="Class-11">Class-11</option>
+              <option value="Class-12">Class-12</option>
+            </select>
+          </Form.Group>
           <Form.Group className="mt-4" size="lg" controlId="difficulty">
             <Form.Label>Difficulty</Form.Label>
             <select
@@ -276,7 +322,7 @@ const addQuestion2 = (props) => {
               borderRadius: 4,
             }}
             size="lg"
-            controlId="quest"
+            // controlId="quest"
           >
             {newQuestion.model == "Image-Question-Text-Options" ||
             newQuestion.model == "Combined" ? (
@@ -307,6 +353,8 @@ const addQuestion2 = (props) => {
             ) : null}
             <Form.Label>Question Text</Form.Label>
             <Form.Control
+              id="question-text"
+              name="question_text"
               style={{ maxHeight: 300 }}
               contentEditable
               type="text"
@@ -547,7 +595,7 @@ const addQuestion2 = (props) => {
               </option>
             </select>
           </Form.Group>
-          <Form.Group className="mt-4" size="lg" controlId="explanation">
+          <Form.Group className="mt-4 mb-3" size="lg" controlId="explanation">
             <Form.Label>Explanation</Form.Label>
             <Form.Control
               type="text"
@@ -564,6 +612,7 @@ const addQuestion2 = (props) => {
               }
             />
           </Form.Group>
+          { uploadProgress > 0 && uploadProgress < 100 ? <ProgressBar now={uploadProgress} animated label={`${uploadProgress}%`} /> : null }
           <Button
             block="true"
             className="mt-4 mb-5"

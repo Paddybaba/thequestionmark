@@ -23,7 +23,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2em;
+  font-size: 1.5em;
   text-align: center;
   height: 40px;
   border-radius: 5px;
@@ -250,14 +250,21 @@ li {
   width: 150px;
   border-radius: 5px;
   margin-right: 5px;
+  transition: all 400ms ease;
+}
+.question-image:hover {
+  transform: scale(2) translate(25%, 20%);
 }
 .option-image {
   height: 60px;
   width: 100px;
   border-radius: 3px;
   margin: 2px 0;
+  /* transition: 300ms all ease; */
 }
-
+/* .option-image:hover{
+  transform: scale(2);
+} */
 .option-text {
   pointer-events: none;
   display: flex;
