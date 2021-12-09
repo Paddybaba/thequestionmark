@@ -12,20 +12,24 @@ const registerTeacher = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [teacherName, setTeacherName] = useState("");
+  const [school, setSchool] = useState("");
+  const [city, setCity] = useState("");
   const router = useRouter();
 
   function validateForm() {
-    return email.length > 0 && password.length > 0 && teacherName.length > 0;
+    return email.length > 0 && password.length > 0 && teacherName.length > 0 && school.length> 0 && city.length > 0;
   }
 
   async function handleSubmit() {
     try {
-      const resposne = await axios.post(`${path}/registerTeacher`, {
+      const resposne = await axios.post(`${path}/registerTeacher2`, {
         teacher_id: email,
         teacher_name: teacherName,
         password: password,
+        school : school,
+        city : city
       });
-      const data = await resposne.data; // receive : Registered Succesfully
+      const data = await resposne.data; // receive : Registered Succesfully activation link sent
 
       if (resposne.status === 400 || !data) {
         window.alert("Something went wrong during registration !!!");
@@ -34,13 +38,13 @@ const registerTeacher = (props) => {
           teacher_id: email,
           teacher_name: teacherName,
         };
-        alert(`${teacher.teacher_name} registered successfully !!! Proceeding to add questions ...`);
+        alert(`${teacher.teacher_name} registered successfully !!! Please check your mail for activation link ...`);
         localStorage.setItem("teacher", JSON.stringify(teacher));
         // props.userLoginHandler(student);       ********************
-        router.push("/question/addQuestion2");  
+        // router.push("/question/addQuestion2");  
       }
     } catch (err) {
-      alert("fetch error");
+      alert("Error Registering teacher");
       console.log(err.message);
     }
   }
@@ -90,6 +94,22 @@ const registerTeacher = (props) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
+          <Form.Group className="mt-4" size="lg" controlId="school">
+            <Form.Label>School</Form.Label>
+            <Form.Control
+              type="text"
+              value={school}
+              onChange={(e) => setSchool(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="mt-4" size="lg" controlId="city">
+            <Form.Label>City</Form.Label>
+            <Form.Control
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </Form.Group>
           <Button
             block="true"
             className="mt-4"
@@ -110,10 +130,5 @@ const registerTeacher = (props) => {
     </div>
   );
 };
-// const mdtp = (dispatch) => ({
-//   teacherLoginHandler: (data) => dispatch(userLogin(data)),
-// });
-// const mstp = (state) => ({
-//   student: state.studentReducer,
-// });
+
 export default registerTeacher;
