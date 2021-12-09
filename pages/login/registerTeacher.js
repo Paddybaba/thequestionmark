@@ -17,7 +17,13 @@ const registerTeacher = (props) => {
   const router = useRouter();
 
   function validateForm() {
-    return email.length > 0 && password.length > 0 && teacherName.length > 0 && school.length> 0 && city.length > 0;
+    return (
+      email.length > 0 &&
+      password.length > 0 &&
+      teacherName.length > 0 &&
+      school.length > 0 &&
+      city.length > 0
+    );
   }
 
   async function handleSubmit() {
@@ -26,8 +32,8 @@ const registerTeacher = (props) => {
         teacher_id: email,
         teacher_name: teacherName,
         password: password,
-        school : school,
-        city : city
+        school: school,
+        city: city,
       });
       const data = await resposne.data; // receive : Registered Succesfully activation link sent
 
@@ -38,10 +44,12 @@ const registerTeacher = (props) => {
           teacher_id: email,
           teacher_name: teacherName,
         };
-        alert(`${teacher.teacher_name} registered successfully !!! Please check your mail for activation link ...`);
+        alert(
+          `${teacher.teacher_name} registered successfully !!! Please check your mail for activation link ...`
+        );
         localStorage.setItem("teacher", JSON.stringify(teacher));
         // props.userLoginHandler(student);       ********************
-        // router.push("/question/addQuestion2");  
+        // router.push("/question/addQuestion2");
       }
     } catch (err) {
       alert("Error Registering teacher");
@@ -50,10 +58,7 @@ const registerTeacher = (props) => {
   }
 
   return (
-    <div
-      className="row gx-0"
-      style={{ color: "white"}}
-    >
+    <div className="row gx-0" style={{ color: "white" }}>
       <Head>
         <title>Registration</title>
       </Head>
