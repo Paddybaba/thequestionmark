@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { userLogin } from "../../redux/actions";
 import { connect } from "react-redux";
 import path from "../api/mypaths";
+import { FaHome, FaKey, FaMailBulk, FaUserAlt } from "react-icons/fa";
 const registerStudent = (props) => {
   // console.log("props from register page :", props);
   const [email, setEmail] = useState("");
@@ -44,10 +45,7 @@ const registerStudent = (props) => {
   }
 
   return (
-    <div
-      className="row gx-0"
-      style={{ color: "white"}}
-    >
+    <div className="row gx-0" style={{ color: "white" }}>
       <Head>
         <title>Registration</title>
       </Head>
@@ -57,53 +55,63 @@ const registerStudent = (props) => {
           style={{ position: "absolute", top: 5, right: 10, cursor: "pointer" }}
           onClick={() => router.push("/")}
         >
-          Home
+          <FaHome />
         </div>
-        <div className="text-center text-uppercase fs-3 fw-bold my-5">
+        <div className="text-center text-uppercase fs-3 fw-bold my-3">
           New Student Registration
         </div>
-        <Form>
-          <Form.Group size="lg" controlId="studentName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              autoFocus
-              type="text"
-              value={studentName}
-              onChange={(e) => setStudentName(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mt-4" size="lg" controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mt-4" size="lg" controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Button
-            block="true"
-            className="mt-4"
-            // type="submit" (This is not allowing action to work properly)
-            disabled={!validateForm()}
-            onClick={() => handleSubmit()}
+        <div className="col-sm-10 mx-auto my-box">
+          <Form>
+            <Form.Group size="lg" controlId="studentName">
+              <Form.Label>
+                <FaUserAlt /> Name
+              </Form.Label>
+              <Form.Control
+                autoFocus
+                type="text"
+                value={studentName}
+                onChange={(e) => setStudentName(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mt-4" size="lg" controlId="email">
+              <Form.Label>
+                <FaMailBulk /> Email
+              </Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mt-4" size="lg" controlId="password">
+              <Form.Label>
+                <FaKey /> Password
+              </Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            <div className="d-flex justify-content-center">
+              <Button
+                block="true"
+                className="mt-4"
+                // type="submit" (This is not allowing action to work properly)
+                disabled={!validateForm()}
+                onClick={() => handleSubmit()}
+              >
+                Register
+              </Button>
+            </div>
+          </Form>
+          <p
+            className="mt-4 simple-link "
+            onClick={() => router.push("/login/loginStudent")}
           >
-            Register
-          </Button>
-        </Form>
-        <p
-          className="mt-4 simple-link "
-          onClick={() => router.push("/login/loginStudent")}
-        >
-          Already registered, go to Login
-        </p>
+            Already registered, go to Login
+          </p>
+        </div>
       </div>
     </div>
   );
