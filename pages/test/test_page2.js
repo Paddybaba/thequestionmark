@@ -191,8 +191,9 @@ const test_page2 = (props) => {
 
   try {
     let currentQuestion = data[activeQ].question;
+    console.log("question", currentQuestion.quest.que)
     return (
-      <>
+      <div className="gx-0">
         <div style={{ position: "fixed", top: 0, width: "100%" }}>
           <TopBar />
         </div>
@@ -215,12 +216,13 @@ const test_page2 = (props) => {
                           src={currentQuestion.quest.image}
                         ></img>
                       ) : null}
-                      <p
+                      <textarea
                         className="text-bottom fw-bold"
-                        style={{ lineHeight: "15px" }}
+                        readOnly
+                        value={currentQuestion.quest.que}
                       >
                         {currentQuestion.quest.que}
-                      </p>
+                      </textarea>
                     </div>
 
                     <ol>
@@ -340,7 +342,7 @@ const test_page2 = (props) => {
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   } catch (err) {
     console.log(err);

@@ -123,6 +123,24 @@ body {
   height: 100vh;
   margin-top: 50px;
 }
+.test-page textarea{
+  display: block;
+  border: none;
+  width: 100%;
+  resize: none;
+  max-width: 100%;
+  min-height: 120px;
+  max-height: 200px;
+  background-color: honeydew;
+  font-size: 1.2em;
+  line-height: 1.15em;
+  overflow:scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+textarea::-webkit-scrollbar {display: none;}
+
+
 .quest-box,
 .navi-box {
   border-radius: 5px;
@@ -222,6 +240,9 @@ li {
 }
 
 @media only screen and (max-width: 480px) {
+  .test-page textarea{
+    font-size: 0.9em;
+  }
   .quest-box {
     height: 70vh;
   }

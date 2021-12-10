@@ -353,10 +353,11 @@ const addQuestion2 = (props) => {
             ) : null}
             <Form.Label>Question Text</Form.Label>
             <Form.Control
+            as="textarea"
+            rows={8}
               id="question-text"
               name="question_text"
-              style={{ maxHeight: 300 }}
-              contentEditable
+              
               type="text"
               value={newQuestion.question.quest.que}
               onChange={(e) => {

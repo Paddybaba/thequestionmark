@@ -35,7 +35,7 @@ const loginTeacher = (props) => {
       }
     } catch (err) {
       alert("Something went wrong !!!");
-      // console.log(err.message);
+      console.log(err.message);
     }
   }
 
