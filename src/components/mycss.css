@@ -129,7 +129,9 @@ body {
 .box {
   height: 200px;
   border: 2px solid green;
+  margin: 1em;
 }
+
 .test-page {
   /* display: flex; */
   /* position: relative; */
@@ -255,6 +257,9 @@ li {
 }
 
 @media only screen and (max-width: 480px) {
+  .box {
+    height: 100px;
+  }
   .test-page textarea {
     font-size: 0.9em;
   }

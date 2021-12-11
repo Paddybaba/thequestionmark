@@ -5,14 +5,14 @@ const teacherOptions = () => {
     <>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-10 mx-auto ">
+          <div className="col-8 mx-auto" style={{ marginTop: 100 }}>
             <div className="row">
-              <div className="col col-6 box"></div>
-              <div className="col col-6 box"></div>
+              <div className="col-sm-5 box"></div>
+              <div className="col-sm-5 box"></div>
             </div>
             <div className="row">
-              <div className="col col-6 box"></div>
-              <div className="col col-6 box"></div>
+              <div className="col-sm-5 box"></div>
+              <div className="col-sm-5 box"></div>
             </div>
           </div>
         </div>
