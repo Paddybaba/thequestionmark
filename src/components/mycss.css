@@ -128,10 +128,37 @@ body {
 }
 .box {
   height: 200px;
-  border: 2px solid green;
-  margin: 1em;
+  /* border: 2px solid green; */
+  border-radius: 5px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 300ms ease;
 }
-
+.box:hover {
+  border: white 3px solid;
+}
+.newQuestion-box {
+  background-color: #c25e84;
+  color: white;
+}
+.question-bank-box {
+  background-color: #530026;
+  color: antiquewhite;
+}
+.mystudents-box {
+  background-color: #00c9c3;
+  color: white;
+}
+.extra-box {
+  background-color: #ddd7c6;
+  color: black;
+}
 .test-page {
   /* display: flex; */
   /* position: relative; */

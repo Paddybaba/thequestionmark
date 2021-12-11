@@ -25,9 +25,9 @@ export default function Home() {
         <Link href="/login/loginStudent">
           <div
             className="box-login text-center"
-            onClick={() => {
-              document.documentElement.requestFullscreen();
-            }}
+            // onClick={() => {
+            //   document.documentElement.requestFullscreen();
+            // }}
           >
             <FcReadingEbook />
             <p style={{ lineHeight: "0", margin: "0 10px" }}>Student</p>
@@ -36,9 +36,9 @@ export default function Home() {
         <Link href="/login/loginTeacher">
           <div
             className="box-login text-center"
-            onClick={() => {
-              document.documentElement.requestFullscreen();
-            }}
+            // onClick={() => {
+            //   document.documentElement.requestFullscreen();
+            // }}
           >
             <GiTeacher />
             <p style={{ lineHeight: "0", margin: "0 10px" }}>Teacher</p>
