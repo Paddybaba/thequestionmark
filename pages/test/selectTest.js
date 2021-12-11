@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { Hint } from "react-autocomplete-hint";
 import axios from "axios";
 import path from "../api/mypaths";
+import { Alert } from "react-bootstrap";
 const selectTest = (props) => {
   // console.log("select page props", props);
   const [authorHint, setAuthorHint] = useState([]);
@@ -15,6 +16,7 @@ const selectTest = (props) => {
   const [author, setAuthor] = useState("");
   const [year, setYear] = useState(2021);
   const [standard, setStandard] = useState("Class-1");
+  const [show, setShow] = useState(false);
 
   useEffect(async () => {
     const response = await axios.post(`${path}/getauthors`);
@@ -43,13 +45,25 @@ const selectTest = (props) => {
       props.setQuestionsHandler(questions);
       router.push("/test/start_test");
     } else {
-      alert("NO tests available");
+      setShow(true);
+      // alert("NO tests available");
     }
   };
   // console.log(props);
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid" style={{ color: "white" }}>
+        <div className="my-alert">
+          <Alert
+            variant="danger"
+            show={show}
+            onClose={() => setShow(false)}
+            dismissible
+          >
+            No tests available !!!
+          </Alert>
+        </div>
+
         <div className="row">
           <div className="col-10 mx-auto">
             <h3 className="col-10 text-center mx-auto mt-5">
@@ -58,7 +72,7 @@ const selectTest = (props) => {
             <h3 className="text-center mt-4">Select your test paper</h3>
 
             <div className="row">
-              <div className="col-10 mx-auto">
+              <div className="col-sm-6 mx-auto my-box">
                 <Form>
                   <Form.Group size="lg" controlId="subject">
                     <Form.Label>Subject</Form.Label>
@@ -123,23 +137,25 @@ const selectTest = (props) => {
                       onChange={(e) => setYear(e.target.value)}
                     />
                   </Form.Group>
-                  <Button
-                    block="true"
-                    className="mt-4"
-                    disabled={!validateForm()}
-                    onClick={() => onSubmit()}
-                  >
-                    Submit
-                  </Button>
+                  <div className="d-flex justify-content-around">
+                    <Button
+                      block="true"
+                      className="mt-4"
+                      disabled={!validateForm()}
+                      onClick={() => onSubmit()}
+                    >
+                      Submit
+                    </Button>
+                    <Button
+                      block="true"
+                      className="mt-4"
+                      // type="submit" (This is not allowing action to work properly)
+                      onClick={() => router.push("/login/loginStudent")}
+                    >
+                      Log Out
+                    </Button>
+                  </div>
                 </Form>
-                <Button
-                  block="true"
-                  className="mt-4"
-                  // type="submit" (This is not allowing action to work properly)
-                  onClick={() => router.push("/login/loginStudent")}
-                >
-                  Log Out
-                </Button>
               </div>
             </div>
           </div>

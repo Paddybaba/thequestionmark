@@ -49,7 +49,7 @@ const registerTeacher = (props) => {
         );
         localStorage.setItem("teacher", JSON.stringify(teacher));
         // props.userLoginHandler(student);       ********************
-        // router.push("/question/addQuestion2");
+        router.replace("/login/loginTeacher");
       }
     } catch (err) {
       alert("Error Registering teacher");

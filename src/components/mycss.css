@@ -1,6 +1,7 @@
 body {
   background-color: honeydew;
 }
+
 /* //STARTING PAGE /// */
 .image-box {
   width: 200;
@@ -50,7 +51,20 @@ body {
   font-weight: bolder;
   cursor: pointer;
 }
-
+.my-box {
+  border: 1px solid whitesmoke;
+  border-radius: 5px;
+  padding: 8px;
+  box-shadow: 4px 4px 4px;
+}
+.my-alert {
+  display: block;
+  position: absolute;
+  margin-top: 40%;
+  margin-left: 20%;
+  margin-right: 20%;
+  width: 60%;
+}
 /* ///////TOP BAR ////////// */
 .topbar {
   /* position: absolute;
@@ -114,7 +128,36 @@ body {
 }
 .box {
   height: 200px;
-  border: 2px solid green;
+  /* border: 2px solid green; */
+  border-radius: 5px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 300ms ease;
+}
+.box:hover {
+  border: white 3px solid;
+}
+.newQuestion-box {
+  background-color: #c25e84;
+  color: white;
+}
+.question-bank-box {
+  background-color: #530026;
+  color: antiquewhite;
+}
+.mystudents-box {
+  background-color: #00c9c3;
+  color: white;
+}
+.extra-box {
+  background-color: #ddd7c6;
+  color: black;
 }
 .test-page {
   /* display: flex; */
@@ -123,6 +166,25 @@ body {
   height: 100vh;
   margin-top: 50px;
 }
+.test-page textarea {
+  display: block;
+  border: none;
+  width: 100%;
+  resize: none;
+  max-width: 100%;
+  min-height: 120px;
+  max-height: 200px;
+  background-color: honeydew;
+  font-size: 1.2em;
+  line-height: 1.15em;
+  overflow: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
 .quest-box,
 .navi-box {
   border-radius: 5px;
@@ -222,6 +284,12 @@ li {
 }
 
 @media only screen and (max-width: 480px) {
+  .box {
+    height: 100px;
+  }
+  .test-page textarea {
+    font-size: 0.9em;
+  }
   .quest-box {
     height: 70vh;
   }

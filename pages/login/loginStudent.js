@@ -40,10 +40,7 @@ const loginPage = (props) => {
   }
 
   return (
-    <div
-      className="row gx-0"
-      style={{ color: "white"}}
-    >
+    <div className="row gx-0" style={{ color: "white" }}>
       <Head>
         <title>Student Login</title>
       </Head>
@@ -64,44 +61,46 @@ const loginPage = (props) => {
         <div className="text-center text-uppercase fs-3 fw-bold my-5">
           Student Login
         </div>
-        <Form>
-          <Form.Group size="lg" controlId="email">
-            <Form.Label>
-              <FaUserAlt /> Student ID
-            </Form.Label>
-            <Form.Control
-              autoFocus
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mt-4" size="lg" controlId="password">
-            <Form.Label>
-              <FaKey /> Password
-            </Form.Label>
-            <Form.Control
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Button
-            block="true"
-            className="mt-4"
-            // type="submit" (This is not allowing action to work properly)
-            disabled={!validateForm()}
-            onClick={() => handleSubmit()}
+        <div className="mx-auto col-sm-6 my-box">
+          <Form>
+            <Form.Group size="lg" controlId="email">
+              <Form.Label>
+                <FaUserAlt /> Student ID
+              </Form.Label>
+              <Form.Control
+                autoFocus
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mt-4" size="lg" controlId="password">
+              <Form.Label>
+                <FaKey /> Password
+              </Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            <Button
+              block="true"
+              className="mt-4"
+              // type="submit" (This is not allowing action to work properly)
+              disabled={!validateForm()}
+              onClick={() => handleSubmit()}
+            >
+              Login
+            </Button>
+          </Form>
+          <p
+            className="mt-4 simple-link "
+            onClick={() => router.push("/login/registerStudent")}
           >
-            Login
-          </Button>
-        </Form>
-        <p
-          className="mt-4 simple-link "
-          onClick={() => router.push("/login/registerStudent")}
-        >
-          New Student, Register
-        </p>
+            New Student, Register
+          </p>
+        </div>
       </div>
     </div>
   );

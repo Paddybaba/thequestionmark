@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import path from "../api/mypaths";
 import Resizer from "react-image-file-resizer";
 import { ProgressBar } from "react-bootstrap";
+import { FaHome } from "react-icons/fa";
 //// Resize image before uploading
 const resizeFile = (file) =>
   new Promise((resolve, reject) => {
@@ -160,21 +161,21 @@ const addQuestion2 = (props) => {
 
       // console.log("formData", fd.get("quest_image"));
       var config = {
-       
         onUploadProgress: (progressEvent) => {
-          const {loaded, total} = progressEvent;
-          let percent = Math.floor( (loaded * 100) / total )
-          console.log( `${loaded}kb of ${total}kb | ${percent}%` );
-  
-          if( percent < 100 ){
-            setUploadProgress(percent)
-          }
-        }
+          const { loaded, total } = progressEvent;
+          let percent = Math.floor((loaded * 100) / total);
+          console.log(`${loaded}kb of ${total}kb | ${percent}%`);
 
+          if (percent < 100) {
+            setUploadProgress(percent);
+          }
+        },
       };
-      const resposne = await axios.post(`${path}/addQuestion`, fd, config,  {headers: {
-        "Content-Type": "multipart/form-data",
-      }});
+      const resposne = await axios.post(`${path}/addQuestion`, fd, config, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       const message = await resposne.data;
       if (message) alert("Question Uploaded Successfully !!!");
       setAllImages({
@@ -192,9 +193,11 @@ const addQuestion2 = (props) => {
         class: newQuestion.class,
       });
       // Finish Progress bar after getting response
-      setUploadProgress(100, ()=>{ setTimeout(() => {
-        this.setState({ uploadPercentage: 0 })
-      }, 500);})
+      setUploadProgress(100, () => {
+        setTimeout(() => {
+          this.setState({ uploadPercentage: 0 });
+        }, 500);
+      });
       document.getElementById("question-text").focus();
       // document.getElementById("question-text").scrollIntoView();
       window.scrollTo(0, 500);
@@ -212,10 +215,16 @@ const addQuestion2 = (props) => {
       <div className="col-10 mt-5 mx-auto">
         <div
           className="simple-link"
-          style={{ position: "absolute", top: 5, right: 10, cursor: "pointer" }}
+          style={{
+            position: "absolute",
+            top: 5,
+            right: 15,
+            cursor: "pointer",
+            fontSize: "1.5em",
+          }}
           onClick={() => router.push("/")}
         >
-          Home
+          <FaHome />
         </div>
         <div className="text-center text-uppercase fs-3 fw-bold mb-3">
           Add New Question
@@ -353,10 +362,10 @@ const addQuestion2 = (props) => {
             ) : null}
             <Form.Label>Question Text</Form.Label>
             <Form.Control
+              as="textarea"
+              rows={8}
               id="question-text"
               name="question_text"
-              style={{ maxHeight: 300 }}
-              contentEditable
               type="text"
               value={newQuestion.question.quest.que}
               onChange={(e) => {
@@ -612,7 +621,13 @@ const addQuestion2 = (props) => {
               }
             />
           </Form.Group>
-          { uploadProgress > 0 && uploadProgress < 100 ? <ProgressBar now={uploadProgress} animated label={`${uploadProgress}%`} /> : null }
+          {uploadProgress > 0 && uploadProgress < 100 ? (
+            <ProgressBar
+              now={uploadProgress}
+              animated
+              label={`${uploadProgress}%`}
+            />
+          ) : null}
           <Button
             block="true"
             className="mt-4 mb-5"

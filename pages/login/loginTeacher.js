@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { userLogin } from "../../redux/actions";
 import { connect } from "react-redux";
 import path from "../api/mypaths";
+import { FaHome, FaKey, FaUserAlt } from "react-icons/fa";
 const loginTeacher = (props) => {
   // console.log("props from login page :", props);
   const [email, setEmail] = useState("");
@@ -31,67 +32,70 @@ const loginTeacher = (props) => {
       } else {
         //LOGIN TEAHCER TO SELECT SUBJECT PAGE
         // props.userLoginHandler(student);
-        router.push("/question/addQuestion2");
+        router.push("/options/teacherOptions");
       }
     } catch (err) {
       alert("Something went wrong !!!");
-      // console.log(err.message);
+      console.log(err.message);
     }
   }
 
   return (
-    <div
-      className="row gx-0"
-      style={{ color: "white"}}
-    >
+    <div className="row gx-0" style={{ color: "white" }}>
       <Head>
         <title>Teacher Login</title>
       </Head>
       <div className="col-7 mt-5 mx-auto">
         <div
-          className="simple-link"
+          className="simple-link fs-3"
           style={{ position: "absolute", top: 5, right: 10, cursor: "pointer" }}
           onClick={() => router.push("/")}
         >
-          Home
+          <FaHome />
         </div>
         <div className="text-center text-uppercase fs-3 fw-bold my-5">
           Teacher Login
         </div>
-        <Form>
-          <Form.Group size="lg" controlId="email">
-            <Form.Label>Teacher ID</Form.Label>
-            <Form.Control
-              autoFocus
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mt-4" size="lg" controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Button
-            block="true"
-            className="mt-4"
-            // type="submit" (This is not allowing action to work properly)
-            disabled={!validateForm()}
-            onClick={() => handleSubmit()}
+        <div className="mx-auto col-sm-8 my-box">
+          <Form>
+            <Form.Group size="lg" controlId="email">
+              <Form.Label>
+                <FaUserAlt /> Teacher ID
+              </Form.Label>
+              <Form.Control
+                autoFocus
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mt-4" size="lg" controlId="password">
+              <Form.Label>
+                <FaKey /> Password
+              </Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            <Button
+              block="true"
+              className="mt-4"
+              // type="submit" (This is not allowing action to work properly)
+              disabled={!validateForm()}
+              onClick={() => handleSubmit()}
+            >
+              Login
+            </Button>
+          </Form>
+          <p
+            className="mt-4 simple-link "
+            onClick={() => router.push("/login/registerTeacher")}
           >
-            Login
-          </Button>
-        </Form>
-        <p
-          className="mt-4 simple-link "
-          onClick={() => router.push("/login/registerTeacher")}
-        >
-          New Teacher, Register
-        </p>
+            New Teacher, Register
+          </p>
+        </div>
       </div>
     </div>
   );
