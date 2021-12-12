@@ -8,17 +8,20 @@ import { userLogin } from "../../redux/actions";
 import { connect } from "react-redux";
 import path from "../api/mypaths";
 import { FaHome, FaUserAlt, FaKey } from "react-icons/fa";
+import Spinner from "react-bootstrap/Spinner";
 
 const loginPage = (props) => {
   // console.log("props from login page :", props);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showSpinner, setSpinner] = useState(false);
   const router = useRouter();
   function validateForm() {
     return email.length > 0 && password.length > 0;
   }
 
   async function handleSubmit() {
+    setSpinner(true);
     try {
       const resposne = await axios.post(`${path}/login`, {
         student_id: email,
@@ -26,14 +29,17 @@ const loginPage = (props) => {
       });
       const data = await resposne.data;
       const student = await data.student;
+
       // console.log("studnet", student);
       if (resposne.status === 400 || !data) {
         window.alert("Invalid Credentials 1 !!!");
       } else {
         props.userLoginHandler(student);
+        setSpinner(false);
         router.replace("/test/selectTest");
       }
     } catch (err) {
+      setSpinner(false);
       alert("Something went wrong !!!");
       console.log(err.message);
     }
@@ -58,6 +64,13 @@ const loginPage = (props) => {
         >
           <FaHome />
         </div>
+        {showSpinner ? (
+          <div className="my-spinner">
+            <Spinner animation="border" variant="info" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        ) : null}
         <div className="text-center text-uppercase fs-3 fw-bold my-5">
           Student Login
         </div>

@@ -8,6 +8,11 @@ import path from "../api/mypaths";
 import Resizer from "react-image-file-resizer";
 import { ProgressBar } from "react-bootstrap";
 import { FaHome } from "react-icons/fa";
+import { Alert } from "react-bootstrap";
+
+import Spinner from "react-bootstrap/Spinner";
+import { urlObjectKeys } from "next/dist/shared/lib/utils";
+
 //// Resize image before uploading
 const resizeFile = (file) =>
   new Promise((resolve, reject) => {
@@ -54,7 +59,8 @@ const addQuestion2 = (props) => {
   const [newQuestion, setQuestion] = useState(initialValues);
   // const [questImage, setQuestImage] = useState();
   const [uploadProgress, setUploadProgress] = useState(0);
-
+  const [showSpinner, setSpinner] = useState(false);
+  const [show, setShow] = useState(false);
   const [allImage, setAllImages] = useState({
     quest_image: null,
     optionA: null,
@@ -146,6 +152,7 @@ const addQuestion2 = (props) => {
   };
 
   async function onSubmitQuestion() {
+    setSpinner(true);
     try {
       // console.log("Images", allImage);
       // console.log("question", newQuestion);
@@ -177,7 +184,12 @@ const addQuestion2 = (props) => {
         },
       });
       const message = await resposne.data;
-      if (message) alert("Question Uploaded Successfully !!!");
+      setSpinner(false);
+      if (message) {
+        setShow(true);
+        setTimeout(() => setShow(false), 2000);
+      }
+
       setAllImages({
         quest_image: null,
         optionA: null,
@@ -208,7 +220,7 @@ const addQuestion2 = (props) => {
   }
 
   return (
-    <div className="row gx-0" style={{ backgroundColor: "#d1d1d1" }}>
+    <div className="row gx-0 question-bg">
       <Head>
         <title>New Question</title>
       </Head>
@@ -226,6 +238,23 @@ const addQuestion2 = (props) => {
         >
           <FaHome />
         </div>
+        <div className="my-alert">
+          <Alert
+            variant="info"
+            show={show}
+            onClose={() => setShow(false)}
+            dismissible
+          >
+            Question Uploaded Successfully !!!
+          </Alert>
+        </div>
+        {showSpinner ? (
+          <div className="my-spinner">
+            <Spinner animation="border" variant="info" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        ) : null}
         <div className="text-center text-uppercase fs-3 fw-bold mb-3">
           Add New Question
         </div>
@@ -326,7 +355,7 @@ const addQuestion2 = (props) => {
           <Form.Group
             className="mt-4"
             style={{
-              backgroundColor: "honeydew",
+              backgroundColor: "#FF9671",
               padding: "5px",
               borderRadius: 4,
             }}
@@ -386,7 +415,7 @@ const addQuestion2 = (props) => {
             size="lg"
             controlId="option"
             style={{
-              backgroundColor: "#ffe3fb",
+              backgroundColor: "#845EC2",
               padding: "5px",
               borderRadius: 4,
             }}
@@ -437,7 +466,7 @@ const addQuestion2 = (props) => {
           <Form.Group
             className="mt-4"
             style={{
-              backgroundColor: "#ffe3fb",
+              backgroundColor: "#845EC2",
               padding: "5px",
               borderRadius: 4,
             }}
@@ -484,7 +513,7 @@ const addQuestion2 = (props) => {
             size="lg"
             controlId="option"
             style={{
-              backgroundColor: "#ffe3fb",
+              backgroundColor: "#845EC2",
               padding: "5px",
               borderRadius: 4,
             }}
@@ -528,7 +557,7 @@ const addQuestion2 = (props) => {
             size="lg"
             controlId="option"
             style={{
-              backgroundColor: "#ffe3fb",
+              backgroundColor: "#845EC2",
               padding: "5px",
               borderRadius: 4,
             }}
@@ -567,16 +596,11 @@ const addQuestion2 = (props) => {
               onChange={(e) => addOptions(e, 3)}
             />
           </Form.Group>
-          <Form.Group
-            className="mt-4"
-            size="lg"
-            controlId="correct_ans"
-            style={{ color: "#32a852" }}
-          >
+          <Form.Group className="mt-4" size="lg" controlId="correct_ans">
             <Form.Label>Correct Answer</Form.Label>
             <select
               className="form-select"
-              style={{ backgroundColor: "honeydew" }}
+              style={{ backgroundColor: "#68EDCB" }}
               aria-label="Default select example"
               value={newQuestion.question.correct_ans}
               onChange={(e) => {

@@ -191,7 +191,12 @@ const test_page2 = (props) => {
 
   try {
     let currentQuestion = data[activeQ].question;
-    console.log("question", currentQuestion.quest.que)
+    console.log("question", currentQuestion.quest.que);
+    // if (currentQuestion.quest.que === "") {
+    //   document.getElementById("quest-image").style.width = "100%";
+    // } else {
+    //   document.getElementById("quest-image").style.width = "150px";
+    // }
     return (
       <div className="gx-0">
         <div style={{ position: "fixed", top: 0, width: "100%" }}>
@@ -212,6 +217,7 @@ const test_page2 = (props) => {
                     <div className="col-12 quest-question mt-2 mr-3 mb-2">
                       {currentQuestion.quest.image != "" ? (
                         <img
+                          id="quest-image"
                           className="question-image"
                           src={currentQuestion.quest.image}
                         ></img>
