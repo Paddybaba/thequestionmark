@@ -59,11 +59,23 @@ body {
 }
 .my-alert {
   display: block;
-  position: absolute;
-  margin-top: 40%;
+  position: fixed;
+  margin-top: 30%;
   margin-left: 20%;
   margin-right: 20%;
   width: 60%;
+}
+.my-spinner {
+  position: fixed;
+  left: 49%;
+  top: 49%;
+}
+.question-bg {
+  background-image: url("/picture.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
 }
 /* ///////TOP BAR ////////// */
 .topbar {

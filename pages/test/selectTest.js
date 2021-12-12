@@ -8,6 +8,7 @@ import { Hint } from "react-autocomplete-hint";
 import axios from "axios";
 import path from "../api/mypaths";
 import { Alert } from "react-bootstrap";
+import Spinner from "react-bootstrap/Spinner";
 const selectTest = (props) => {
   // console.log("select page props", props);
   const [authorHint, setAuthorHint] = useState([]);
@@ -17,7 +18,7 @@ const selectTest = (props) => {
   const [year, setYear] = useState(2021);
   const [standard, setStandard] = useState("Class-1");
   const [show, setShow] = useState(false);
-
+  const [showSpinner, setSpinner] = useState(false);
   useEffect(async () => {
     const response = await axios.post(`${path}/getauthors`);
     const authors = await response.data;
@@ -33,6 +34,7 @@ const selectTest = (props) => {
   const router = useRouter();
 
   const onSubmit = async () => {
+    setSpinner(true);
     const options = {
       subject,
       author,
@@ -43,6 +45,7 @@ const selectTest = (props) => {
     const questions = await requestQuestions(options);
     if (questions.length > 0) {
       props.setQuestionsHandler(questions);
+      setSpinner(false);
       router.push("/test/start_test");
     } else {
       setShow(true);
@@ -63,7 +66,13 @@ const selectTest = (props) => {
             No tests available !!!
           </Alert>
         </div>
-
+        {showSpinner ? (
+          <div className="my-spinner">
+            <Spinner animation="border" variant="info" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        ) : null}
         <div className="row">
           <div className="col-10 mx-auto">
             <h3 className="col-10 text-center mx-auto mt-5">
