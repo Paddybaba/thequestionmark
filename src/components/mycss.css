@@ -372,3 +372,49 @@ li {
   margin-top: 1em;
   margin-left: 1em;
 }
+
+/* ////////// TEST LIBRARY */
+.recent-tests {
+  display: flex;
+}
+
+.test-lib-comp {
+  display: flex;
+  flex-direction: column;
+  width: 160px;
+  height: 90px;
+  background-color: blueviolet;
+  color: white;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 4px;
+  line-height: 1.2em;
+  border: 2px solid blueviolet;
+  transition: 300ms all ease;
+}
+.test-lib-comp:hover {
+  cursor: pointer;
+  border: 2px solid white;
+}
+.lib-subject {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.8em;
+}
+.lib-author {
+  font-weight: bolder;
+  font-size: 0.75em;
+}
+.lib-standard {
+  font-size: 0.75em;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+.lib-year {
+  margin-left: 5px;
+  font-size: 0.75em;
+}
+.lib-published {
+  font-size: 0.75em;
+  font-style: italic;
+}

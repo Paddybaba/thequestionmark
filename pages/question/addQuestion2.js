@@ -11,7 +11,6 @@ import { FaHome } from "react-icons/fa";
 import { Alert } from "react-bootstrap";
 
 import Spinner from "react-bootstrap/Spinner";
-import { urlObjectKeys } from "next/dist/shared/lib/utils";
 
 //// Resize image before uploading
 const resizeFile = (file) =>
@@ -672,10 +671,7 @@ const addQuestion2 = (props) => {
     </div>
   );
 };
-// const mdtp = (dispatch) => ({
-//   teacherLoginHandler: (data) => dispatch(userLogin(data)),
-// });
-// const mstp = (state) => ({
-//   student: state.studentReducer,
-// });
+
+async function saveToRecent(options) {}
+
 export default addQuestion2;
