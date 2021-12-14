@@ -28,7 +28,7 @@ function PopModal(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button
-          onClick={() => router.replace("/test/selectTest")}
+          onClick={() => router.replace("/options/studentOptions")}
           style={{ alignSelf: "left" }}
         >
           Finish Test

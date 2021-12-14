@@ -36,7 +36,7 @@ const loginPage = (props) => {
       } else {
         props.userLoginHandler(student);
         setSpinner(false);
-        router.replace("/test/selectTest");
+        router.replace("/options/studentOptions");
       }
     } catch (err) {
       setSpinner(false);
