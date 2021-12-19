@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -44,6 +44,20 @@ const loginPage = (props) => {
       console.log(err.message);
     }
   }
+  const style = {
+    play: {
+      button: {
+        width: "28",
+        height: "28",
+        cursor: "pointer",
+        pointerEvents: "none",
+        outline: "none",
+        backgroundColor: "yellow",
+        border: "solid 1px rgba(255,255,255,1)",
+        borderRadius: 6,
+      },
+    },
+  };
 
   return (
     <div className="row gx-0" style={{ color: "white" }}>
@@ -64,6 +78,7 @@ const loginPage = (props) => {
         >
           <FaHome />
         </div>
+
         {showSpinner ? (
           <div className="my-spinner">
             <Spinner animation="border" variant="info" role="status">

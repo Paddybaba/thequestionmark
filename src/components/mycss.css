@@ -138,6 +138,7 @@ body {
 
   /* background-color: honeydew; */
 }
+
 .box {
   height: 200px;
   /* border: 2px solid green; */
@@ -184,8 +185,8 @@ body {
   width: 100%;
   resize: none;
   max-width: 100%;
-  min-height: 120px;
-  max-height: 200px;
+  max-height: 8em;
+  min-height: 5em;
   background-color: honeydew;
   font-size: 1.2em;
   line-height: 1.15em;
@@ -220,9 +221,12 @@ textarea::-webkit-scrollbar {
   /* margin-top: 20px; */
 
   min-height: 40px;
+  max-height: fit-content;
   font-weight: 500;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  /* border: 2px solid red; */
 }
 li {
   margin-left: 15px;
@@ -326,14 +330,20 @@ li {
 .previous-next {height : 30px}
 } */
 .question-image {
-  height: 100px;
-  width: 150px;
+  height: 200px;
+  width: 350px;
   border-radius: 5px;
   margin-right: 5px;
   transition: all 400ms ease;
 }
+@media only screen and (max-width: 480px) {
+  .question-image {
+    height: 80%;
+    width: 80%;
+  }
+}
 .question-image:hover {
-  transform: scale(2) translate(25%, 20%);
+  transform: scale(1.3) translate(9%, 8%);
 }
 .option-image {
   height: 60px;
@@ -417,4 +427,10 @@ li {
 .lib-published {
   font-size: 0.75em;
   font-style: italic;
+}
+.speech {
+  width: 30px;
+  height: 30px;
+  /* border: 1px solid red;
+  background-color: #00c9c3; */
 }

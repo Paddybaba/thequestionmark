@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import TopBar from "../../src/components/TopBar";
 import PopModal from "../../src/components/PopModal";
-
+import Speaker from "../../src/components/Speaker";
 // const myQuestions = [
 //   {
 //       subject: "General Knowledge",
@@ -222,13 +222,18 @@ const test_page2 = (props) => {
                           src={currentQuestion.quest.image}
                         ></img>
                       ) : null}
-                      <textarea
-                        className="text-bottom fw-bold"
-                        readOnly
-                        value={currentQuestion.quest.que}
-                      >
-                        {currentQuestion.quest.que}
-                      </textarea>
+                      <div className="d-flex w-100 mt-2">
+                        {currentQuestion.quest.que.length > 0 ? (
+                          <Speaker speak_this={currentQuestion.quest.que} />
+                        ) : null}
+                        <textarea
+                          className="text-bottom fw-bold"
+                          readOnly
+                          value={currentQuestion.quest.que}
+                        >
+                          {currentQuestion.quest.que}
+                        </textarea>
+                      </div>
                     </div>
 
                     <ol>
