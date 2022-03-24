@@ -9,12 +9,15 @@ import { connect } from "react-redux";
 import path from "../api/mypaths";
 import { FaHome, FaUserAlt, FaKey } from "react-icons/fa";
 import Spinner from "react-bootstrap/Spinner";
+import SLNavbar from "../../src/components/navbars/StudentLoginNavbar";
 
 const loginPage = (props) => {
   // console.log("props from login page :", props);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showSpinner, setSpinner] = useState(false);
+  const [remMe, setRemember] = useState(false);
+
   const router = useRouter();
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -27,16 +30,24 @@ const loginPage = (props) => {
         student_id: email,
         password: password,
       });
-      const data = await resposne.data;
-      const student = await data.student;
+      // Receive student from backend
+      const student = await resposne.data;
 
-      // console.log("studnet", student);
-      if (resposne.status === 400 || !data) {
+      console.log("student:", student);
+      // If no student found
+      if (resposne.status === 400 || !student) {
         window.alert("Invalid Credentials 1 !!!");
       } else {
+        // save to localStorage if remember me is checked
+        if (remMe) {
+          console.log("I will save the student");
+          localStorage.setItem("student", JSON.stringify(student));
+        } else {
+          console.log("I will not remember the student");
+        }
         props.userLoginHandler(student);
         setSpinner(false);
-        router.replace("/options/studentOptions");
+        router.replace("/dashboard/studentOptions");
       }
     } catch (err) {
       setSpinner(false);
@@ -61,24 +72,9 @@ const loginPage = (props) => {
 
   return (
     <div className="row gx-0" style={{ color: "white" }}>
-      <Head>
-        <title>Student Login</title>
-      </Head>
-      <div className="col-7 mx-auto" style={{ marginTop: "3em" }}>
-        <div
-          className="simple-link"
-          style={{
-            fontSize: "1.3em",
-            position: "absolute",
-            top: 5,
-            right: 10,
-            cursor: "pointer",
-          }}
-          onClick={() => router.push("/")}
-        >
-          <FaHome />
-        </div>
+      <SLNavbar />
 
+      <div className="col-7 mx-auto" style={{ marginTop: "3em" }}>
         {showSpinner ? (
           <div className="my-spinner">
             <Spinner animation="border" variant="info" role="status">
@@ -86,9 +82,9 @@ const loginPage = (props) => {
             </Spinner>
           </div>
         ) : null}
-        <div className="text-center text-uppercase fs-3 fw-bold my-5">
+        {/* <div className="text-center text-uppercase fs-3 fw-bold my-5">
           Student Login
-        </div>
+        </div> */}
         <div className="mx-auto col-sm-6 my-box">
           <Form>
             <Form.Group size="lg" controlId="email">
@@ -112,6 +108,20 @@ const loginPage = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
+            <Form.Group className="mt-2 smallLabel">
+              <input
+                type="checkbox"
+                id="remember"
+                name="remember"
+                checked={remMe}
+                onChange={() => {
+                  setRemember(!remMe);
+                }}
+              />
+              <label className="ml-1" htmlFor="remember">
+                Remember me
+              </label>
+            </Form.Group>
             <Button
               block="true"
               className="mt-4"
@@ -122,6 +132,7 @@ const loginPage = (props) => {
               Login
             </Button>
           </Form>
+
           <p
             className="mt-4 simple-link "
             onClick={() => router.push("/login/registerStudent")}

@@ -2,6 +2,7 @@ const initialState = {
   user: {
     student_id: "",
     student_name: "",
+    token: "",
     options: {
       subject: "",
       author: "",
@@ -28,6 +29,7 @@ function studentReducer(state = initialState, action) {
           ...state.user,
           student_id: action.payload.student_id,
           student_name: action.payload.student_name,
+          token: action.payload.token,
         },
       };
     }

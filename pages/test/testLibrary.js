@@ -1,31 +1,83 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TestLibComp from "../../src/components/testLibComp";
+import axios from "axios";
+import path from "../api/mypaths";
+import ReadyTest from "../../src/components/cards/ReadyTest";
+import Navbar1 from "../../src/components/navbars/DashboardNavbar";
 const testLibrary = () => {
+  const [tests, setTests] = useState([]);
+  const getTest = async () => {
+    const resposne = await axios.post(`${path}/getpublishedtest`);
+    const data = await resposne.data;
+    setTests(data);
+    // console.log(data);
+    console.log(data[0]);
+  };
+
+  useEffect(() => {
+    getTest();
+  }, []);
+
   return (
     <>
       <div className="container-fluid gx-0">
-        <div className="row">
-          <div className="col-10 mx-auto">
-            <h3 className="text-center mt-3 fw-bold text-uppercase">
-              Test Library
-            </h3>
+        <Navbar1 heading="Test Library" />
+        <div className="row gx-0">
+          <div className="col-12 mx-auto">
             <div>
-              <h4 className="my-3">Recently Uploaded</h4>
+              <h4 className="my-3" style={{ color: "white" }}>
+                Recently Uploaded
+              </h4>
               <div className="recent-tests">
-                <TestLibComp
-                  subject="Mathematics"
-                  author="Anup Padamwar"
-                  standard="Class-1"
-                  year="2019"
-                  published="13 Dec 2021"
-                />
-                <TestLibComp
-                  subject="Science"
-                  author="Anup Padamwar"
-                  standard="Class-1"
-                  year="2021"
-                  published="13 Dec 2021"
-                />
+                {tests.reverse().map((item, index) => {
+                  return (
+                    <div>
+                      <ReadyTest test={item} key={index} />
+                    </div>
+                  );
+                })}
+              </div>
+              <h4 className="my-3" style={{ color: "white" }}>
+                Science
+              </h4>
+              <div className="recent-tests">
+                {tests.map((item, index) => {
+                  if (item.subject == "Science") {
+                    return (
+                      <div>
+                        <ReadyTest test={item} key={index} />
+                      </div>
+                    );
+                  }
+                })}
+              </div>
+              <h4 className="my-3" style={{ color: "white" }}>
+                Mathematics
+              </h4>
+              <div className="recent-tests">
+                {tests.map((item, index) => {
+                  if (item.subject == "Mathematics") {
+                    return (
+                      <div>
+                        <ReadyTest test={item} key={index} />
+                      </div>
+                    );
+                  }
+                })}
+              </div>
+              <h4 className="my-3" style={{ color: "white" }}>
+                General Knowledge
+              </h4>
+              <div className="recent-tests">
+                {tests.map((item, index) => {
+                  if (item.subject == "GK") {
+                    return (
+                      <div>
+                        <ReadyTest test={item} key={index} />
+                      </div>
+                    );
+                  }
+                })}
               </div>
             </div>
           </div>

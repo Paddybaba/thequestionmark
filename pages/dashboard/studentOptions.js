@@ -1,22 +1,20 @@
 import React from "react";
 import router from "next/router";
-import { FaHome } from "react-icons/fa";
-const studentOptions = () => {
+import { connect } from "react-redux";
+import DashboardNavbar from "../../src/components/navbars/DashboardNavbar";
+// import { FaHome } from "react-icons/fa";
+const studentOptions = (props) => {
+  // console.log(props);
+  const student = props.student.user.student_name;
+  console.log(student);
   return (
     <>
       <div className="container-fluid gx-0">
-        <div
-          className="simple-link"
-          style={{
-            position: "absolute",
-            top: 5,
-            right: 15,
-            cursor: "pointer",
-            fontSize: "1.5em",
-          }}
-          onClick={() => router.push("/")}
-        >
-          <FaHome />
+        <div className="row gx-0">
+          {/* <h2 className="col-9 tc mx-auto mt-3 fw-bold">
+            {student}'s Dashboard
+          </h2> */}
+          <DashboardNavbar heading={`${student}'s Dashboard`} />
         </div>
         <div className="row gx-0">
           <div className="col-8 mx-auto" style={{ marginTop: 100 }}>
@@ -52,5 +50,11 @@ const studentOptions = () => {
     </>
   );
 };
-
-export default studentOptions;
+const mdtp = (dispatch) => ({
+  // userLoginHandler: (data) => dispatch(userLogin(data)),
+});
+const mstp = (state) => ({
+  student: state.studentReducer,
+});
+export default connect(mstp, mdtp)(studentOptions);
+// export default studentOptions;
