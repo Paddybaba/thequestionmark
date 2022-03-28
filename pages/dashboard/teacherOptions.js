@@ -1,23 +1,16 @@
 import React from "react";
 import router from "next/router";
 import { FaHome } from "react-icons/fa";
-const teacherOptions = () => {
+import TeacherDBNavbar from "../../src/components/navbars/TeacherDBNavbar";
+import { connect } from "react-redux";
+const teacherOptions = (props) => {
+  const teacher = props.teacher;
+  // console.log(teacher);
   return (
     <>
       <div className="container-fluid gx-0">
-        <div
-          className="simple-link"
-          style={{
-            position: "absolute",
-            top: 5,
-            right: 15,
-            cursor: "pointer",
-            fontSize: "1.5em",
-          }}
-          onClick={() => router.push("/")}
-        >
-          <FaHome />
-        </div>
+        <TeacherDBNavbar heading={teacher.teacher_name} />
+
         <div className="row gx-0">
           <div className="col-8 mx-auto" style={{ marginTop: 100 }}>
             <div className="row mx-auto gx-0">
@@ -48,4 +41,10 @@ const teacherOptions = () => {
   );
 };
 
-export default teacherOptions;
+// const mdtp = (dispatch) => ({
+//   userLoginHandler: (data) => dispatch(userLogin(data)),
+// });
+const mstp = (state) => ({
+  teacher: state.studentReducer.teacher,
+});
+export default connect(mstp)(teacherOptions);

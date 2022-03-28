@@ -6,6 +6,12 @@ export const userLogin = (user) => {
   };
 };
 
+export const teacherLogin = (teacher) => {
+  return {
+    type: "TEACHER_LOGIN",
+    payload: teacher,
+  };
+};
 export const selectOptions = (options) => {
   return {
     type: "SELECT_OPTIONS",

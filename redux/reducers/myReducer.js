@@ -18,6 +18,7 @@ const initialState = {
     },
   },
   questions: [{}],
+  teacher: {},
 };
 function studentReducer(state = initialState, action) {
   // console.log("action received in reducer", action);
@@ -31,6 +32,12 @@ function studentReducer(state = initialState, action) {
           student_name: action.payload.student_name,
           token: action.payload.token,
         },
+      };
+    }
+    case "TEACHER_LOGIN": {
+      return {
+        ...state,
+        teacher: action.payload,
       };
     }
     case "USER_LOGOUT": {

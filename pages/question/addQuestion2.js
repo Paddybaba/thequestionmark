@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { connect } from "react-redux";
 import axios from "axios";
 import { useRouter } from "next/router";
 import path from "../api/mypaths";
@@ -9,7 +10,7 @@ import Resizer from "react-image-file-resizer";
 import { ProgressBar } from "react-bootstrap";
 import { FaHome } from "react-icons/fa";
 import { Alert } from "react-bootstrap";
-
+import AddQNB from "../../src/components/navbars/AddQNB";
 import Spinner from "react-bootstrap/Spinner";
 
 //// Resize image before uploading
@@ -68,8 +69,8 @@ const addQuestion2 = (props) => {
     optionD: null,
   });
   useEffect(() => {
-    stored_teacher = JSON.parse(localStorage.getItem("teacher")).teacher_name;
-    setQuestion({ ...newQuestion, author: stored_teacher });
+    stored_teacher = props.teacher;
+    setQuestion({ ...newQuestion, author: stored_teacher.teacher_name });
   }, []);
 
   const router = useRouter();
@@ -223,8 +224,9 @@ const addQuestion2 = (props) => {
       <Head>
         <title>New Question</title>
       </Head>
-      <div className="col-10 mt-5 mx-auto">
-        <div
+      <AddQNB />
+      <div className="col-10 mx-auto">
+        {/* <div
           className="simple-link"
           style={{
             position: "absolute",
@@ -236,7 +238,8 @@ const addQuestion2 = (props) => {
           onClick={() => router.push("/")}
         >
           <FaHome />
-        </div>
+        </div> */}
+
         <div className="my-alert">
           <Alert
             variant="info"
@@ -254,9 +257,9 @@ const addQuestion2 = (props) => {
             </Spinner>
           </div>
         ) : null}
-        <div className="text-center text-uppercase fs-3 fw-bold mb-3">
+        {/* <div className="text-center text-uppercase fs-3 fw-bold mb-3">
           Add New Question
-        </div>
+        </div> */}
         <Form>
           <Form.Group size="lg" controlId="teacherName">
             <Form.Label>Subject</Form.Label>
@@ -674,4 +677,7 @@ const addQuestion2 = (props) => {
 
 async function saveToRecent(options) {}
 
-export default addQuestion2;
+const mstp = (state) => ({
+  teacher: state.studentReducer.teacher,
+});
+export default connect(mstp)(addQuestion2);

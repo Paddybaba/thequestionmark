@@ -1,7 +1,14 @@
 body {
   background-color: honeydew;
 }
-
+a {
+  border-bottom: 1px solid transparent;
+  transition: all 400ms ease;
+}
+a:hover {
+  cursor: pointer;
+  border-bottom: 1px solid whitesmoke;
+}
 /* //STARTING PAGE /// */
 .image-box {
   width: 200;

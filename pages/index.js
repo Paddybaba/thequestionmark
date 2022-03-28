@@ -22,7 +22,22 @@ export default function Home() {
       });
     } else {
       // Goto Login page if student token not found
-      navigation.navigate("Student Login");
+      router.push("/login/loginStudent");
+    }
+  }
+  // Define on teacher click function /////////////
+  async function onTeacherClick() {
+    // Look for teacher data in Localstorage
+    const storedTeacher = await localStorage.getItem("teacher");
+    // console.log(JSON.parse(storedTeacher));
+    // Goto DASHBOARD page if teacher found
+    if (storedTeacher != null) {
+      router.push("/dashboard/teacherOptions", {
+        teacher: JSON.parse(storedTeacher),
+      });
+    } else {
+      // Goto Login page if teacher  not found
+      router.push("/login/loginTeacher");
     }
   }
   return (
@@ -49,17 +64,15 @@ export default function Home() {
           <p style={{ lineHeight: "0", margin: "0 10px" }}>Student</p>
         </div>
 
-        <Link href="/login/loginTeacher">
-          <div
-            className="box-login text-center"
-            // onClick={() => {
-            //   document.documentElement.requestFullscreen();
-            // }}
-          >
-            <GiTeacher />
-            <p style={{ lineHeight: "0", margin: "0 10px" }}>Teacher</p>
-          </div>
-        </Link>
+        <div
+          className="box-login text-center"
+          onClick={() => {
+            onTeacherClick();
+          }}
+        >
+          <GiTeacher />
+          <p style={{ lineHeight: "0", margin: "0 10px" }}>Teacher</p>
+        </div>
       </main>
     </div>
   );

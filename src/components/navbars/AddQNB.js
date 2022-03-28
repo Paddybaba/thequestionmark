@@ -3,19 +3,18 @@ import Navbar from "react-bootstrap/Navbar";
 import Link from "next/link";
 import { Nav, NavDropdown } from "react-bootstrap";
 import router from "next/router";
-import { FaHome } from "react-icons/fa";
-const DashboardNavbar = (props) => {
+const AddQNB = (props) => {
   return (
     <>
-      <Navbar justify bg="transparent" variant="dark" expand="sm">
-        <Navbar.Brand href="#home">
-          <h2 style={{ marginLeft: 10 }}>{props.heading}</h2>
-        </Navbar.Brand>
-        {/* <h2 style={{ paddingLeft: "35%", color: "white" }}>TEST LIBRARY</h2> */}
+      <Navbar bg="transparent" variant="dark" expand="sm">
+        <h2 style={{ marginLeft: 10, border: "2px solid red " }}>
+          ADD NEW QUESTION
+        </h2>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" style={{ marginLeft: 20 }}>
           <Nav className="ms-auto">
-            <Link href="/dashboard/studentOptions">
+            <Link href="/dashboard/teacherOptions">
               <a
                 style={{
                   marginTop: "0.3em",
@@ -48,14 +47,11 @@ const DashboardNavbar = (props) => {
               }}
               onClick={() => {
                 router.replace("/");
-                localStorage.removeItem("student");
+                localStorage.removeItem("teacher");
               }}
             >
               Logout
             </a>
-            {/* <Nav.Link href="/">
-              <h5 style={{ color: "white" }}>Home</h5>
-            </Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -63,4 +59,4 @@ const DashboardNavbar = (props) => {
   );
 };
 
-export default DashboardNavbar;
+export default AddQNB;
