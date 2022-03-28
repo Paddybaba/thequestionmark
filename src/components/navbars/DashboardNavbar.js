@@ -8,9 +8,11 @@ const DashboardNavbar = (props) => {
   return (
     <>
       <Navbar justify bg="transparent" variant="dark" expand="sm">
-        <Navbar.Brand href="#home">
-          <h2 style={{ marginLeft: 10 }}>{props.heading}</h2>
-        </Navbar.Brand>
+        <div className="mx-auto">
+          <Navbar.Brand href="#home">
+            <h2 style={{ marginLeft: 10 }}>{props.heading}</h2>
+          </Navbar.Brand>
+        </div>
         {/* <h2 style={{ paddingLeft: "35%", color: "white" }}>TEST LIBRARY</h2> */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" style={{ marginLeft: 20 }}>
