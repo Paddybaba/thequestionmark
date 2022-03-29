@@ -23,7 +23,7 @@ const teacherOptions = (props) => {
                 </div>
               </div>
               <div className="col-sm-6 ">
-                <div className="box question-bank-box">My Question Bank </div>
+                <div className="box question-bank-box" onClick={()=>router.push("/question/questionBank")}>My Question Bank </div>
               </div>
             </div>
             <div className="row mx-auto gx-0">

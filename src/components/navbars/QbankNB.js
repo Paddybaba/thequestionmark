@@ -3,12 +3,12 @@ import Navbar from "react-bootstrap/Navbar";
 import Link from "next/link";
 import { Nav, NavDropdown } from "react-bootstrap";
 import router from "next/router";
-const AddQNB = (props) => {
+const QbankNB = (props) => {
   return (
     <>
       <Navbar bg="transparent" variant="dark" expand="sm">
-        <h2 style={{ marginLeft: 10 }}>
-          ADD NEW QUESTION
+        <h2 style={{ marginLeft: 10, color: "coral" }}>
+       My Question Bank
         </h2>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -59,4 +59,4 @@ const AddQNB = (props) => {
   );
 };
 
-export default AddQNB;
+export default QbankNB;
