@@ -1,20 +1,40 @@
-import React from 'react'
-import {connect} from "react-redux"
-import QbankNB from '../../src/components/navbars/QbankNB'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import path from "../api/mypaths";
+import QuestionCard from "../../src/components/cards/QuestionCard";
+import QbankNB from "../../src/components/navbars/QbankNB";
 
-const myQuestionBank = (props) =>{
-console.log(props.teacher)
+const myQuestionBank = (props) => {
+  const { teacher_id } = props.teacher;
+  const [myQuestions, setMyQuestions] = useState([]);
 
-return (
+  // Call getmyquestions and update myQuestion array on load
+  useEffect(async () => {
+    const data = await getMyQuestions(teacher_id);
+    setMyQuestions(data);
+  }, []);
+
+  return (
     <div>
-        <QbankNB/>
-        <h2>My Question Bank</h2>
+      <QbankNB />
+      <div className="qbank_container">
+        {myQuestions.map((item, index) => {
+          return <QuestionCard item={item} key={index} />;
+        })}
+      </div>
+      {/* <button onClick={() => getMyQuestions(teacher_id)}>Get Questions</button> */}
     </div>
-)
-}
+  );
+};
 
-
-  const mstp = (state) => ({
-    teacher: state.studentReducer.teacher,
+async function getMyQuestions(teacher_id) {
+  const response = await axios.post(`${path}/getmyquestions`, {
+    author_email: teacher_id,
   });
-  export default connect(mstp)(myQuestionBank);
+  return response.data;
+}
+const mstp = (state) => ({
+  teacher: state.studentReducer.teacher,
+});
+export default connect(mstp)(myQuestionBank);

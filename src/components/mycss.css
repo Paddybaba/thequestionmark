@@ -548,3 +548,37 @@ li {
   display: flex;
   justify-content: center;
 }
+
+/* /////// LIBRARY ///////// */
+.qbank_container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.qcard_rect {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 8px;
+  margin: 8px;
+  height: 160px;
+  width: 200px;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 8px;
+  color: white;
+  line-height: 1em;
+  background-color: #3a373d;
+}
+.subject {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.year {
+}
+.standard {
+}
+.question_text {
+  font-size: smaller;
+  font-weight: bolder;
+  font-style: italic;
+}

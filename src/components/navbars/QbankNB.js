@@ -7,8 +7,8 @@ const QbankNB = (props) => {
   return (
     <>
       <Navbar bg="transparent" variant="dark" expand="sm">
-        <h2 style={{ marginLeft: 10, color: "coral" }}>
-       My Question Bank
+        <h2 style={{ marginLeft: 10, color: "coral", fontWeight: "bold" }}>
+          My Question Bank
         </h2>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
