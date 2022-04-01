@@ -563,11 +563,16 @@ li {
   margin: 8px;
   height: 160px;
   width: 200px;
-  border: 2px solid rgb(255, 255, 255);
+  /* border: 1px solid rgb(255, 255, 255); */
   border-radius: 8px;
   color: white;
   line-height: 1em;
   background-color: #3a373d;
+  transition: all 400ms ease;
+}
+.qcard_rect:hover{
+cursor: pointer;
+box-shadow: #c2f1f3 0px 0px 8px;
 }
 .subject {
   font-size: 1.2em;
