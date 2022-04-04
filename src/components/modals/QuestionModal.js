@@ -110,9 +110,7 @@ const QuestionModal = ({ show, handleClose, item, editQuestionHandler }) => {
 };
 
 function onEditQuestion(editQuestionFunction, item) {
-  router.push({
-    pathname: "/question/editQuestion",
-  });
+  router.push("/question/editQuestion");
 
   editQuestionFunction(item);
 }

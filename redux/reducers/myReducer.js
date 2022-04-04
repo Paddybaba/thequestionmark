@@ -19,6 +19,7 @@ const initialState = {
   },
   questions: [{}],
   teacher: {},
+  questionBank:[],
   editQuestion: {},
 };
 function studentReducer(state = initialState, action) {
@@ -64,7 +65,12 @@ function studentReducer(state = initialState, action) {
         questions: action.payload,
       };
     }
-
+case "SET_QBANK" : {
+  return {
+    ...state,
+    questionBank : action.payload
+  }
+}
     case "SET_TOTAL_QUESTIONS": {
       return {
         ...state,

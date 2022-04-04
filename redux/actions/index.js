@@ -32,6 +32,12 @@ export const setQuestions = (questions) => {
   };
 };
 
+export const setQBank = (qbank_array) =>{
+  return {
+    type : "SET_QBANK",
+    payload : qbank_array
+  }
+}
 export const setTotalQuestions = (length) => {
   return {
     type: "SET_TOTAL_QUESTIONS",

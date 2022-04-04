@@ -145,7 +145,7 @@ const editQuestion = (props) => {
           }
         },
       };
-      const resposne = await axios.post(`${path}/addQuestion`, fd, config, {
+      const resposne = await axios.post(`${path}/editQuestion`, fd, config, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

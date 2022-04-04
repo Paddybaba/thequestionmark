@@ -48,6 +48,7 @@ const QbankNB = (props) => {
               onClick={() => {
                 router.replace("/");
                 localStorage.removeItem("teacher");
+                props.setQBankHandler(null)
               }}
             >
               Logout

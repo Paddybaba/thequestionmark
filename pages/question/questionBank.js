@@ -1,19 +1,29 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { setQBank } from "../../redux/actions";
 import { connect } from "react-redux";
 import path from "../api/mypaths";
 import QuestionCard from "../../src/components/cards/QuestionCard";
 import QbankNB from "../../src/components/navbars/QbankNB";
 import QuestionModal from "../../src/components/modals/QuestionModal";
+import Spinner from 'react-bootstrap/Spinner'
 const myQuestionBank = (props) => {
-  const { teacher_id } = props.teacher;
+  const { teacher_id } = props.mystate.teacher;
   const [myQuestions, setMyQuestions] = useState([]);
   const [showQModal, setShowQModal] = useState(false);
   const [clickedQuestion, setClickedQuestion] = useState(demo_question);
+  const [showSpinner, setShowSpinner] = useState(false)
   // Call getmyquestions and update myQuestion array on load
   useEffect(async () => {
+    // console.log(props.mystate)
+    if (props.mystate.questionBank != undefined) {
+      setMyQuestions(props.mystate.questionBank)
+    }else{
+      setShowSpinner(true)
     const data = await getMyQuestions(teacher_id);
-    setMyQuestions(data);
+    props.setQBankHandler(data);
+    setMyQuestions(data);}
+    setShowSpinner(false)
   }, []);
 
   function handleClose() {
@@ -31,7 +41,9 @@ const myQuestionBank = (props) => {
         handleClose={handleClose}
         item={clickedQuestion}
       />
-      <QbankNB />
+      <QbankNB setQBankHandler={props.setQBankHandler}/>
+      
+      {showSpinner ? <Spinner animation="grow"/> : null}
       <div className="qbank_container">
         {myQuestions.map((item, index) => {
           return (
@@ -78,7 +90,10 @@ async function getMyQuestions(teacher_id) {
   });
   return response.data;
 }
+const mdtp = (dispatch) => ({
+setQBankHandler : (data) =>{dispatch(setQBank(data))}
+})
 const mstp = (state) => ({
-  teacher: state.studentReducer.teacher,
+  mystate: state.studentReducer,
 });
-export default connect(mstp)(myQuestionBank);
+export default connect(mstp, mdtp)(myQuestionBank);
