@@ -19,6 +19,12 @@ export const selectOptions = (options) => {
   };
 };
 
+export const editQuestion = (question) => {
+  return {
+    type: "EDIT_QUESTION",
+    payload: question,
+  };
+};
 export const setQuestions = (questions) => {
   return {
     type: "SET_QUESTIONS",

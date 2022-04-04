@@ -587,3 +587,10 @@ box-shadow: #c2f1f3 0px 0px 8px;
   font-weight: bolder;
   font-style: italic;
 }
+.qmodal-body{
+  display: flex;
+  flex-direction: column;
+}
+.qmodal-image-question{
+display: flex;
+}

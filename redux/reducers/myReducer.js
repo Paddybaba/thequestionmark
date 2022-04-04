@@ -19,6 +19,7 @@ const initialState = {
   },
   questions: [{}],
   teacher: {},
+  editQuestion: {},
 };
 function studentReducer(state = initialState, action) {
   // console.log("action received in reducer", action);
@@ -50,6 +51,12 @@ function studentReducer(state = initialState, action) {
       };
     }
 
+    case "EDIT_QUESTION": {
+      return {
+        ...state,
+        editQuestion: action.payload,
+      };
+    }
     case "SET_QUESTIONS": {
       // console.log("questions added to state");
       return {

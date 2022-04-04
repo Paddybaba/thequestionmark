@@ -7,7 +7,7 @@ const QbankNB = (props) => {
   return (
     <>
       <Navbar bg="transparent" variant="dark" expand="sm">
-        <h2 style={{ marginLeft: 10, color: "coral", fontWeight: "bold" }}>
+        <h2 style={{ marginLeft: 10, color: "#C34A36l", fontWeight: "bold" }}>
           My Question Bank
         </h2>
 
