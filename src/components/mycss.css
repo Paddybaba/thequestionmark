@@ -79,9 +79,11 @@ a:hover {
 .my-alert {
   display: block;
   position: fixed;
-  margin-top: 30%;
-  margin-left: 20%;
-  margin-right: 20%;
+  /* align-self: center;
+  justify-self: center; */
+  margin-bottom: 200px;
+  /* margin-left: 20%; */
+  margin-right: 20px;
   width: 60%;
 }
 .my-spinner {

@@ -38,6 +38,12 @@ export const setQBank = (qbank_array) =>{
     payload : qbank_array
   }
 }
+export const updateQBank = (editedQuestion) =>{
+  return {
+    type : "UPDATE_QBANK",
+    payload : editedQuestion
+  }
+}
 export const setTotalQuestions = (length) => {
   return {
     type: "SET_TOTAL_QUESTIONS",

@@ -11,6 +11,7 @@ import { ProgressBar } from "react-bootstrap";
 import { Alert } from "react-bootstrap";
 import AddQNB from "../../src/components/navbars/AddQNB";
 import Spinner from "react-bootstrap/Spinner";
+import { updateQBank } from "../../redux/actions";
 
 //// Resize image before uploading
 const resizeFile = (file) =>
@@ -31,7 +32,7 @@ const resizeFile = (file) =>
 
 const editQuestion = (props) => {
   const router = useRouter();
-  console.log("quesry", props.question);
+  console.log("question", props.question);
   var stored_teacher;
 
   const empty_image_array = [];
@@ -150,39 +151,17 @@ const editQuestion = (props) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      const message = await resposne.data;
+      const editedQuestion = await resposne.data;
+      console.log("editedQuestion",editedQuestion)
+      props.updateQBankHandler(editedQuestion)
+      setShow(true)
       setSpinner(false);
-      if (message) {
-        setShow(true);
-        setTimeout(() => setShow(false), 2000);
-      }
+      // router.back();
+     
 
-      setAllImages({
-        quest_image: null,
-        optionA: null,
-        optionB: null,
-        optionC: null,
-        optionD: null,
-      });
-      setQuestion({
-        ...initialValues,
-        subject: newQuestion.subject,
-        author: newQuestion.author,
-        year: newQuestion.year,
-        class: newQuestion.class,
-      });
-      // Finish Progress bar after getting response
-      setUploadProgress(100, () => {
-        setTimeout(() => {
-          this.setState({ uploadPercentage: 0 });
-        }, 500);
-      });
-      document.getElementById("question-text").focus();
-      // document.getElementById("question-text").scrollIntoView();
-      window.scrollTo(0, 500);
     } catch (err) {
       alert("Could not upload the question !!!");
-      // console.log(err.message);
+      console.log(err.message);
     }
   }
 
@@ -197,7 +176,8 @@ const editQuestion = (props) => {
           <Alert
             variant="info"
             show={show}
-            onClose={() => setShow(false)}
+            onClose={() => {setShow(false);
+              router.back()}}
             dismissible
           >
             Question Uploaded Successfully !!!
@@ -629,9 +609,11 @@ const editQuestion = (props) => {
 };
 
 async function saveToRecent(options) {}
-
+const mdtp = (dispatch) => ({
+  updateQBankHandler: (data) => dispatch(updateQBank(data)),
+});
 const mstp = (state) => ({
   question: state.studentReducer.editQuestion,
 });
-export default connect(mstp)(editQuestion);
+export default connect(mstp, mdtp)(editQuestion);
 // export default editQuestion;
