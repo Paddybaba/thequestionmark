@@ -6,28 +6,37 @@ import path from "../api/mypaths";
 import QuestionCard from "../../src/components/cards/QuestionCard";
 import QbankNB from "../../src/components/navbars/QbankNB";
 import QuestionModal from "../../src/components/modals/QuestionModal";
-import Spinner from 'react-bootstrap/Spinner'
+import Spinner from "react-bootstrap/Spinner";
+import { Alert } from "react-bootstrap";
 const myQuestionBank = (props) => {
   const { teacher_id } = props.mystate.teacher;
   const [myQuestions, setMyQuestions] = useState([]);
   const [showQModal, setShowQModal] = useState(false);
   const [clickedQuestion, setClickedQuestion] = useState(demo_question);
-  const [showSpinner, setShowSpinner] = useState(false)
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [deleteAlert, setdeleteAlert] = useState(false);
   // Call getmyquestions and update myQuestion array on load
   useEffect(async () => {
     // console.log(props.mystate)
-    if (props.mystate.questionBank != undefined) {
-      setMyQuestions(props.mystate.questionBank)
-    }else{
-      setShowSpinner(true)
-    const data = await getMyQuestions(teacher_id);
-    props.setQBankHandler(data);
-    setMyQuestions(data);}
-    setShowSpinner(false)
+    if (props.mystate.questionBank != null) {
+      setMyQuestions(props.mystate.questionBank);
+    } else {
+      setShowSpinner(true);
+      const data = await getMyQuestions(teacher_id);
+      props.setQBankHandler(data);
+      setMyQuestions(data);
+    }
+    setShowSpinner(false);
   }, []);
 
   function handleClose() {
     setShowQModal(false);
+    window.location.reload();
+    if (deleteAlert) {
+      setInterval(() => {
+        setdeleteAlert(false);
+      }, 2000);
+    }
   }
   /// Define Question Box Click function
   const onQBoxClick = (item) => {
@@ -40,10 +49,12 @@ const myQuestionBank = (props) => {
         show={showQModal}
         handleClose={handleClose}
         item={clickedQuestion}
+        deleteAlert={deleteAlert}
+        setdeleteAlert={setdeleteAlert}
       />
-      <QbankNB setQBankHandler={props.setQBankHandler}/>
-      
-      {showSpinner ? <Spinner animation="grow"/> : null}
+      <QbankNB setQBankHandler={props.setQBankHandler} />
+
+      {showSpinner ? <Spinner animation="grow" /> : null}
       <div className="qbank_container">
         {myQuestions.map((item, index) => {
           return (
@@ -52,6 +63,19 @@ const myQuestionBank = (props) => {
             </div>
           );
         })}
+        {/* <Alert
+          style={{ position: "fixed", width: "100%" }}
+          show={deleteAlert}
+          dismissible={true}
+          variant="success"
+        >
+          Question deleted successfully
+        </Alert> */}
+        {deleteAlert ? (
+          <div className="my-alert2">
+            <p>Question deleted Successfully !!!</p>
+          </div>
+        ) : null}
       </div>
       {/* <button onClick={() => getMyQuestions(teacher_id)}>Get Questions</button> */}
     </div>
@@ -91,8 +115,10 @@ async function getMyQuestions(teacher_id) {
   return response.data;
 }
 const mdtp = (dispatch) => ({
-setQBankHandler : (data) =>{dispatch(setQBank(data))}
-})
+  setQBankHandler: (data) => {
+    dispatch(setQBank(data));
+  },
+});
 const mstp = (state) => ({
   mystate: state.studentReducer,
 });

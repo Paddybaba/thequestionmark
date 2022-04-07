@@ -25,6 +25,12 @@ export const editQuestion = (question) => {
     payload: question,
   };
 };
+export const deleteQuestion = (question) => {
+  return {
+    type: "DELETE_QUESTION",
+    payload: question,
+  };
+};
 export const setQuestions = (questions) => {
   return {
     type: "SET_QUESTIONS",
@@ -32,18 +38,18 @@ export const setQuestions = (questions) => {
   };
 };
 
-export const setQBank = (qbank_array) =>{
+export const setQBank = (qbank_array) => {
   return {
-    type : "SET_QBANK",
-    payload : qbank_array
-  }
-}
-export const updateQBank = (editedQuestion) =>{
+    type: "SET_QBANK",
+    payload: qbank_array,
+  };
+};
+export const updateQBank = (editedQuestion) => {
   return {
-    type : "UPDATE_QBANK",
-    payload : editedQuestion
-  }
-}
+    type: "UPDATE_QBANK",
+    payload: editedQuestion,
+  };
+};
 export const setTotalQuestions = (length) => {
   return {
     type: "SET_TOTAL_QUESTIONS",

@@ -152,13 +152,11 @@ const editQuestion = (props) => {
         },
       });
       const editedQuestion = await resposne.data;
-      console.log("editedQuestion",editedQuestion)
-      props.updateQBankHandler(editedQuestion)
-      setShow(true)
+      console.log("editedQuestion", editedQuestion);
+      props.updateQBankHandler(editedQuestion);
+      setShow(true);
       setSpinner(false);
       // router.back();
-     
-
     } catch (err) {
       alert("Could not upload the question !!!");
       console.log(err.message);
@@ -176,8 +174,10 @@ const editQuestion = (props) => {
           <Alert
             variant="info"
             show={show}
-            onClose={() => {setShow(false);
-              router.back()}}
+            onClose={() => {
+              setShow(false);
+              router.back();
+            }}
             dismissible
           >
             Question Uploaded Successfully !!!
@@ -333,13 +333,16 @@ const editQuestion = (props) => {
               type="text"
               value={newQuestion.question.quest.que}
               onChange={(e) => {
-                const quest = { image: "", que: e.target.value };
+                // const quest = { image: "", que: e.target.value };
                 // console.log("quest", quest);
                 setQuestion({
                   ...newQuestion,
                   question: {
                     ...newQuestion.question,
-                    quest: quest,
+                    quest: {
+                      ...newQuestion.question.quest,
+                      que: e.target.value,
+                    },
                   },
                 });
               }}

@@ -19,7 +19,7 @@ const initialState = {
   },
   questions: [{}],
   teacher: {},
-  questionBank:[],
+  questionBank: null,
   editQuestion: {},
 };
 function studentReducer(state = initialState, action) {
@@ -59,19 +59,30 @@ function studentReducer(state = initialState, action) {
       };
     }
 
-    case "UPDATE_QBANK" : {
-      var arrayofQuestions = state.questionBank ;
+    case "UPDATE_QBANK": {
+      var arrayofQuestions = state.questionBank;
       var updatedArray = arrayofQuestions.map((item, index) => {
-        if(item._id == action.payload._id){
-          return action.payload
-        }else {
-          return item
+        if (item._id == action.payload._id) {
+          return action.payload;
+        } else {
+          return item;
         }
-      })
+      });
       return {
         ...state,
-        questionBank : updatedArray
-      }
+        questionBank: updatedArray,
+      };
+    }
+
+    case "DELETE_QUESTION": {
+      var arrayofQuestions = state.questionBank;
+      var updatedArray = arrayofQuestions.filter(
+        (question) => question._id != action.payload._id
+      );
+      return {
+        ...state,
+        questionBank: updatedArray,
+      };
     }
     case "SET_QUESTIONS": {
       // console.log("questions added to state");
@@ -80,12 +91,12 @@ function studentReducer(state = initialState, action) {
         questions: action.payload,
       };
     }
-case "SET_QBANK" : {
-  return {
-    ...state,
-    questionBank : action.payload
-  }
-}
+    case "SET_QBANK": {
+      return {
+        ...state,
+        questionBank: action.payload,
+      };
+    }
     case "SET_TOTAL_QUESTIONS": {
       return {
         ...state,

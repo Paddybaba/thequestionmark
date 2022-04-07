@@ -4,10 +4,37 @@ import { Button } from "react-bootstrap";
 import { getDisplayName } from "next/dist/shared/lib/utils";
 import router from "next/router";
 import { connect } from "react-redux";
-import { editQuestion } from "../../../redux/actions";
-const QuestionModal = ({ show, handleClose, item, editQuestionHandler }) => {
+import path from "../../../pages/api/mypaths";
+import { editQuestion, deleteQuestion } from "../../../redux/actions";
+import axios from "axios";
+// import { Alert } from "react-bootstrap";
+const QuestionModal = ({
+  show,
+  handleClose,
+  item,
+  deleteAlert,
+  setdeleteAlert,
+  editQuestionHandler,
+  deleteQuestionHandler,
+}) => {
   // console.log("item", item);
   // console.log("satte", editQuestionHandler);
+
+  // DELETE QUESTION
+  const delQuestion = async (item) => {
+    try {
+      const response = await axios.post(`${path}/deletequestion`, {
+        id: item._id,
+      });
+      deleteQuestionHandler(item);
+      handleClose();
+      setdeleteAlert(true);
+      // alert("Question deleted successfully !!!");
+    } catch (err) {
+      alert("Error deleting question !!!");
+      console.log(err);
+    }
+  };
 
   return (
     <Modal
@@ -101,7 +128,12 @@ const QuestionModal = ({ show, handleClose, item, editQuestionHandler }) => {
         >
           Edit
         </Button>
-        <Button variant="danger" onClick={handleClose}>
+        <Button
+          variant="danger"
+          onClick={() => {
+            delQuestion(item);
+          }}
+        >
           Delete
         </Button>
       </Modal.Footer>
@@ -116,6 +148,7 @@ function onEditQuestion(editQuestionFunction, item) {
 }
 const mdtp = (dispatch) => ({
   editQuestionHandler: (data) => dispatch(editQuestion(data)),
+  deleteQuestionHandler: (data) => dispatch(deleteQuestion(data)),
 });
 const mstp = (state) => ({
   state: state.studentReducer,
