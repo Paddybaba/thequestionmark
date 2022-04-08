@@ -6,6 +6,8 @@ import path from "../api/mypaths";
 import QuestionCard from "../../src/components/cards/QuestionCard";
 import QbankNB from "../../src/components/navbars/QbankNB";
 import QuestionModal from "../../src/components/modals/QuestionModal";
+import Form from 'react-bootstrap/Form'
+import MyDropdown from "../../src/components/dropdowns/Mydropdown";
 import Spinner from "react-bootstrap/Spinner";
 import { Alert } from "react-bootstrap";
 const myQuestionBank = (props) => {
@@ -55,6 +57,23 @@ const myQuestionBank = (props) => {
       <QbankNB setQBankHandler={props.setQBankHandler} />
 
       {showSpinner ? <Spinner animation="grow" /> : null}
+      <div className="filter-row">
+        <div className="my-button">Filter</div>
+        <div className="filter-row2">
+        <div>
+        <Form.Select aria-label="Default select example" style={{paddingTop : 0, paddingBottom : 0, margin : 10}}>
+  <option>Subject</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</Form.Select>
+        </div>
+        <div>Year</div>
+        <div>Keywords</div>
+        <div>Standard</div>
+      </div>
+      </div>
+      
       <div className="qbank_container">
         {myQuestions.map((item, index) => {
           return (
