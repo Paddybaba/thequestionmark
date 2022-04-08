@@ -6,29 +6,50 @@ import path from "../api/mypaths";
 import QuestionCard from "../../src/components/cards/QuestionCard";
 import QbankNB from "../../src/components/navbars/QbankNB";
 import QuestionModal from "../../src/components/modals/QuestionModal";
-import Form from 'react-bootstrap/Form'
+import Form from "react-bootstrap/Form";
 import MyDropdown from "../../src/components/dropdowns/Mydropdown";
 import Spinner from "react-bootstrap/Spinner";
 import { Alert } from "react-bootstrap";
 const myQuestionBank = (props) => {
   const { teacher_id } = props.mystate.teacher;
   const [myQuestions, setMyQuestions] = useState([]);
+  const [filteredQuestions, setFilteredQuestions] = useState([]);
+  const [filters, setFilters] = useState([
+    { class: "Class-1", subject: "", year: "2021" },
+  ]);
   const [showQModal, setShowQModal] = useState(false);
   const [clickedQuestion, setClickedQuestion] = useState(demo_question);
   const [showSpinner, setShowSpinner] = useState(false);
   const [deleteAlert, setdeleteAlert] = useState(false);
+  const [subjectList, setSubjectList] = useState([]);
+  const [yearList, setYearList] = useState([]);
+  const [classList, setClassList] = useState([]);
+  const [showFilters, setShowFilter] = useState(false);
   // Call getmyquestions and update myQuestion array on load
   useEffect(async () => {
     // console.log(props.mystate)
     if (props.mystate.questionBank != null) {
       setMyQuestions(props.mystate.questionBank);
+      setFilteredQuestions(props.mystate.questionBank);
     } else {
       setShowSpinner(true);
       const data = await getMyQuestions(teacher_id);
+      //update state with qBank
       props.setQBankHandler(data);
       setMyQuestions(data);
+      setFilteredQuestions(data);
     }
+    // console.log("All Q", myQuestions);
+    ///Apply filter
+    // setFilteredQuestions(myQuestions);
     setShowSpinner(false);
+  }, []);
+  useEffect(() => {
+    setFilteredQuestions(
+      props.mystate.questionBank.filter(
+        (question) => question.subject == "Mathematics"
+      )
+    );
   }, []);
 
   function handleClose() {
@@ -40,6 +61,39 @@ const myQuestionBank = (props) => {
       }, 2000);
     }
   }
+  /// FILTER QUESTIONS
+  /// Get list of subjects/years/standards
+  function activateFilters() {
+    const allSubjects = myQuestions.map((item, index) => {
+      return item.subject;
+    });
+    const mySubjects = allSubjects.filter(function (item, pos, self) {
+      return self.indexOf(item) == pos;
+    });
+    const allYears = myQuestions.map((item, index) => {
+      return item.year.toString();
+    });
+    const myYears = allYears.filter(function (item, pos, self) {
+      return self.indexOf(item) == pos;
+    });
+    const allClass = myQuestions.map((item, index) => {
+      return item.class;
+    });
+
+    const myClasses = allClass.filter(function (item, pos, self) {
+      return self.indexOf(item) == pos;
+    });
+    setSubjectList(mySubjects);
+    setYearList(myYears);
+    setClassList(myClasses);
+    setShowFilter(true);
+  }
+  //// Clear filter
+  function clearFilters() {
+    // setMyQuestions(myQuestions);
+    setShowFilter(false);
+  }
+
   /// Define Question Box Click function
   const onQBoxClick = (item) => {
     setClickedQuestion(item);
@@ -58,24 +112,82 @@ const myQuestionBank = (props) => {
 
       {showSpinner ? <Spinner animation="grow" /> : null}
       <div className="filter-row">
-        <div className="my-button">Filter</div>
-        <div className="filter-row2">
-        <div>
-        <Form.Select aria-label="Default select example" style={{paddingTop : 0, paddingBottom : 0, margin : 10}}>
-  <option>Subject</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</Form.Select>
+        <div
+          className="my-button"
+          onClick={() => (showFilters ? clearFilters() : activateFilters())}
+        >
+          Filter
         </div>
-        <div>Year</div>
-        <div>Keywords</div>
-        <div>Standard</div>
+        {showFilters ? (
+          <div className="filter-row2">
+            <div>
+              <Form.Select
+                aria-label="Default select example"
+                style={{
+                  paddingTop: 0,
+                  paddingBottom: 0,
+                }}
+                onChange={(e) => console.log(e.target.value)}
+              >
+                <option>Subject</option>
+                {subjectList.map((item, index) => {
+                  return (
+                    <option value={item} key={index}>
+                      {item}
+                    </option>
+                  );
+                })}
+                {/* <option value="Science">Science</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="General Knowledge">General Knowledge</option>
+                <option value="English">English</option> */}
+              </Form.Select>
+            </div>
+            <div>
+              <Form.Select
+                aria-label="Default select example"
+                style={{
+                  paddingTop: 0,
+                  paddingBottom: 0,
+                }}
+                onChange={(e) => console.log(e.target.value)}
+              >
+                <option>Year</option>
+                {yearList.map((item, index) => {
+                  return (
+                    <option value={item} key={index}>
+                      {item}
+                    </option>
+                  );
+                })}
+              </Form.Select>
+            </div>
+
+            <div>
+              <Form.Select
+                aria-label="Default select example"
+                style={{
+                  paddingTop: 0,
+                  paddingBottom: 0,
+                }}
+                onChange={(e) => console.log(e.target.value)}
+              >
+                <option>Standard</option>
+                {classList.map((item, index) => {
+                  return (
+                    <option value={item} key={index}>
+                      {item}
+                    </option>
+                  );
+                })}
+              </Form.Select>
+            </div>
+          </div>
+        ) : null}
       </div>
-      </div>
-      
+
       <div className="qbank_container">
-        {myQuestions.map((item, index) => {
+        {filteredQuestions.map((item, index) => {
           return (
             <div onClick={() => onQBoxClick(item)} key={index}>
               <QuestionCard item={item} />
