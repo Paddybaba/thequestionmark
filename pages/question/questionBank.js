@@ -14,9 +14,11 @@ const myQuestionBank = (props) => {
   const { teacher_id } = props.mystate.teacher;
   const [myQuestions, setMyQuestions] = useState([]);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
-  const [filters, setFilters] = useState([
-    { class: "Class-1", subject: "", year: "2021" },
-  ]);
+  const [filters, setFilters] = useState({
+    standard: "Select Standard",
+    subject: "All Subjects",
+    year: "Select Year",
+  });
   const [showQModal, setShowQModal] = useState(false);
   const [clickedQuestion, setClickedQuestion] = useState(demo_question);
   const [showSpinner, setShowSpinner] = useState(false);
@@ -45,16 +47,28 @@ const myQuestionBank = (props) => {
     setShowSpinner(false);
   }, []);
   useEffect(() => {
-    setFilteredQuestions(
-      props.mystate.questionBank.filter(
-        (question) => question.subject == "Mathematics"
-      )
-    );
-  }, []);
+    if (
+      filters.subject === "All Subjects" &&
+      filters.standard === "Select Standard" &&
+      filters.year === "Select Year"
+    ) {
+      console.log("Filters not active");
+      setFilteredQuestions(props.mystate.questionBank);
+    } else {
+      console.log("filters active", filters);
+      if (filters.subject != "All Subjects") {
+        setFilteredQuestions(
+          props.mystate.questionBank.filter(
+            (question) => question.subject === filters.subject
+          )
+        );
+      }
+    }
+  }, [filters]);
 
   function handleClose() {
     setShowQModal(false);
-    window.location.reload();
+    // window.location.reload();
     if (deleteAlert) {
       setInterval(() => {
         setdeleteAlert(false);
@@ -127,9 +141,11 @@ const myQuestionBank = (props) => {
                   paddingTop: 0,
                   paddingBottom: 0,
                 }}
-                onChange={(e) => console.log(e.target.value)}
+                onChange={(e) =>
+                  setFilters({ ...filters, subject: e.target.value })
+                }
               >
-                <option>Subject</option>
+                <option>All Subjects</option>
                 {subjectList.map((item, index) => {
                   return (
                     <option value={item} key={index}>
@@ -137,22 +153,20 @@ const myQuestionBank = (props) => {
                     </option>
                   );
                 })}
-                {/* <option value="Science">Science</option>
-                <option value="Mathematics">Mathematics</option>
-                <option value="General Knowledge">General Knowledge</option>
-                <option value="English">English</option> */}
               </Form.Select>
             </div>
-            <div>
+            {/* <div>
               <Form.Select
                 aria-label="Default select example"
                 style={{
                   paddingTop: 0,
                   paddingBottom: 0,
                 }}
-                onChange={(e) => console.log(e.target.value)}
+                onChange={(e) =>
+                  setFilters({ ...filters, year: e.target.value })
+                }
+                defaultValue="Select Year"
               >
-                <option>Year</option>
                 {yearList.map((item, index) => {
                   return (
                     <option value={item} key={index}>
@@ -170,7 +184,9 @@ const myQuestionBank = (props) => {
                   paddingTop: 0,
                   paddingBottom: 0,
                 }}
-                onChange={(e) => console.log(e.target.value)}
+                onChange={(e) =>
+                  setFilters({ ...filters, standard: e.target.value })
+                }
               >
                 <option>Standard</option>
                 {classList.map((item, index) => {
@@ -181,7 +197,7 @@ const myQuestionBank = (props) => {
                   );
                 })}
               </Form.Select>
-            </div>
+            </div> */}
           </div>
         ) : null}
       </div>

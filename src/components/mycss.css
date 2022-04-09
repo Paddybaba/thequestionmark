@@ -569,6 +569,7 @@ li {
 .qbank_container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 .qcard_rect {
   display: flex;
