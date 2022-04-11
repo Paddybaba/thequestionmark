@@ -27,6 +27,36 @@ const myQuestionBank = (props) => {
   const [yearList, setYearList] = useState([]);
   const [classList, setClassList] = useState([]);
   const [showFilters, setShowFilter] = useState(false);
+  const [createTestMode, setCreateTestMode] = useState(false)
+
+/// FILTER QUESTIONS
+  /// Get list of subjects/years/standards
+  function activateFilters() {
+    const allSubjects = myQuestions.map((item, index) => {
+      return item.subject;
+    });
+    const mySubjects = allSubjects.filter(function (item, pos, self) {
+      return self.indexOf(item) == pos;
+    });
+    const allYears = myQuestions.map((item, index) => {
+      return item.year.toString();
+    });
+    const myYears = allYears.filter(function (item, pos, self) {
+      return self.indexOf(item) == pos;
+    });
+    const allClass = myQuestions.map((item, index) => {
+      return item.class;
+    });
+
+    const myClasses = allClass.filter(function (item, pos, self) {
+      return self.indexOf(item) == pos;
+    });
+    setSubjectList(mySubjects);
+    setYearList(myYears);
+    setClassList(myClasses);
+    setShowFilter(true);
+  }
+
   // Call getmyquestions and update myQuestion array on load
   useEffect(async () => {
     // console.log(props.mystate)
@@ -45,7 +75,13 @@ const myQuestionBank = (props) => {
     ///Apply filter
     // setFilteredQuestions(myQuestions);
     setShowSpinner(false);
+ 
   }, []);
+
+  useEffect(()=>{
+    activateFilters();
+  },[myQuestions])
+
   useEffect(() => {
     if (
       filters.subject === "All Subjects" &&
@@ -75,33 +111,7 @@ const myQuestionBank = (props) => {
       }, 2000);
     }
   }
-  /// FILTER QUESTIONS
-  /// Get list of subjects/years/standards
-  function activateFilters() {
-    const allSubjects = myQuestions.map((item, index) => {
-      return item.subject;
-    });
-    const mySubjects = allSubjects.filter(function (item, pos, self) {
-      return self.indexOf(item) == pos;
-    });
-    const allYears = myQuestions.map((item, index) => {
-      return item.year.toString();
-    });
-    const myYears = allYears.filter(function (item, pos, self) {
-      return self.indexOf(item) == pos;
-    });
-    const allClass = myQuestions.map((item, index) => {
-      return item.class;
-    });
-
-    const myClasses = allClass.filter(function (item, pos, self) {
-      return self.indexOf(item) == pos;
-    });
-    setSubjectList(mySubjects);
-    setYearList(myYears);
-    setClassList(myClasses);
-    setShowFilter(true);
-  }
+  
   //// Clear filter
   function clearFilters() {
     // setMyQuestions(myQuestions);
@@ -125,14 +135,9 @@ const myQuestionBank = (props) => {
       <QbankNB setQBankHandler={props.setQBankHandler} />
 
       {showSpinner ? <Spinner animation="grow" /> : null}
+
       <div className="filter-row">
-        <div
-          className="my-button"
-          onClick={() => (showFilters ? clearFilters() : activateFilters())}
-        >
-          Filter
-        </div>
-        {showFilters ? (
+        <div>Create Test</div>
           <div className="filter-row2">
             <div>
               <Form.Select
@@ -140,6 +145,8 @@ const myQuestionBank = (props) => {
                 style={{
                   paddingTop: 0,
                   paddingBottom: 0,
+                  marginRight: 10,
+                  marginBottom: 5,
                 }}
                 onChange={(e) =>
                   setFilters({ ...filters, subject: e.target.value })
@@ -155,51 +162,8 @@ const myQuestionBank = (props) => {
                 })}
               </Form.Select>
             </div>
-            {/* <div>
-              <Form.Select
-                aria-label="Default select example"
-                style={{
-                  paddingTop: 0,
-                  paddingBottom: 0,
-                }}
-                onChange={(e) =>
-                  setFilters({ ...filters, year: e.target.value })
-                }
-                defaultValue="Select Year"
-              >
-                {yearList.map((item, index) => {
-                  return (
-                    <option value={item} key={index}>
-                      {item}
-                    </option>
-                  );
-                })}
-              </Form.Select>
-            </div>
-
-            <div>
-              <Form.Select
-                aria-label="Default select example"
-                style={{
-                  paddingTop: 0,
-                  paddingBottom: 0,
-                }}
-                onChange={(e) =>
-                  setFilters({ ...filters, standard: e.target.value })
-                }
-              >
-                <option>Standard</option>
-                {classList.map((item, index) => {
-                  return (
-                    <option value={item} key={index}>
-                      {item}
-                    </option>
-                  );
-                })}
-              </Form.Select>
-            </div> */}
           </div>
-        ) : null}
+ 
       </div>
 
       <div className="qbank_container">
@@ -228,6 +192,9 @@ const myQuestionBank = (props) => {
     </div>
   );
 };
+
+
+
 const demo_question = {
   author: "paddybaba@gmail.com",
   class: "Class-1",
