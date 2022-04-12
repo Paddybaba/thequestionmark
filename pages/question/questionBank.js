@@ -25,11 +25,11 @@ const myQuestionBank = (props) => {
   const [deleteAlert, setdeleteAlert] = useState(false);
   const [subjectList, setSubjectList] = useState([]);
   const [yearList, setYearList] = useState([]);
-  const [classList, setClassList] = useState([]);
+  const [standardList, setstandardList] = useState([]);
   const [showFilters, setShowFilter] = useState(false);
-  const [createTestMode, setCreateTestMode] = useState(false)
+  const [createTestMode, setCreateTestMode] = useState(false);
 
-/// FILTER QUESTIONS
+  /// FILTER QUESTIONS
   /// Get list of subjects/years/standards
   function activateFilters() {
     const allSubjects = myQuestions.map((item, index) => {
@@ -53,7 +53,7 @@ const myQuestionBank = (props) => {
     });
     setSubjectList(mySubjects);
     setYearList(myYears);
-    setClassList(myClasses);
+    setstandardList(myClasses);
     setShowFilter(true);
   }
 
@@ -75,12 +75,11 @@ const myQuestionBank = (props) => {
     ///Apply filter
     // setFilteredQuestions(myQuestions);
     setShowSpinner(false);
- 
   }, []);
 
-  useEffect(()=>{
-    activateFilters();
-  },[myQuestions])
+  // useEffect(()=>{
+  //   activateFilters();
+  // },[myQuestions])
 
   useEffect(() => {
     if (
@@ -92,13 +91,24 @@ const myQuestionBank = (props) => {
       setFilteredQuestions(props.mystate.questionBank);
     } else {
       console.log("filters active", filters);
+      let tempArray = props.mystate.questionBank;
       if (filters.subject != "All Subjects") {
-        setFilteredQuestions(
-          props.mystate.questionBank.filter(
-            (question) => question.subject === filters.subject
-          )
+        tempArray = tempArray.filter(
+          (question) => question.subject === filters.subject
         );
       }
+      if (filters.year != "Select Year") {
+        tempArray = tempArray.filter(
+          (question) => question.year.toString() === filters.year
+        );
+      }
+      if (filters.standard != "Select Standard") {
+        tempArray = tempArray.filter(
+          (question) => question.class === filters.standard
+        );
+      }
+
+      setFilteredQuestions(tempArray);
     }
   }, [filters]);
 
@@ -111,7 +121,7 @@ const myQuestionBank = (props) => {
       }, 2000);
     }
   }
-  
+
   //// Clear filter
   function clearFilters() {
     // setMyQuestions(myQuestions);
@@ -137,9 +147,17 @@ const myQuestionBank = (props) => {
       {showSpinner ? <Spinner animation="grow" /> : null}
 
       <div className="filter-row">
-        <div>Create Test</div>
-          <div className="filter-row2">
-            <div>
+        <div className="filter-row2">
+          <div
+            className="my-button"
+            onClick={() => {
+              showFilters ? clearFilters() : activateFilters();
+            }}
+          >
+            FILTER
+          </div>
+          {showFilters ? (
+            <div className="filter-row2">
               <Form.Select
                 aria-label="Default select example"
                 style={{
@@ -161,9 +179,51 @@ const myQuestionBank = (props) => {
                   );
                 })}
               </Form.Select>
+              <Form.Select
+                aria-label="Default select example"
+                style={{
+                  paddingTop: 0,
+                  paddingBottom: 0,
+                  marginRight: 10,
+                  marginBottom: 5,
+                }}
+                onChange={(e) =>
+                  setFilters({ ...filters, year: e.target.value })
+                }
+              >
+                <option>Select Year</option>
+                {yearList.map((item, index) => {
+                  return (
+                    <option value={item} key={index}>
+                      {item}
+                    </option>
+                  );
+                })}
+              </Form.Select>
+              <Form.Select
+                aria-label="Default select example"
+                style={{
+                  paddingTop: 0,
+                  paddingBottom: 0,
+                  marginRight: 10,
+                  marginBottom: 5,
+                }}
+                onChange={(e) =>
+                  setFilters({ ...filters, standard: e.target.value })
+                }
+              >
+                <option>Select Standard</option>
+                {standardList.map((item, index) => {
+                  return (
+                    <option value={item} key={index}>
+                      {item}
+                    </option>
+                  );
+                })}
+              </Form.Select>
             </div>
-          </div>
- 
+          ) : null}
+        </div>
       </div>
 
       <div className="qbank_container">
@@ -192,8 +252,6 @@ const myQuestionBank = (props) => {
     </div>
   );
 };
-
-
 
 const demo_question = {
   author: "paddybaba@gmail.com",
