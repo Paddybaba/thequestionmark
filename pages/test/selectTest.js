@@ -9,6 +9,7 @@ import axios from "axios";
 import path from "../api/mypaths";
 import { Alert } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
+import DashboardNavbar from "../../src/components/navbars/DashboardNavbar";
 const selectTest = (props) => {
   // console.log("select page props", props);
   const [authorHint, setAuthorHint] = useState([]);
@@ -20,11 +21,28 @@ const selectTest = (props) => {
   const [show, setShow] = useState(false);
   const [showSpinner, setSpinner] = useState(false);
   useEffect(async () => {
-    const response = await axios.post(`${path}/getauthors`);
-    const authors = await response.data;
-    // console.log("authors", authors);
-    setAuthorHint(authors);
+    await getAuthors();
   }, []);
+  async function getAuthors() {
+    try {
+      var token = props.student.user.token;
+      if (token) {
+        console.log(token);
+      } else {
+        token = console.log("no token");
+        router.replace("/login/loginStudent");
+      }
+      const response = await axios.post(
+        `${path}/getauthors`,
+        {},
+        { headers: { "mcq-access-token": token } }
+      );
+      const authors = await response.data;
+      setAuthorHint(authors);
+    } catch (err) {
+      alert("Authors could not be fetched !!!");
+    }
+  }
   function validateForm() {
     return (
       subject.length > 0 && author.length > 0 && year > 0 && standard.length > 0
@@ -73,11 +91,9 @@ const selectTest = (props) => {
             </Spinner>
           </div>
         ) : null}
+        <DashboardNavbar heading={mystudent} />
         <div className="row">
           <div className="col-10 mx-auto">
-            <h3 className="col-10 text-center mx-auto mt-5">
-              Welcome : {mystudent}
-            </h3>
             <h3 className="text-center mt-4">Select your test paper</h3>
 
             <div className="row">

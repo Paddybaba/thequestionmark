@@ -4,14 +4,14 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import axios from "axios";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import path from "../api/mypaths";
 import Resizer from "react-image-file-resizer";
 import { ProgressBar } from "react-bootstrap";
-import { FaHome } from "react-icons/fa";
 import { Alert } from "react-bootstrap";
 import AddQNB from "../../src/components/navbars/AddQNB";
 import Spinner from "react-bootstrap/Spinner";
+import { updateQBank } from "../../redux/actions";
 
 //// Resize image before uploading
 const resizeFile = (file) =>
@@ -30,33 +30,13 @@ const resizeFile = (file) =>
     );
   });
 
-const addQuestion2 = (props) => {
-  // console.log("path", path);
+const editQuestion = (props) => {
+  const router = useRouter();
+  console.log("question", props.question);
   var stored_teacher;
 
-  const initialValues = {
-    subject: "Science",
-    author: "",
-    class: "Class-1",
-    model: "Text-Question-Text-Options", //Other images
-    question: {
-      quest: { image: "", que: "" },
-      options: [
-        { image: "", option: "A" },
-        { image: "", option: "B" },
-        { image: "", option: "C" },
-        { image: "", option: "D" },
-      ],
-      correct_ans: "A",
-      explanation: "",
-      marks: 0,
-    },
-    year: 2021,
-    difficulty: "Easy", //easy, medium ,hard
-  };
-
   const empty_image_array = [];
-  const [newQuestion, setQuestion] = useState(initialValues);
+  const [newQuestion, setQuestion] = useState(props.question);
   // const [questImage, setQuestImage] = useState();
   const [uploadProgress, setUploadProgress] = useState(0);
   const [showSpinner, setSpinner] = useState(false);
@@ -68,13 +48,6 @@ const addQuestion2 = (props) => {
     optionC: null,
     optionD: null,
   });
-  useEffect(() => {
-    stored_teacher = props.teacher;
-    setQuestion({ ...newQuestion, author: stored_teacher.teacher_name });
-  }, []);
-
-  const router = useRouter();
-
   ///// Get Image file from input, resize it and add to images State
   const getQuestImage = async (event) => {
     try {
@@ -127,12 +100,7 @@ const addQuestion2 = (props) => {
       // console.log(err.message);
     }
   };
-  //   function validateForm() {
-  //     return (
-  //       newQuestion.question.quest.length > 0 &&
-  //       newQuestion.question.correct_ans.length > 0
-  //     );
-  //   }
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     // console.log("name of field :", name);
@@ -178,73 +146,38 @@ const addQuestion2 = (props) => {
           }
         },
       };
-      const resposne = await axios.post(`${path}/addQuestion`, fd, config, {
+      const resposne = await axios.post(`${path}/editQuestion`, fd, config, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      const message = await resposne.data;
+      const editedQuestion = await resposne.data;
+      console.log("editedQuestion", editedQuestion);
+      props.updateQBankHandler(editedQuestion);
+      setShow(true);
       setSpinner(false);
-      if (message) {
-        setShow(true);
-        setTimeout(() => setShow(false), 2000);
-      }
-
-      setAllImages({
-        quest_image: null,
-        optionA: null,
-        optionB: null,
-        optionC: null,
-        optionD: null,
-      });
-      setQuestion({
-        ...initialValues,
-        subject: newQuestion.subject,
-        author: newQuestion.author,
-        year: newQuestion.year,
-        class: newQuestion.class,
-      });
-      // Finish Progress bar after getting response
-      setUploadProgress(100, () => {
-        setTimeout(() => {
-          this.setState({ uploadPercentage: 0 });
-        }, 500);
-      });
-      document.getElementById("question-text").focus();
-      // document.getElementById("question-text").scrollIntoView();
-      window.scrollTo(0, 500);
+      // router.back();
     } catch (err) {
       alert("Could not upload the question !!!");
-      // console.log(err.message);
+      console.log(err.message);
     }
   }
 
   return (
     <div className="row gx-0 question-bg">
       <Head>
-        <title>New Question</title>
+        <title>Edit Question</title>
       </Head>
       <AddQNB />
       <div className="col-10 mx-auto">
-        {/* <div
-          className="simple-link"
-          style={{
-            position: "absolute",
-            top: 5,
-            right: 15,
-            cursor: "pointer",
-            fontSize: "1.5em",
-          }}
-          onClick={() => router.push("/")}
-        >
-          <FaHome />
-        </div> */}
-
         <div className="my-alert">
           <Alert
             variant="info"
             show={show}
-            onClose={() => setShow(false)}
+            onClose={() => {
+              setShow(false);
+              router.back();
+            }}
             dismissible
           >
             Question Uploaded Successfully !!!
@@ -400,13 +333,16 @@ const addQuestion2 = (props) => {
               type="text"
               value={newQuestion.question.quest.que}
               onChange={(e) => {
-                const quest = { image: "", que: e.target.value };
+                // const quest = { image: "", que: e.target.value };
                 // console.log("quest", quest);
                 setQuestion({
                   ...newQuestion,
                   question: {
                     ...newQuestion.question,
-                    quest: quest,
+                    quest: {
+                      ...newQuestion.question.quest,
+                      que: e.target.value,
+                    },
                   },
                 });
               }}
@@ -676,8 +612,11 @@ const addQuestion2 = (props) => {
 };
 
 async function saveToRecent(options) {}
-
-const mstp = (state) => ({
-  teacher: state.studentReducer.teacher,
+const mdtp = (dispatch) => ({
+  updateQBankHandler: (data) => dispatch(updateQBank(data)),
 });
-export default connect(mstp)(addQuestion2);
+const mstp = (state) => ({
+  question: state.studentReducer.editQuestion,
+});
+export default connect(mstp, mdtp)(editQuestion);
+// export default editQuestion;

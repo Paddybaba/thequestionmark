@@ -8,6 +8,7 @@ import { userLogin } from "../../redux/actions";
 import { connect } from "react-redux";
 import path from "../api/mypaths";
 import { FaHome, FaKey, FaMailBulk, FaUserAlt } from "react-icons/fa";
+import SRNavbar from "../../src/components/navbars/StudenRegisterNavbar";
 const registerStudent = (props) => {
   // console.log("props from register page :", props);
   const [email, setEmail] = useState("");
@@ -49,17 +50,16 @@ const registerStudent = (props) => {
       <Head>
         <title>Registration</title>
       </Head>
+      <SRNavbar />
       <div className="col-7 mt-5 mx-auto">
-        <div
+        {/* <div
           className="simple-link"
           style={{ position: "absolute", top: 5, right: 10, cursor: "pointer" }}
           onClick={() => router.push("/")}
         >
           <FaHome />
-        </div>
-        <div className="text-center text-uppercase fs-3 fw-bold my-3">
-          New Student Registration
-        </div>
+        </div> */}
+
         <div className="col-sm-10 mx-auto my-box">
           <Form>
             <Form.Group size="lg" controlId="studentName">

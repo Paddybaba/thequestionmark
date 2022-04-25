@@ -6,6 +6,12 @@ export const userLogin = (user) => {
   };
 };
 
+export const teacherLogin = (teacher) => {
+  return {
+    type: "TEACHER_LOGIN",
+    payload: teacher,
+  };
+};
 export const selectOptions = (options) => {
   return {
     type: "SELECT_OPTIONS",
@@ -13,6 +19,18 @@ export const selectOptions = (options) => {
   };
 };
 
+export const editQuestion = (question) => {
+  return {
+    type: "EDIT_QUESTION",
+    payload: question,
+  };
+};
+export const deleteQuestion = (question) => {
+  return {
+    type: "DELETE_QUESTION",
+    payload: question,
+  };
+};
 export const setQuestions = (questions) => {
   return {
     type: "SET_QUESTIONS",
@@ -20,6 +38,18 @@ export const setQuestions = (questions) => {
   };
 };
 
+export const setQBank = (qbank_array) => {
+  return {
+    type: "SET_QBANK",
+    payload: qbank_array,
+  };
+};
+export const updateQBank = (editedQuestion) => {
+  return {
+    type: "UPDATE_QBANK",
+    payload: editedQuestion,
+  };
+};
 export const setTotalQuestions = (length) => {
   return {
     type: "SET_TOTAL_QUESTIONS",

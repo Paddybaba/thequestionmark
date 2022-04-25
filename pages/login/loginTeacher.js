@@ -4,14 +4,17 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { userLogin } from "../../redux/actions";
+import { teacherLogin } from "../../redux/actions";
 import { connect } from "react-redux";
 import path from "../api/mypaths";
 import { FaHome, FaKey, FaUserAlt } from "react-icons/fa";
+
 const loginTeacher = (props) => {
   // console.log("props from login page :", props);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [remMe, setRemember] = useState(false);
+
   const router = useRouter();
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -23,16 +26,17 @@ const loginTeacher = (props) => {
         teacher_id: email,
         password: password,
       });
-      const data = await resposne.data;
-      const teacher = await data.teacher;
-      localStorage.setItem("teacher", JSON.stringify(teacher));
-      // console.log("data", teacher.teacher_name)
-      if (resposne.status === 400 || !data) {
+      const teacher = await resposne.data;
+      console.log("teacher", teacher);
+      // localStorage.setItem("teacher", JSON.stringify(teacher));
+      if (resposne.status === 400 || !teacher) {
         window.alert("Invalid Credentials 1 !!!");
       } else {
-        //LOGIN TEAHCER TO SELECT SUBJECT PAGE
-        // props.userLoginHandler(student);
-        router.push("/options/teacherOptions");
+        if (remMe) {
+          localStorage.setItem("teacher", JSON.stringify(teacher));
+        }
+        props.teacherLoginHandler(teacher);
+        router.push("/dashboard/teacherOptions");
       }
     } catch (err) {
       alert("Something went wrong !!!");
@@ -79,8 +83,22 @@ const loginTeacher = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
+            <Form.Group className="mt-2 smallLabel">
+              <input
+                type="checkbox"
+                id="remember"
+                name="remember"
+                checked={remMe}
+                onChange={() => {
+                  setRemember(!remMe);
+                }}
+              />
+              <label className="ml-1" htmlFor="remember">
+                Remember me
+              </label>
+            </Form.Group>
             <Button
-              block="true"
+              // block="true"
               className="mt-4"
               // type="submit" (This is not allowing action to work properly)
               disabled={!validateForm()}
@@ -101,4 +119,11 @@ const loginTeacher = (props) => {
   );
 };
 
-export default loginTeacher;
+const mdtp = (dispatch) => ({
+  teacherLoginHandler: (data) => dispatch(teacherLogin(data)),
+});
+const mstp = (state) => ({
+  teacher: state.studentReducer,
+});
+
+export default connect(mstp, mdtp)(loginTeacher);

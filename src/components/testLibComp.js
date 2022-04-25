@@ -9,6 +9,7 @@ const TestLibComp = (props) => {
 
   async function onComponentClick() {
     const options = {
+      teacher_id,
       subject,
       author,
       year,

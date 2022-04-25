@@ -8,7 +8,38 @@ import { FcReadingEbook } from "react-icons/fc";
 // import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
 import Link from "next/link";
 import { useEffect } from "react";
+import router from "next/router";
 export default function Home() {
+  // Define on student click function /////////////
+  async function onStudentClick() {
+    // Look for student data and student token in Asyncstorage
+    const storedStudent = await localStorage.getItem("student");
+    // console.log(JSON.parse(studentTo));
+    // Goto DASHBOARD page if student token found
+    if (storedStudent != null) {
+      router.push("/dashboard/studentOptions", {
+        student: JSON.parse(storedStudent),
+      });
+    } else {
+      // Goto Login page if student token not found
+      router.push("/login/loginStudent");
+    }
+  }
+  // Define on teacher click function /////////////
+  async function onTeacherClick() {
+    // Look for teacher data in Localstorage
+    const storedTeacher = await localStorage.getItem("teacher");
+    // console.log(JSON.parse(storedTeacher));
+    // Goto DASHBOARD page if teacher found
+    if (storedTeacher != null) {
+      router.push("/dashboard/teacherOptions", {
+        teacher: JSON.parse(storedTeacher),
+      });
+    } else {
+      // Goto Login page if teacher  not found
+      router.push("/login/loginTeacher");
+    }
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -22,28 +53,26 @@ export default function Home() {
       </div>
       <main className={styles.main}>
         <h1>The Question Mark </h1>
-        <Link href="/login/loginStudent">
-          <div
-            className="box-login text-center"
-            // onClick={() => {
-            //   document.documentElement.requestFullscreen();
-            // }}
-          >
-            <FcReadingEbook />
-            <p style={{ lineHeight: "0", margin: "0 10px" }}>Student</p>
-          </div>
-        </Link>
-        <Link href="/login/loginTeacher">
-          <div
-            className="box-login text-center"
-            // onClick={() => {
-            //   document.documentElement.requestFullscreen();
-            // }}
-          >
-            <GiTeacher />
-            <p style={{ lineHeight: "0", margin: "0 10px" }}>Teacher</p>
-          </div>
-        </Link>
+
+        <div
+          className="box-login text-center"
+          onClick={() => {
+            onStudentClick();
+          }}
+        >
+          <FcReadingEbook />
+          <p style={{ lineHeight: "0", margin: "0 10px" }}>Student</p>
+        </div>
+
+        <div
+          className="box-login text-center"
+          onClick={() => {
+            onTeacherClick();
+          }}
+        >
+          <GiTeacher />
+          <p style={{ lineHeight: "0", margin: "0 10px" }}>Teacher</p>
+        </div>
       </main>
     </div>
   );
