@@ -5,13 +5,13 @@ import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import axios from "axios";
 import { Router, useRouter } from "next/router";
-import path from "../api/mypaths";
+import path from "../pages/api/mypaths";
 import Resizer from "react-image-file-resizer";
 import { ProgressBar } from "react-bootstrap";
 import { Alert } from "react-bootstrap";
-import AddQNB from "../../src/components/navbars/AddQNB";
+import AddQNB from "./components/navbars/AddQNB";
 import Spinner from "react-bootstrap/Spinner";
-import { updateQBank } from "../../redux/actions";
+import { updateQBank } from "../redux/actions";
 
 //// Resize image before uploading
 const resizeFile = (file) =>
