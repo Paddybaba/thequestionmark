@@ -176,13 +176,13 @@ width: 100%;
 
 .box {
   height: 200px;
-  /* border: 2px solid green; */
   border-radius: 5px;
-  margin: 10px;
+  margin: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: bold;
   cursor: pointer;
   border: 3px solid transparent;
@@ -192,7 +192,8 @@ width: 100%;
   border: white 3px solid;
 }
 .newQuestion-box {
-  background-color: #c25e84;
+  /* background-color: #c25e84; */
+  background-image: url("/public/selecttest.png");
   color: white;
 }
 .question-bank-box {
@@ -692,6 +693,7 @@ display: flex;
 }
 
 .mybar {
+  position: relative;  
   box-sizing: border-box;
   display: flex;
   box-shadow:  0px 1px 5px #888;
@@ -702,4 +704,10 @@ display: flex;
 }
 .mybar:hover {
   /* box-shadow: 0px 1px 10px #888; */
+}
+.x-center{
+ /* border: 1px solid red; */
+ position: absolute;
+ transform: translateX(-50%);
+ left : 50%;
 }

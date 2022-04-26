@@ -2,8 +2,7 @@ import React from "react";
 import router from "next/router";
 import { connect } from "react-redux";
 import DashboardNavbar from "../../src/components/navbars/DashboardNavbar";
-import MyNavbar from "../../src/components/navbars/MyNavbar"
-// import { FaHome } from "react-icons/fa";
+import MyNavbar from "../../src/components/navbars/MyNavbar";
 const studentOptions = (props) => {
   // console.log(props);
   const student = props.student.user.student_name;
@@ -12,37 +11,37 @@ const studentOptions = (props) => {
     <>
       <div className="container-fluid gx-0">
         <div className="row gx-0">
-          {/* <h2 className="col-9 tc mx-auto mt-3 fw-bold">
-            {student}'s Dashboard
-          </h2> */}
-          {/* <DashboardNavbar heading={`${student}'s Dashboard`} /> */}
-          <MyNavbar/>
+          <DashboardNavbar heading={`${student}'s Dashboard`} />
+          {/* <MyNavbar heading={student} /> */}
         </div>
         <div className="row gx-0">
-          <div className="col-8 mx-auto" style={{ marginTop: 100 }}>
+          <div className="col-10 mx-auto" style={{ marginTop: 100 }}>
             <div className="row mx-auto gx-0">
-              <div className="col-sm-6 ">
+              <div className="col-6 ">
                 <div
-                  className="box newQuestion-box"
+                  className="box"
                   onClick={() => router.push("/test/selectTest")}
                 >
-                  Select Test
+                  <img
+                    src="/selecttest.png"
+                    style={{ width: 140, height: 140 }}
+                  />
                 </div>
               </div>
-              <div className="col-sm-6 ">
+              <div className="col-6 ">
                 <div
-                  className="box question-bank-box"
+                  className="box"
                   onClick={() => router.push("/test/testLibrary")}
                 >
-                  Test Library
+                  <img src="/library.png" style={{ width: 140, height: 140 }} />
                 </div>
               </div>
             </div>
             <div className="row mx-auto gx-0">
-              <div className="col-sm-6 ">
+              <div className="col-6 ">
                 <div className="box mystudents-box">My Test</div>
               </div>
-              <div className="col-sm-6 ">
+              <div className="col-6 ">
                 <div className="box extra-box">One more Tab</div>
               </div>
             </div>

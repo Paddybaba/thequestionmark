@@ -7,23 +7,23 @@ import { FaHome } from "react-icons/fa";
 const DashboardNavbar = (props) => {
   return (
     <>
-      <Navbar justify bg="transparent" variant="dark" expand="sm">
-        <div className="mx-auto">
+      <Navbar justify="true" bg="transparent" variant="dark" expand="sm">
+        <div>
           <Navbar.Brand href="#home">
-            <h2 style={{ marginLeft: 10 }}>{props.heading}</h2>
+            <h2 className="x-center">{props.heading}</h2>
           </Navbar.Brand>
         </div>
-        {/* <h2 style={{ paddingLeft: "35%", color: "white" }}>TEST LIBRARY</h2> */}
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" style={{ marginLeft: 20 }}>
           <Nav className="ms-auto">
             <Link href="/dashboard/studentOptions">
               <a
                 style={{
-                  marginTop: "0.3em",
+                  marginTop: "0.4em",
                   color: "white",
-                  fontSize: "1.2em",
-                  marginRight: 10,
+                  fontSize: "1em",
+                  marginRight: 20,
                 }}
               >
                 Dashboard
@@ -32,10 +32,10 @@ const DashboardNavbar = (props) => {
             <Link href="/">
               <a
                 style={{
-                  marginTop: "0.3em",
+                  marginTop: "0.4em",
                   color: "white",
-                  fontSize: "1.2em",
-                  marginRight: 10,
+                  fontSize: "1em",
+                  marginRight: 20,
                 }}
               >
                 Home
@@ -43,9 +43,9 @@ const DashboardNavbar = (props) => {
             </Link>
             <a
               style={{
-                marginTop: "0.3em",
+                marginTop: "0.4em",
                 color: "white",
-                fontSize: "1.2em",
+                fontSize: "1em",
                 marginRight: 10,
               }}
               onClick={() => {
