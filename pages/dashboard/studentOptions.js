@@ -2,6 +2,7 @@ import React from "react";
 import router from "next/router";
 import { connect } from "react-redux";
 import DashboardNavbar from "../../src/components/navbars/DashboardNavbar";
+import MyNavbar from "../../src/components/navbars/MyNavbar"
 // import { FaHome } from "react-icons/fa";
 const studentOptions = (props) => {
   // console.log(props);
@@ -14,7 +15,8 @@ const studentOptions = (props) => {
           {/* <h2 className="col-9 tc mx-auto mt-3 fw-bold">
             {student}'s Dashboard
           </h2> */}
-          <DashboardNavbar heading={`${student}'s Dashboard`} />
+          {/* <DashboardNavbar heading={`${student}'s Dashboard`} /> */}
+          <MyNavbar/>
         </div>
         <div className="row gx-0">
           <div className="col-8 mx-auto" style={{ marginTop: 100 }}>
