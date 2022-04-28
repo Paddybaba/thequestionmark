@@ -17,6 +17,7 @@ const loginPage = (props) => {
   const [password, setPassword] = useState("");
   const [showSpinner, setSpinner] = useState(false);
   const [remMe, setRemember] = useState(false);
+  const [pwdVisible, setPwdvisible] = useState(false);
 
   const router = useRouter();
   function validateForm() {
@@ -103,10 +104,16 @@ const loginPage = (props) => {
                 <FaKey /> Password
               </Form.Label>
               <Form.Control
-                type="password"
+                type={pwdVisible ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <p
+                onClick={() => setPwdvisible(!pwdVisible)}
+                style={{ textAlign: "end", fontSize: 15, cursor: "pointer" }}
+              >
+                {pwdVisible ? "Hide password" : "Show password"}
+              </p>
             </Form.Group>
             <Form.Group className="mt-2 smallLabel">
               <input

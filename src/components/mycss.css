@@ -1,3 +1,4 @@
+/* main color  #845ec2 */
 body {
   background-color: honeydew;
 }
@@ -211,7 +212,7 @@ width: 100%;
 .test-page {
   /* display: flex; */
   /* position: relative; */
-  background-color: honeydew;
+  background-color: #845ec2;
   height: 100vh;
   margin-top: 50px;
 }
@@ -710,4 +711,17 @@ display: flex;
  position: absolute;
  transform: translateX(-50%);
  left : 50%;
+}
+
+.getting-authors{
+  color: purple;
+  animation: blink infinite 800ms ease-in-out  ;
+}
+@keyframes blink {
+  0%{
+    color: white;
+  }
+  100%{
+    color: purple;
+  }
 }

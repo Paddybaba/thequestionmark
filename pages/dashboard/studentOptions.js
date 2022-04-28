@@ -6,7 +6,7 @@ import MyNavbar from "../../src/components/navbars/MyNavbar";
 const studentOptions = (props) => {
   // console.log(props);
   const student = props.student.user.student_name;
-  console.log(student);
+  // console.log(student);
   return (
     <>
       <div className="container-fluid gx-0">

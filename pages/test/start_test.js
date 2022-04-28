@@ -1,10 +1,12 @@
 import React from "react";
 import TopBar1 from "../../src/components/TopBar1";
+import StartTestNavbar from "../../src/components/navbars/StartTestNavbar";
 import { connect } from "react-redux";
 import router, { useRouter } from "next/router";
 
 const StartTest = (props) => {
   // console.log("props from start test", props);
+  const student = props.student;
   const number_of_questions = props.questBank.length;
   const arrayofNulls = new Array(number_of_questions).fill("x");
   const score = {
@@ -23,7 +25,8 @@ const StartTest = (props) => {
         <div className="row gx-0">
           <div className="col-12 mx-auto gx-0">
             <div style={{ position: "fixed", top: 0, width: "100%" }}>
-              <TopBar1 />
+              {/* <TopBar1 /> */}
+              <StartTestNavbar heading={student.student_name} />
             </div>
             <div className="row">
               <div className="col-10 mx-auto">
