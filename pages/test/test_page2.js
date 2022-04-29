@@ -106,7 +106,7 @@ function saveProgress(score) {
 const test_page2 = (props) => {
   // console.log("props from test page-2:", props.questBank);
   const data = props.questBank;
-  const student = props.student
+  const student = props.student;
   // const data = myQuestions;
   const arrayofNulls = new Array(data.length).fill("x");
   const score = {
@@ -202,7 +202,10 @@ const test_page2 = (props) => {
     return (
       <div className="gx-0">
         <div style={{ width: "100%" }}>
-          <TestPageNavbar student={student.student_name} subject={student.options.subject}/>
+          <TestPageNavbar
+            student={student.student_name}
+            subject={student.options.subject}
+          />
         </div>
 
         <div className=" test-page gx-0 ">
@@ -231,6 +234,7 @@ const test_page2 = (props) => {
                         <textarea
                           className="text-bottom fw-bold"
                           readOnly
+                          disabled
                           value={currentQuestion.quest.que}
                         >
                           {currentQuestion.quest.que}
@@ -258,9 +262,10 @@ const test_page2 = (props) => {
                                 display: "flex",
                                 alignItems: "center",
                                 alignContent: "center",
+                                borderRadius: 3,
                                 border:
                                   index == progress.clickedAnsList[activeQ]
-                                    ? "1px solid green"
+                                    ? "1px solid white"
                                     : "none",
                               }}
                               content={element.option}
@@ -306,7 +311,7 @@ const test_page2 = (props) => {
                             ? { backgroundColor: "grey", color: "white" }
                             : {},
                           progress.answered.includes(index)
-                            ? { backgroundColor: "rgb(128, 192, 33)" }
+                            ? { backgroundColor: "#603F8B" }
                             : {})
                         }
                         onClick={() => {
@@ -325,20 +330,20 @@ const test_page2 = (props) => {
               </div>
               <div className="row mx-auto">
                 <div className="col-10 mx-auto footer-box">
-                  <button
+                  <div
                     className="previous-next"
                     onClick={() => onPreviousClick()}
                     disabled={activeQ === 0}
                   >
                     Previous
-                  </button>
-                  <button
+                  </div>
+                  <div
                     className="previous-next"
                     onClick={() => onNextClick()}
                     disabled={activeQ == data.length - 1}
                   >
                     Next
-                  </button>
+                  </div>
                   <button
                     className=" previous-next finish-button"
                     onClick={() => setModalShow(true)}
@@ -372,7 +377,7 @@ const mstp = (state) => {
   return {
     questBank: state.studentReducer.questions,
     student_record: state.studentReducer.user.progress,
-    student : state.studentReducer.user
+    student: state.studentReducer.user,
   };
 };
 
