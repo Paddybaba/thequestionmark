@@ -21,21 +21,26 @@ const StartTest = (props) => {
   };
   return (
     <>
-      <div className="test-page">
+      <div className="test-page gx-0">
         <div className="row gx-0">
           <div className="col-12 mx-auto gx-0">
             <div style={{ position: "fixed", top: 0, width: "100%" }}>
               {/* <TopBar1 /> */}
               <StartTestNavbar heading={student.student_name} />
             </div>
-            <div className="row">
-              <div className="col-10 mx-auto">
-                <div className="welcome text-center">
-                  All the best, <strong>{props.student.student_name}</strong>
+            <div className="row gx-0">
+              <div className="col-10 mx-auto  gx-0">
+                <div className="welcome text-center  gx-0">
+                  {/* All the best, <strong>{props.student.student_name}</strong> */}
+                  <h3 style={{fontWeight: "bold"}}>Subject : {student.options.subject}</h3>
+                  <h4 style={{fontStyle : "italic", fontSize:"60%"}}>{student.options.author}</h4>
+                  <h4>Year : {student.options.year}</h4>
+                  <h4>Standard : {student.options.standard}</h4>
+                  <h4>Number of questions : {number_of_questions}</h4>
                 </div>
               </div>
             </div>
-            <div className="row">
+            <div className="row  gx-0">
               <div className="col-10 mx-auto ">
                 <div
                   className="start-button mx-auto mt-3"

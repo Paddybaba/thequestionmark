@@ -4,15 +4,13 @@ import Link from "next/link";
 import { Nav } from "react-bootstrap";
 import router from "next/router";
 
-const StartTestNavbar = (props) => {
+const TestPageNavbar = (props) => {
   return (
-    <>
+    <div style={{boxShadow : "0px 0px 4px rgba(255,255,255, 0.3)"}}>
       <Navbar justify="true" bg="transparent" variant="dark" expand="sm">
-        <div>
-          <Navbar.Brand href="#home">
-            <h2 className="x-center">{props.heading}</h2>
-          </Navbar.Brand>
-        </div>
+      
+        <h2 style={{color:"white", marginLeft: 10}}>{props.student}</h2>
+        <h2 className="x-center" style={{color:"white"}}>{props.subject}</h2>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" style={{ marginLeft: 20 }}>
@@ -61,8 +59,8 @@ const StartTestNavbar = (props) => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-    </>
+    </div>
   );
 };
 
-export default StartTestNavbar;
+export default TestPageNavbar;

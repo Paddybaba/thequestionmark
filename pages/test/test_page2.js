@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import TestPageNavbar from "../../src/components/navbars/TestPageNavbar";
 import TopBar from "../../src/components/TopBar";
 import PopModal from "../../src/components/PopModal";
 import Speaker from "../../src/components/Speaker";
@@ -105,6 +106,7 @@ function saveProgress(score) {
 const test_page2 = (props) => {
   // console.log("props from test page-2:", props.questBank);
   const data = props.questBank;
+  const student = props.student
   // const data = myQuestions;
   const arrayofNulls = new Array(data.length).fill("x");
   const score = {
@@ -199,12 +201,12 @@ const test_page2 = (props) => {
     // }
     return (
       <div className="gx-0">
-        <div style={{ position: "fixed", top: 0, width: "100%" }}>
-          <TopBar />
+        <div style={{ width: "100%" }}>
+          <TestPageNavbar student={student.student_name} subject={student.options.subject}/>
         </div>
 
-        <div className="container-fluid test-page gx-0 ">
-          <div className="row gx-0 main-container">
+        <div className=" test-page gx-0 ">
+          <div className="row gx-0">
             <div className="col-10 mx-auto">
               <div className="row ">
                 <div className="col-sm-8 mx-auto quest-box">
@@ -370,6 +372,7 @@ const mstp = (state) => {
   return {
     questBank: state.studentReducer.questions,
     student_record: state.studentReducer.user.progress,
+    student : state.studentReducer.user
   };
 };
 

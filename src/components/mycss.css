@@ -61,9 +61,9 @@ a:hover {
   color: white;
 }
 .test-page {
-  background-color: rgb(250, 123, 4);
-  height: 100vh;
-  color: black;
+  /* background-color: rgb(250, 123, 4); */
+  /* height: 100vh; */
+  color: rgb(255, 253, 253);
 }
 /* /////// LOGINPage ////////// */
 
@@ -144,15 +144,15 @@ width: 100%;
   margin: 0;
 }
 .welcome {
-  margin-top: 20%;
+  margin-top: 200px;
   font-size: 200%;
 }
 .start-button {
   width: 90px;
   height: 90px;
   /* border: 1px solid red; */
-  background-color: rgb(128, 192, 33);
-  color: black;
+  background-color: rgb(107, 7, 173);
+  color: rgb(253, 253, 253);
   font-weight: bold;
   box-shadow: 2px 2px 4px rgb(73, 73, 73);
   border-radius: 50%;
@@ -161,8 +161,9 @@ width: 100%;
   align-items: center;
   transition: all 200ms ease;
   cursor: pointer;
+}.start-button:hover{
+  box-shadow: 4px 4px 4px rgb(73, 73, 73);
 }
-
 .start-button:active {
   transform: scale(0.98);
   box-shadow: 1px 1px 2px;
@@ -170,7 +171,7 @@ width: 100%;
 
 /* ///////    TEST_PAGE   //////////// */
 .main-container {
-  height: 84vh;
+  /* height: 84vh; */
 
   /* background-color: honeydew; */
 }
@@ -213,18 +214,19 @@ width: 100%;
   /* display: flex; */
   /* position: relative; */
   background-color: #845ec2;
-  height: 100vh;
-  margin-top: 50px;
+  /* height: 100vh; */
+  /* margin-top: 50px; */
 }
 .test-page textarea {
   display: block;
   border: none;
+  color: white;
   width: 100%;
   resize: none;
   max-width: 100%;
-  max-height: 8em;
-  min-height: 5em;
-  background-color: honeydew;
+  /* max-height: 8em;
+  min-height: 5em; */
+  background-color: transparent;
   font-size: 1.2em;
   line-height: 1.15em;
   overflow: scroll;
@@ -235,15 +237,29 @@ textarea::-webkit-scrollbar {
   display: none;
 }
 
+/* /// Questbox scrollbar customisation /// */
+.quest-box::-webkit-scrollbar{
+  width: 5px;
+}
+.quest-box::-webkit-scrollbar-track{
+  background-color: #cfbbf0;
+}
+.quest-box::-webkit-scrollbar-thumb{
+  background-color: #3d1a75;
+  border-radius: 10px;
+}
 .quest-box,
 .navi-box {
   border-radius: 5px;
-  height: 82vh;
+  /* height: 82vh; */
   padding: 5px;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+  /* overflow-x: hidden;
+  scroll-behavior: smooth; */
+  box-shadow: 0px 0px 4px rgba(194, 219, 209, 0.5);
+  /* border: 2px solid red; */
   /* border: gray 1px solid; */
 }
+
 .navi-box {
   /* border-left: 1px solid gray; */
 }
@@ -345,7 +361,8 @@ li {
     font-size: 0.9em;
   }
   .quest-box {
-    height: 70vh;
+    /* height: 70vh; */
+  
   }
   .navi-box {
     height: 14vh;
@@ -723,5 +740,18 @@ display: flex;
   }
   100%{
     color: purple;
+  }
+}
+.welcome h3, h4 {
+  color: white;
+  animation: slideUp 2000ms ease-in;
+}
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+   
+  }
+  100%{
+    opacity: 1;
   }
 }
