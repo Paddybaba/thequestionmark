@@ -218,7 +218,7 @@ const test_page2 = (props) => {
                     <div className="col-6 text-center">Marks : 5</div>
                   </div>
 
-                  <div className="row ">
+                  <div className="row">
                     <div className="col-12 quest-question mt-2 mr-3 mb-2">
                       {currentQuestion.quest.image != "" ? (
                         <img
