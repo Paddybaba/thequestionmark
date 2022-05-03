@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import TopBar from "../../src/components/TopBar";
 import router from "next/router";
+import ResultPageNavbar from "../../src/components/navbars/ResultPageNavbar";
 import path from "../api/mypaths";
 //////
 //  make an array of correct answers *
@@ -12,7 +13,7 @@ import path from "../api/mypaths";
 
 const result_page = (props) => {
   const data = props.questBank;
-  // console.log("props from result_page", data)
+  // console.log("props from result_page", data);
   //   console.log(correctAnswerArray);
   const [progress, setProgress] = useState(
     typeof window !== "undefined"
@@ -21,7 +22,7 @@ const result_page = (props) => {
         : {}
       : {}
   );
-  // console.log("progress from result page :", progress)
+  console.log("progress from result page :", progress);
   const [activeQ, setActiveQ] = useState(0);
   // const [clickedOption, setClickedOption] = useState(progress.clickedAnsList);
   try {
@@ -43,7 +44,9 @@ const result_page = (props) => {
     let currentQuestion = data[activeQ].question;
     console.log(currentQuestion);
     const clickedAnswerArray = data.map((quest, index) => {
-      return quest.question.options[progress.clickedAnsList[index]].option;
+      return progress.clickedAnsList[index] === "x"
+        ? ""
+        : quest.question.options[progress.clickedAnsList[index]].option;
     });
 
     const correctAnswerArray = data.map((quest, index) => {
@@ -52,9 +55,9 @@ const result_page = (props) => {
     const correctAnswer = correctAnswerArray[activeQ].toLowerCase();
 
     return (
-      <>
-        <div style={{ position: "fixed", top: 0, width: "100%" }}>
-          <TopBar />
+      <div className="gx-0">
+        <div style={{ width: "100%" }}>
+          <ResultPageNavbar />
         </div>
         <div className="container-fluid test-page gx-0 ">
           <div className="row gx-0 main-container">
@@ -139,7 +142,7 @@ const result_page = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-4 mx-auto navi-box">
+                <div className="col-sm-4 mx-auto navi-box solutions-navi-box">
                   <p>Total Questions : {progress.total}</p>
                   {data.map((element, index) => {
                     return (
@@ -188,19 +191,19 @@ const result_page = (props) => {
                   </button>
                   <button
                     className=" previous-next finish-button"
-                    onClick={() => router.replace("/options/studentOptions")}
+                    onClick={() => router.replace("/dashboard/studentOptions")}
                   >
-                    END TEST
+                    FINISH
                   </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   } catch (err) {
-    // console.log(err);
+    console.log(err);
 
     return (
       <div className="row">
