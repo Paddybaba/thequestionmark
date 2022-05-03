@@ -1,10 +1,10 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Link from "next/link";
-import { Nav, NavDropdown } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import router from "next/router";
-import { FaHome } from "react-icons/fa";
-const DashboardNavbar = (props) => {
+
+const StartTestNavbar = (props) => {
   return (
     <>
       <Navbar justify="true" bg="transparent" variant="dark" expand="sm">
@@ -17,7 +17,7 @@ const DashboardNavbar = (props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" style={{ marginLeft: 20 }}>
           <Nav className="ms-auto">
-            {/* <Link href="/dashboard/studentOptions">
+          <Link href="/test/selectTest">
               <a
                 style={{
                   marginTop: "0.4em",
@@ -26,9 +26,9 @@ const DashboardNavbar = (props) => {
                   marginRight: 20,
                 }}
               >
-                Dashboard
+                Select Test
               </a>
-            </Link> */}
+            </Link>
             <Link href="/">
               <a
                 style={{
@@ -65,4 +65,4 @@ const DashboardNavbar = (props) => {
   );
 };
 
-export default DashboardNavbar;
+export default StartTestNavbar;

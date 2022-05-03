@@ -64,10 +64,11 @@ const selectTest = (props) => {
     if (questions.length > 0) {
       props.setQuestionsHandler(questions);
       setSpinner(false);
-      router.push("/test/start_test");
+      router.replace("/test/start_test");
     } else {
-      setShow(true);
-      // alert("NO tests available");
+      // setShow(true);
+      setSpinner(false);
+      alert("NO tests available");
     }
   };
   // console.log(props);
@@ -133,6 +134,10 @@ const selectTest = (props) => {
                       })}
                     </datalist>
                   </Form.Group>
+                  {authorHint.length != 0 ? null : (
+                    <p className="getting-authors">Getting authors ....</p>
+                  )}
+
                   <Form.Group className="mt-3" size="lg" controlId="class">
                     <Form.Label>Class</Form.Label>
                     <select

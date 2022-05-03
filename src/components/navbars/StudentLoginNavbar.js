@@ -17,9 +17,7 @@ const SLNavbar = (props) => {
         }}
       >
         <Navbar.Brand href="#">
-          <h3 style={{ marginLeft: 10, justifySelf: "center" }}>
-            Student Login
-          </h3>
+          <h3 className="x-center">Student Login</h3>
         </Navbar.Brand>
         <div style={{ marginRight: 0 }}>
           <Link href="/">
