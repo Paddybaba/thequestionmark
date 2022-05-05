@@ -232,7 +232,7 @@ const test_page2 = (props) => {
                           <Speaker speak_this={currentQuestion.quest.que} />
                         ) : null}
                         <textarea
-                          className="text-bottom fw-bold"
+                          className="text-bottom fw-bold question-text"
                           readOnly
                           disabled
                           value={currentQuestion.quest.que}

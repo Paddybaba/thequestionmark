@@ -61,7 +61,7 @@ const result_page = (props) => {
         </div>
         <div className="container-fluid test-page gx-0 ">
           <div className="row gx-0 main-container">
-            <div className="col-11 mx-auto">
+            <div className="col-10 mx-auto">
               <div className="row ">
                 <div className="col-sm-8 mx-auto quest-box">
                   <div className="row quest-toprow">
