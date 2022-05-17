@@ -50,6 +50,12 @@ export const updateQBank = (editedQuestion) => {
     payload: editedQuestion,
   };
 };
+export const add2QBank = (newQuestion) => {
+  return {
+    type: "ADD2_QBANK",
+    payload: newQuestion,
+  };
+};
 export const setTotalQuestions = (length) => {
   return {
     type: "SET_TOTAL_QUESTIONS",
