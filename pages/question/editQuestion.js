@@ -5,13 +5,13 @@ import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import axios from "axios";
 import { Router, useRouter } from "next/router";
-import path from "../pages/api/mypaths";
+import path from "../api/mypaths";
 import Resizer from "react-image-file-resizer";
 import { ProgressBar } from "react-bootstrap";
 import { Alert } from "react-bootstrap";
-import AddQNB from "./components/navbars/AddQNB";
+import AddQNB from "../../src/components/navbars/AddQNB";
 import Spinner from "react-bootstrap/Spinner";
-import { updateQBank } from "../redux/actions";
+import { updateQBank } from "../../redux/actions";
 
 //// Resize image before uploading
 const resizeFile = (file) =>
@@ -34,9 +34,36 @@ const editQuestion = (props) => {
   const router = useRouter();
   console.log("question", props.question);
   var stored_teacher;
+  var demo_question = {
+    author: "paddybaba@gmail.com",
+    class: "Class-1",
+    model: "Image-Question-Text-Options",
+    question: {
+      correct_ans: "2",
+      explanation:
+        "Brain, also known as cerebrum has two hemisheres Right and Left.",
+      marks: 0,
+      options: [
+        { image: "", option: "3" },
+        { image: "", option: "4" },
+        { image: "", option: "2" },
+        { image: "", option: "1" },
+      ],
 
+      quest: {
+        image:
+          "https://paddy-photo-bucket.s3.amazonaws.com/1645848581229-questionImage.jpeg",
+        que: "How many hemispheres are there in human brain?",
+      },
+      subject: "Science",
+      year: 2021,
+      __v: 0,
+      _id: "61ab9f6122444a556d1869bd",
+    },
+  };
   const empty_image_array = [];
-  const [newQuestion, setQuestion] = useState(props.question);
+  const [newQuestion, setQuestion] = useState(demo_question);
+  if (props.question != undefined) setQuestion(props.question);
   // const [questImage, setQuestImage] = useState();
   const [uploadProgress, setUploadProgress] = useState(0);
   const [showSpinner, setSpinner] = useState(false);
@@ -162,6 +189,8 @@ const editQuestion = (props) => {
       console.log(err.message);
     }
   }
+
+  console.log("NewQuestion", newQuestion);
 
   return (
     <div className="row gx-0 question-bg">

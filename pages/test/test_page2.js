@@ -199,6 +199,7 @@ const test_page2 = (props) => {
     // } else {
     //   document.getElementById("quest-image").style.width = "150px";
     // }
+    console.log("activeQ", activeQ);
     return (
       <div className="gx-0">
         <div style={{ width: "100%" }}>
@@ -330,20 +331,20 @@ const test_page2 = (props) => {
               </div>
               <div className="row mx-auto">
                 <div className="col-10 mx-auto footer-box">
-                  <div
+                  <button
                     className="previous-next"
                     onClick={() => onPreviousClick()}
                     disabled={activeQ === 0}
                   >
                     Previous
-                  </div>
-                  <div
+                  </button>
+                  <button
                     className="previous-next"
                     onClick={() => onNextClick()}
                     disabled={activeQ == data.length - 1}
                   >
                     Next
-                  </div>
+                  </button>
                   <button
                     className=" previous-next finish-button"
                     onClick={() => setModalShow(true)}

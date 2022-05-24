@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { setQBank } from "../../redux/actions";
+import { setQBank, editQuestion } from "../../redux/actions";
 import { connect } from "react-redux";
 import path from "../api/mypaths";
 import QuestionCard from "../../src/components/cards/QuestionCard";
@@ -138,6 +138,7 @@ const myQuestionBank = (props) => {
         item={clickedQuestion}
         deleteAlert={deleteAlert}
         setdeleteAlert={setdeleteAlert}
+        editQuestionHandler={props.editQuestionHandler}
       />
       <QbankNB
         heading={props.mystate.teacher.teacher_name}
@@ -282,6 +283,9 @@ async function getMyQuestions(teacher_id) {
 const mdtp = (dispatch) => ({
   setQBankHandler: (data) => {
     dispatch(setQBank(data));
+  },
+  editQuestionHandler: (data) => {
+    dispatch(editQuestion(data));
   },
 });
 const mstp = (state) => ({
