@@ -63,7 +63,6 @@ const editQuestion = (props) => {
   };
   const empty_image_array = [];
   const [newQuestion, setQuestion] = useState(demo_question);
-  if (props.question != undefined) setQuestion(props.question);
   // const [questImage, setQuestImage] = useState();
   const [uploadProgress, setUploadProgress] = useState(0);
   const [showSpinner, setSpinner] = useState(false);
