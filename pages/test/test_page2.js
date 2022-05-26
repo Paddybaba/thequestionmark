@@ -367,7 +367,9 @@ const test_page2 = (props) => {
             >
               <button
                 className="previous-next finish-button"
-                onClick={() => saveMyTest(props.student, progress)}
+                onClick={() =>
+                  saveMyTest(props.student, progress, props.questBank)
+                }
               >
                 Save
               </button>
@@ -398,15 +400,16 @@ function addAfter(array, index, newItem) {
   return [...array.slice(0, index), newItem, ...array.slice(index)];
 }
 
-async function saveMyTest(student, progress) {
+async function saveMyTest(student, progress, questions) {
   const savedTest = {
+    questions: questions,
     options: student.options,
     progress: progress,
     student_id: student.student_id,
   };
 
   const response = await axios.post(`${path}/savestudenttest`, savedTest);
-
+  if (response) alert("Test saved successfully !!!");
   console.log("Will save this in record", savedTest);
 }
 

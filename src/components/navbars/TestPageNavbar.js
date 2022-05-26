@@ -29,7 +29,7 @@ const TestPageNavbar = (props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" style={{ marginLeft: 20 }}>
           <Nav className="ms-auto">
-            <Link href="/test/selectTest">
+            <Link href="/dashboard/studentOptions">
               <a
                 style={{
                   marginTop: "0.4em",
@@ -38,7 +38,7 @@ const TestPageNavbar = (props) => {
                   marginRight: 20,
                 }}
               >
-                Select Test
+                Dashboard
               </a>
             </Link>
             <Link href="/">
