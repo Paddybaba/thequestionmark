@@ -12,6 +12,7 @@ import { FaHome } from "react-icons/fa";
 import { Alert } from "react-bootstrap";
 import AddQNB from "../../src/components/navbars/AddQNB";
 import Spinner from "react-bootstrap/Spinner";
+import { add2QBank } from "../../redux/actions";
 
 //// Resize image before uploading
 const resizeFile = (file) =>
@@ -37,6 +38,7 @@ const addQuestion2 = (props) => {
   const initialValues = {
     subject: "Science",
     author: "",
+    authorname: "",
     class: "Class-1",
     model: "Text-Question-Text-Options", //Other images
     question: {
@@ -70,7 +72,11 @@ const addQuestion2 = (props) => {
   });
   useEffect(() => {
     stored_teacher = props.teacher;
-    setQuestion({ ...newQuestion, author: stored_teacher.teacher_name });
+    setQuestion({
+      ...newQuestion,
+      authorname: stored_teacher.teacher_name,
+      author: stored_teacher.teacher_id,
+    });
   }, []);
 
   const router = useRouter();
@@ -184,6 +190,7 @@ const addQuestion2 = (props) => {
         },
       });
       const message = await resposne.data;
+      // console.log("added question to DB :", message);
       setSpinner(false);
       if (message) {
         setShow(true);
@@ -210,12 +217,16 @@ const addQuestion2 = (props) => {
           this.setState({ uploadPercentage: 0 });
         }, 500);
       });
+      // Focus to question window
       document.getElementById("question-text").focus();
       // document.getElementById("question-text").scrollIntoView();
       window.scrollTo(0, 500);
+      // Update question bank in state
+      props.add2QbankHandler(message);
     } catch (err) {
       alert("Could not upload the question !!!");
-      // console.log(err.message);
+      setSpinner(false);
+      console.log(err.message);
     }
   }
 
@@ -676,8 +687,13 @@ const addQuestion2 = (props) => {
 };
 
 async function saveToRecent(options) {}
-
+const mdtp = (dispatch) => ({
+  add2QbankHandler: (data) => {
+    dispatch(add2QBank(data));
+  },
+});
 const mstp = (state) => ({
   teacher: state.studentReducer.teacher,
+  questionBank: state.studentReducer.questionBank,
 });
-export default connect(mstp)(addQuestion2);
+export default connect(mstp, mdtp)(addQuestion2);

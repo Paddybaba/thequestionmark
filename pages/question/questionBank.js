@@ -1,15 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { setQBank } from "../../redux/actions";
+import { setQBank, editQuestion } from "../../redux/actions";
 import { connect } from "react-redux";
 import path from "../api/mypaths";
 import QuestionCard from "../../src/components/cards/QuestionCard";
 import QbankNB from "../../src/components/navbars/QbankNB";
 import QuestionModal from "../../src/components/modals/QuestionModal";
 import Form from "react-bootstrap/Form";
-import MyDropdown from "../../src/components/dropdowns/Mydropdown";
 import Spinner from "react-bootstrap/Spinner";
-import { Alert } from "react-bootstrap";
+
 const myQuestionBank = (props) => {
   const { teacher_id } = props.mystate.teacher;
   const [myQuestions, setMyQuestions] = useState([]);
@@ -77,20 +76,16 @@ const myQuestionBank = (props) => {
     setShowSpinner(false);
   }, []);
 
-  // useEffect(()=>{
-  //   activateFilters();
-  // },[myQuestions])
-
   useEffect(() => {
     if (
       filters.subject === "All Subjects" &&
       filters.standard === "Select Standard" &&
       filters.year === "Select Year"
     ) {
-      console.log("Filters not active");
+      // console.log("Filters not active");
       setFilteredQuestions(props.mystate.questionBank);
     } else {
-      console.log("filters active", filters);
+      // console.log("filters active", filters);
       let tempArray = props.mystate.questionBank;
       if (filters.subject != "All Subjects") {
         tempArray = tempArray.filter(
@@ -133,6 +128,8 @@ const myQuestionBank = (props) => {
     setClickedQuestion(item);
     setShowQModal(true);
   };
+
+  // console.log("filtered Questions :", filteredQuestions);
   return (
     <div>
       <QuestionModal
@@ -141,8 +138,12 @@ const myQuestionBank = (props) => {
         item={clickedQuestion}
         deleteAlert={deleteAlert}
         setdeleteAlert={setdeleteAlert}
+        editQuestionHandler={props.editQuestionHandler}
       />
-      <QbankNB setQBankHandler={props.setQBankHandler} />
+      <QbankNB
+        heading={props.mystate.teacher.teacher_name}
+        setQBankHandler={props.setQBankHandler}
+      />
 
       {showSpinner ? <Spinner animation="grow" /> : null}
 
@@ -234,14 +235,7 @@ const myQuestionBank = (props) => {
             </div>
           );
         })}
-        {/* <Alert
-          style={{ position: "fixed", width: "100%" }}
-          show={deleteAlert}
-          dismissible={true}
-          variant="success"
-        >
-          Question deleted successfully
-        </Alert> */}
+
         {deleteAlert ? (
           <div className="my-alert2">
             <p>Question deleted Successfully !!!</p>
@@ -289,6 +283,9 @@ async function getMyQuestions(teacher_id) {
 const mdtp = (dispatch) => ({
   setQBankHandler: (data) => {
     dispatch(setQBank(data));
+  },
+  editQuestionHandler: (data) => {
+    dispatch(editQuestion(data));
   },
 });
 const mstp = (state) => ({

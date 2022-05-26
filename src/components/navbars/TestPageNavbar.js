@@ -8,15 +8,28 @@ const TestPageNavbar = (props) => {
   return (
     <div style={{ boxShadow: "0px 0px 4px rgba(255,255,255, 0.3)" }}>
       <Navbar justify="true" bg="transparent" variant="dark" expand="sm">
-        <h2 style={{ color: "white", marginLeft: 10 }}>{props.student}</h2>
-        <h2 className="x-center" style={{ color: "white" }}>
+        <h2
+          className="qbank-teacher"
+          style={{ color: "white", marginLeft: 10 }}
+        >
+          {props.student}
+        </h2>
+        <h2
+          className="x-center"
+          style={{
+            color: "white",
+            fontSize: 18,
+            bottom: 0,
+            paddingTop: "8px",
+          }}
+        >
           {props.subject}
         </h2>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" style={{ marginLeft: 20 }}>
           <Nav className="ms-auto">
-            <Link href="/test/selectTest">
+            <Link href="/dashboard/studentOptions">
               <a
                 style={{
                   marginTop: "0.4em",
@@ -25,7 +38,7 @@ const TestPageNavbar = (props) => {
                   marginRight: 20,
                 }}
               >
-                Select Test
+                Dashboard
               </a>
             </Link>
             <Link href="/">

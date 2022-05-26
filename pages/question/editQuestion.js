@@ -5,13 +5,13 @@ import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import axios from "axios";
 import { Router, useRouter } from "next/router";
-import path from "../pages/api/mypaths";
+import path from "../api/mypaths";
 import Resizer from "react-image-file-resizer";
 import { ProgressBar } from "react-bootstrap";
 import { Alert } from "react-bootstrap";
-import AddQNB from "./components/navbars/AddQNB";
+import AddQNB from "../../src/components/navbars/AddQNB";
 import Spinner from "react-bootstrap/Spinner";
-import { updateQBank } from "../redux/actions";
+import { updateQBank } from "../../redux/actions";
 
 //// Resize image before uploading
 const resizeFile = (file) =>
@@ -32,11 +32,37 @@ const resizeFile = (file) =>
 
 const editQuestion = (props) => {
   const router = useRouter();
-  console.log("question", props.question);
+  // console.log("question", props.question);
   var stored_teacher;
+  var demo_question = {
+    author: "paddybaba@gmail.com",
+    class: "Class-1",
+    model: "Image-Question-Text-Options",
+    question: {
+      correct_ans: "2",
+      explanation:
+        "Brain, also known as cerebrum has two hemisheres Right and Left.",
+      marks: 0,
+      options: [
+        { image: "", option: "3" },
+        { image: "", option: "4" },
+        { image: "", option: "2" },
+        { image: "", option: "1" },
+      ],
 
+      quest: {
+        image:
+          "https://paddy-photo-bucket.s3.amazonaws.com/1645848581229-questionImage.jpeg",
+        que: "How many hemispheres are there in human brain?",
+      },
+      subject: "Science",
+      year: 2021,
+      __v: 0,
+      _id: "61ab9f6122444a556d1869bd",
+    },
+  };
   const empty_image_array = [];
-  const [newQuestion, setQuestion] = useState(props.question);
+  const [newQuestion, setQuestion] = useState(demo_question);
   // const [questImage, setQuestImage] = useState();
   const [uploadProgress, setUploadProgress] = useState(0);
   const [showSpinner, setSpinner] = useState(false);
@@ -48,6 +74,10 @@ const editQuestion = (props) => {
     optionC: null,
     optionD: null,
   });
+
+  useEffect(() => {
+    if (props.question != undefined) setQuestion(props.question);
+  }, []);
   ///// Get Image file from input, resize it and add to images State
   const getQuestImage = async (event) => {
     try {
@@ -163,6 +193,8 @@ const editQuestion = (props) => {
     }
   }
 
+  // console.log("NewQuestion", newQuestion);
+
   return (
     <div className="row gx-0 question-bg">
       <Head>
@@ -201,7 +233,7 @@ const editQuestion = (props) => {
               className="form-select"
               aria-label="Default select example"
               onChange={handleInputChange}
-              defaultValue="Science"
+              value={newQuestion.subject}
             >
               <option value="Mathematics">Mathematics</option>
               <option value="General Knowledge">General Knowledge</option>
@@ -210,7 +242,7 @@ const editQuestion = (props) => {
             </select>
           </Form.Group>
           <Form.Group className="mt-4" size="lg" controlId="author">
-            <Form.Label>Author</Form.Label>
+            <Form.Label>Author ID</Form.Label>
             <Form.Control
               type="text"
               defaultValue={newQuestion.author}
@@ -300,10 +332,24 @@ const editQuestion = (props) => {
             {newQuestion.model == "Image-Question-Text-Options" ||
             newQuestion.model == "Combined" ? (
               <div>
-                {!allImage.quest_image ? (
+                {/* {!allImage.quest_image ? (
                   <Form.Label>Question Image</Form.Label>
-                ) : null}
-                {!allImage.quest_image ? null : (
+                ) : null} */}
+
+                {/* // Show question image on loading // */}
+                {!allImage.quest_image ? (
+                  !newQuestion.question.quest.image ? null : (
+                    <img
+                      style={{
+                        height: 100,
+                        width: 120,
+                        padding: 2,
+                        borderRadius: 5,
+                      }}
+                      src={newQuestion.question.quest.image}
+                    ></img>
+                  )
+                ) : (
                   <img
                     style={{
                       height: 100,
@@ -361,10 +407,22 @@ const editQuestion = (props) => {
             {newQuestion.model == "Text-Question-Image-Options" ||
             newQuestion.model == "Combined" ? (
               <div>
-                {allImage.optionA == null ? (
+                {/* {allImage.optionA == null ? (
                   <Form.Label>Option A Image</Form.Label>
-                ) : null}
-                {!allImage.optionA ? null : (
+                ) : null} */}
+                {!allImage.optionA ? (
+                  !newQuestion.question.options[0].image ? null : (
+                    <img
+                      style={{
+                        height: 100,
+                        width: 120,
+                        padding: 2,
+                        borderRadius: 5,
+                      }}
+                      src={newQuestion.question.options[0].image}
+                    />
+                  )
+                ) : (
                   <img
                     style={{
                       height: 100,
@@ -414,10 +472,22 @@ const editQuestion = (props) => {
             {newQuestion.model == "Text-Question-Image-Options" ||
             newQuestion.model == "Combined" ? (
               <div>
-                {allImage.optionB == null ? (
+                {/* {allImage.optionB == null ? (
                   <Form.Label>Option B Image</Form.Label>
-                ) : null}
-                {!allImage.optionB ? null : (
+                ) : null} */}
+                {!allImage.optionB ? (
+                  !newQuestion.question.options[1].image ? null : (
+                    <img
+                      style={{
+                        height: 100,
+                        width: 120,
+                        padding: 2,
+                        borderRadius: 5,
+                      }}
+                      src={newQuestion.question.options[1].image}
+                    />
+                  )
+                ) : (
                   <img
                     style={{
                       height: 100,
@@ -459,10 +529,22 @@ const editQuestion = (props) => {
             {newQuestion.model == "Text-Question-Image-Options" ||
             newQuestion.model == "Combined" ? (
               <div>
-                {allImage.optionC == null ? (
+                {/* {allImage.optionC == null ? (
                   <Form.Label>Option C Image</Form.Label>
-                ) : null}
-                {!allImage.optionC ? null : (
+                ) : null} */}
+                {!allImage.optionC ? (
+                  !newQuestion.question.options[2].image ? null : (
+                    <img
+                      style={{
+                        height: 100,
+                        width: 120,
+                        padding: 2,
+                        borderRadius: 5,
+                      }}
+                      src={newQuestion.question.options[2].image}
+                    />
+                  )
+                ) : (
                   <img
                     style={{
                       height: 100,
@@ -503,10 +585,22 @@ const editQuestion = (props) => {
             {newQuestion.model == "Text-Question-Image-Options" ||
             newQuestion.model == "Combined" ? (
               <div>
-                {allImage.optionD == null ? (
+                {/* {allImage.optionD == null ? (
                   <Form.Label>Option D Image</Form.Label>
-                ) : null}
-                {!allImage.optionD ? null : (
+                ) : null} */}
+                {!allImage.optionD ? (
+                  !newQuestion.question.options[3].image ? null : (
+                    <img
+                      style={{
+                        height: 100,
+                        width: 120,
+                        padding: 2,
+                        borderRadius: 5,
+                      }}
+                      src={newQuestion.question.options[3].image}
+                    />
+                  )
+                ) : (
                   <img
                     style={{
                       height: 100,

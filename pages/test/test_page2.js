@@ -4,6 +4,8 @@ import TestPageNavbar from "../../src/components/navbars/TestPageNavbar";
 import TopBar from "../../src/components/TopBar";
 import PopModal from "../../src/components/PopModal";
 import Speaker from "../../src/components/Speaker";
+import axios from "axios";
+import path from "../api/mypaths";
 // const myQuestions = [
 //   {
 //       subject: "General Knowledge",
@@ -199,6 +201,7 @@ const test_page2 = (props) => {
     // } else {
     //   document.getElementById("quest-image").style.width = "150px";
     // }
+    console.log("activeQ", activeQ);
     return (
       <div className="gx-0">
         <div style={{ width: "100%" }}>
@@ -232,7 +235,7 @@ const test_page2 = (props) => {
                           <Speaker speak_this={currentQuestion.quest.que} />
                         ) : null}
                         <textarea
-                          className="text-bottom fw-bold"
+                          className="text-bottom fw-bold question-text"
                           readOnly
                           disabled
                           value={currentQuestion.quest.que}
@@ -328,36 +331,60 @@ const test_page2 = (props) => {
                   })}
                 </div>
               </div>
-              <div className="row mx-auto">
-                <div className="col-10 mx-auto footer-box">
-                  <div
-                    className="previous-next"
-                    onClick={() => onPreviousClick()}
-                    disabled={activeQ === 0}
-                  >
-                    Previous
-                  </div>
-                  <div
-                    className="previous-next"
-                    onClick={() => onNextClick()}
-                    disabled={activeQ == data.length - 1}
-                  >
-                    Next
-                  </div>
-                  <button
-                    className=" previous-next finish-button"
-                    onClick={() => setModalShow(true)}
-                  >
-                    Finish
-                  </button>
-                  <PopModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    progress={progress}
-                  />
-                </div>
-              </div>
             </div>
+          </div>
+        </div>
+        <div className="row mx-auto">
+          <div
+            // className="col-12 mx-auto footer-box"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <button
+                className="previous-next"
+                onClick={() => onPreviousClick()}
+                disabled={activeQ === 0}
+              >
+                Previous
+              </button>
+              <button
+                className="previous-next"
+                onClick={() => onNextClick()}
+                disabled={activeQ == data.length - 1}
+              >
+                Next
+              </button>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                marginRight: 0,
+              }}
+            >
+              <button
+                className="previous-next finish-button"
+                onClick={() =>
+                  saveMyTest(props.student, progress, props.questBank)
+                }
+              >
+                Save
+              </button>
+              <button
+                className=" previous-next finish-button"
+                onClick={() => setModalShow(true)}
+              >
+                Finish
+              </button>
+            </div>
+            <PopModal
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              progress={progress}
+            />
           </div>
         </div>
       </div>
@@ -371,6 +398,19 @@ const test_page2 = (props) => {
 
 function addAfter(array, index, newItem) {
   return [...array.slice(0, index), newItem, ...array.slice(index)];
+}
+
+async function saveMyTest(student, progress, questions) {
+  const savedTest = {
+    questions: questions,
+    options: student.options,
+    progress: progress,
+    student_id: student.student_id,
+  };
+
+  const response = await axios.post(`${path}/savestudenttest`, savedTest);
+  if (response) alert("Test saved successfully !!!");
+  console.log("Will save this in record", savedTest);
 }
 
 const mstp = (state) => {

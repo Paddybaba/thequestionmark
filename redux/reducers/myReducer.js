@@ -73,7 +73,15 @@ function studentReducer(state = initialState, action) {
         questionBank: updatedArray,
       };
     }
-
+    case "ADD2_QBANK": {
+      var arrayofQuestions = state.questionBank;
+      // console.log("Array from reducer", arrayofQuestions);
+      arrayofQuestions.push(action.payload);
+      return {
+        ...state,
+        questionBank: arrayofQuestions,
+      };
+    }
     case "DELETE_QUESTION": {
       var arrayofQuestions = state.questionBank;
       var updatedArray = arrayofQuestions.filter(
